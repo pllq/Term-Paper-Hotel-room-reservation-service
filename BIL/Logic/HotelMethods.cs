@@ -107,7 +107,5 @@ namespace BIL.Logic
         {
             return HotelList.Count;
         }
-
-
     }
 }

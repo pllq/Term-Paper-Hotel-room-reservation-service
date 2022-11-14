@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,29 +12,48 @@ namespace PL
 {
     internal class PLMethodsForCustomerInformation
     {
-
-        private static string InizCustomer(string first_or_last, string pattern) 
-        {
-            Console.Write($"Input {first_or_last} of the customer: ");
-            string last_and_first_name_input = Console.ReadLine();
-
-            while (!RegexPatternCheck.Pattern_of_the_Data_check(last_and_first_name_input, pattern))
-            {
-                Console.Clear();
-                Console.Write($"Wrong input of {first_or_last}, please try again: ");
-                last_and_first_name_input = Console.ReadLine();
-            }
-            return last_and_first_name_input;
-        }
-
         public static void AddCustomer()
         {
-            string First_Name_of_the_Customer = InizCustomer("first name", @"^[a-zA-Z]+$");
-            string Last_Name_of_the_Customer = InizCustomer("last name", @"^[a-zA-Z]+$");
+            string First_Name_of_the_Customer = CommonMethods.Initialize("first name", @"^[a-zA-Z]+$").ToLower();
+            First_Name_of_the_Customer = char.ToUpper(First_Name_of_the_Customer[0]) + First_Name_of_the_Customer.Substring(1);// to make first letter Upper case and others lower case
 
-            string string_Age = InizCustomer("age", @"^[1-9][0-9]$|^1[0-2]\d$");
+
+            string Last_Name_of_the_Customer = CommonMethods.Initialize("last name", @"^[a-zA-Z]+$").ToLower();
+            Last_Name_of_the_Customer = char.ToUpper(Last_Name_of_the_Customer[0]) + Last_Name_of_the_Customer.Substring(1);
+
+
+
+            string string_Age = CommonMethods.Initialize("age", @"^[1-9][0-9]$|^1[0-2]\d$");
             int Age = int.Parse(string_Age);
 
+        customer_wrongkey:
+            Console.Clear();
+            Console.WriteLine
+                (
+                    $"Customer: {First_Name_of_the_Customer} {Last_Name_of_the_Customer}.\n" +
+                    $"Age: {Age}.\n"
+                );
+
+            Console.WriteLine
+                (
+                    "Do you want to create this customer?\n" +
+                    "Press \"Y\" key, to create customer, or \"N\" key, to cancel the creation."
+                );
+            Console.WriteLine();
+
+            ConsoleKey keyInfo = Menu.keyIninze();
+            switch (keyInfo)
+            {
+                case ConsoleKey.Y:
+                    break;
+
+                case ConsoleKey.N:
+                    return;
+
+                default:
+                    goto customer_wrongkey;
+            }
+            Console.WriteLine();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             Console.Write("Customer was successfully created! To return to Main menu press any key.");
@@ -169,6 +189,35 @@ namespace PL
             }
         }
 
+        public static void ChangeCustomer()
+        {
+            Console.WriteLine("Choose what customer you want to edit:");
+
+            ShowCustomers(ConsoleKey.D4);
+            Console.WriteLine();
+
+
+            string string_index_user_input = CommonMethods.forIniz("index of customer, you want to edit", @"^[1-9]$|[1-9][0-9]+$");
+            int index_user_input = int.Parse(string_index_user_input);
+
+            while (index_user_input > CustomerMethods.CustomerListLenght())
+            {
+                string_index_user_input = CommonMethods.forIniz("index of customer, you want to edit", @"^[1-9]$|[1-9][0-9]+$");
+                index_user_input = int.Parse(string_index_user_input);
+            }
+
+            Console.WriteLine("Choose what exectly you want to change in customer's data.");
+            CustomerMethods.SpecificCustomer(index_user_input);
+
+            ConsoleKey consoleKey = Menu.keyIninze();
+
+
+
+
+
+        }
+
+
         public static void ShowCustomers(ConsoleKey consoleKey)
         {
             if (CustomerMethods.CustomerListLenght() == 0)
@@ -196,13 +245,9 @@ namespace PL
             }
             Console.WriteLine();
 
-            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.WriteLine("Press any key to returen to continue work.");
             Console.ReadKey();
         }
-
-
-
-
 
     }
 }

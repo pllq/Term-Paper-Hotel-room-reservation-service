@@ -52,6 +52,25 @@ namespace BIL.Logic
         }
 
 
+        public static string SpecificCustomer(int index)
+        {
+            string data_of_specific_customer =
+                $"Name: {CustomerList[index].First_name} {CustomerList[index].Last_name}\n"+
+                $"Age: {CustomerList[index].Age}\n"+
+                $"Have booked the room: {CustomerList[index].Have_Booked_the_Room}\n";
+
+            if (CustomerList[index].Have_Booked_the_Room) 
+            {
+                data_of_specific_customer += $"Room number: {CustomerList[index].Booked_Room.Room_Number}\n";
+                data_of_specific_customer += $"Have booked the room: {CustomerList[index].Booked_Room.Room_Price_For_1_Day}\n";
+                data_of_specific_customer += $"Have booked the room: {CustomerList[index].Booked_Room.Is_Booked}\n";
+
+            }
+
+
+            return data_of_specific_customer;
+
+        }
 
         public static string[] CustomersList()
         {
