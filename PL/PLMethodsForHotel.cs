@@ -58,6 +58,7 @@ namespace PL
 
             //_____
 
+
             Console.Clear();
             string_Hotel_Stars_Rate = InizCustomer("number of stars, that hotel has", @"^[1-5]$");
             Hotel_Stars_Rate = int.Parse(string_Hotel_Stars_Rate);
