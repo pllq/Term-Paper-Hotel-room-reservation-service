@@ -1,5 +1,4 @@
-﻿using BIL;
-
+﻿using BIL.Logic;
 
 namespace PL
 {
@@ -16,12 +15,32 @@ namespace PL
 
         public static void MainMenu() 
         {
+            switch((HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
+            {
+                case (true, true):
+                    Console.WriteLine("Data of created hotels with appropriate name was found and loaded.");
+                    Console.WriteLine("Data of created customers with appropriate name was found and loaded. To continue press any key.");
+                    Console.ReadKey();
+                    break;
+
+                case (true, false):
+                    Console.WriteLine("Data of created hotels with appropriate name was found and loaded. To continue press any key.");
+                    Console.ReadKey();
+                    break;
+
+                case (false, true):
+                    Console.WriteLine("Data of created customers with appropriate name was found and loaded. To continue press any key.");
+                    Console.ReadKey();
+                    break;
+
+                case (false, false):
+                    break;
+            }
+
             ConsoleKey keyInfo;
+            bool not_4_key = true;
 
-            bool not_E_key = true;
-
-
-            while (not_E_key) 
+            while (not_4_key) 
             {
                 Console.Clear();
                 Console.WriteLine(MenusToShow.ShowMainMenu());
@@ -46,12 +65,41 @@ namespace PL
                                     break;
 
                             case ConsoleKey.D2:
+                                try 
+                                { 
+                                    PLMethodsForHotel.RemoveHotel();
+                                }
+                                catch(Exception e) 
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
                             case ConsoleKey.D3:
+
+                                try
+                                {
+                                    Console.Clear();
+                                    PLMethodsForHotel.ShowHotels(keyInfo);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
+
                                 break;
 
                             case ConsoleKey.D4:
+
+                                try
+                                {
+                                    Console.Clear();
+                                    PLMethodsForHotel.ShowHotels(keyInfo);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
                             case ConsoleKey.D5:
@@ -98,27 +146,64 @@ namespace PL
                                 switch (keyInfo)
                                 {
                                     case ConsoleKey.D1:
+                                        Console.Clear();
+                                        PLMethodsForCustomerInformation.AddCustomer();
                                         break;
 
                                     case ConsoleKey.D2:
+                                        Console.Clear();
+                                        try
+                                        {
+                                            PLMethodsForCustomerInformation.RemoveCustomer();
+                                        }
+                                        catch(Exception e) 
+                                        {
+                                            Console.WriteLine(e.Message);
+                                        }
                                         break;
 
                                     case ConsoleKey.D3:
+                                        Console.Clear();
+                                        try
+                                        {
+                                            PLMethodsForCustomerInformation.ShowCustomers(keyInfo);
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Console.WriteLine(e.Message);
+                                        }
+
                                         break;
 
                                     case ConsoleKey.D4:
+                                        Console.Clear();
+                                        try
+                                        {
+                                            PLMethodsForCustomerInformation.ShowCustomers(keyInfo);
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Console.WriteLine(e.Message);
+                                        }
                                         break;
 
                                     case ConsoleKey.D5:
+                                        Console.Clear();
                                         break;
 
                                     case ConsoleKey.D6:
+                                        Console.Clear();
+
                                         break;
 
                                     case ConsoleKey.D7:
+                                        Console.Clear();
+
                                         break;
 
                                     case ConsoleKey.D8:
+                                        Console.Clear();
+
                                         break;
 
                                     case ConsoleKey.R:
@@ -208,7 +293,7 @@ namespace PL
 
                     //4. Exit.
                     case ConsoleKey.D4:
-                        not_E_key = false;
+                        not_4_key = false;
                         break;
                 }
             }

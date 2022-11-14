@@ -3,10 +3,12 @@ Tofix:
 
 - in PLMethodsForHotel class -> AddHotel() method to block user possebillity to create same room numbers
 - XMLSeriallization delets file if it exists.
-- Serialization of Hotel works, but doest save to file anything
+- fix Deserialization of hotel
 - in Hotel class for serialization has to be Rooms = info.GetRoom("Rooms") but NOT Rooms = info.GetString("Rooms");
+- To fix in Remove:
+	-- it writes that i can return to main menu, but i don have to do this
+	-- writline
 
-ALL VARIABLES IN HOTEL class WERE PRIVATE!
 
 
 
