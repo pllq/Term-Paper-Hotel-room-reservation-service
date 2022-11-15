@@ -1,31 +1,25 @@
 ﻿using DAL;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BIL.Logic
 {
     public class CustomerMethods
     {
         internal static List<Customer> CustomerList = new List<Customer>();
-        internal static XMLSerialization<List<Customer>> xml_serialize_list_of_hotels = new XMLSerialization<List<Customer>>();
-        internal static JSONSerialization<List<Customer>> json_serialize_list_of_hotels = new JSONSerialization<List<Customer>>();
-        private static string name_of_file = "customer_list";
+        internal static XMLSerialization<List<Customer>> xml_serialize_list_of_customers = new XMLSerialization<List<Customer>>();
+        internal static JSONSerialization<List<Customer>> json_serialize_list_of_customers = new JSONSerialization<List<Customer>>();
+        internal const string Name_of_file = "customer_list";
 
 
         public static bool CustomerDataFileExists()
         {
-            if (File.Exists(name_of_file + ".xml"))
+            if (File.Exists(Name_of_file + ".xml"))
             {
-                CustomerList = xml_serialize_list_of_hotels.Deserialize(name_of_file);
+                CustomerList = xml_serialize_list_of_customers.Deserialize(Name_of_file);
                 return true;
             }
-            if (File.Exists(name_of_file + ".json"))
+            if (File.Exists(Name_of_file + ".json"))
             {
-                CustomerList = json_serialize_list_of_hotels.Deserialize(name_of_file);
+                CustomerList = json_serialize_list_of_customers.Deserialize(Name_of_file);
                 return true;
             }
 
@@ -38,18 +32,64 @@ namespace BIL.Logic
 
             CustomerList.Add(Cusomter);
 
-            xml_serialize_list_of_hotels.Serialize(CustomerList, name_of_file);
-            json_serialize_list_of_hotels.Serialize(CustomerList, name_of_file);
+            xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
+            json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
         public static void RemoveCustomer(int index_of_hotel_to_remove)
         {
             CustomerList.RemoveAt(index_of_hotel_to_remove);
 
-            xml_serialize_list_of_hotels.Serialize(CustomerList, name_of_file);
+            xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
 
-            json_serialize_list_of_hotels.Serialize(CustomerList, name_of_file);
+            json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
+
+
+        public static void SortByFirstName(ConsoleKey consoleKey)
+        {
+            switch (consoleKey)
+            {
+                //Ascending order A-Z
+                case ConsoleKey.A:
+                    CustomerList.Sort(delegate (Customer first, Customer second)
+                    {
+                        return first.First_name.CompareTo(second.First_name);
+                    });
+                    return;
+
+                //Descending order Z-A
+                case ConsoleKey.D:
+                    CustomerList.Sort(delegate (Customer first, Customer second)
+                    {
+                        return second.First_name.CompareTo(first.First_name);
+                    });
+                    return;
+            }
+        }
+
+        public static void SortByLastName(ConsoleKey consoleKey)
+        {
+            switch (consoleKey)
+            {
+                //Ascending order A-Z
+                case ConsoleKey.A:
+                    CustomerList.Sort(delegate (Customer first, Customer second)
+                    {
+                        return first.Last_name.CompareTo(second.Last_name);
+                    });
+                    return;
+
+                //Descending order Z-A
+                case ConsoleKey.D:
+                    CustomerList.Sort(delegate (Customer first, Customer second)
+                    {
+                        return second.Last_name.CompareTo(first.Last_name);
+                    });
+                    return;
+            }
+        }
+
 
         public static void ChangeCustomer(int index, string data_to_edit, string what_field_to_edit)
         {
@@ -71,6 +111,9 @@ namespace BIL.Logic
 
                             //Probably add here Hotel.Rooms.Customer = CustomerList[index] or smt
 
+
+                            xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
+                            json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
                             return;
                         }
                     }

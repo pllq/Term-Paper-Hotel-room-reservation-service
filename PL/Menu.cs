@@ -1,21 +1,14 @@
 ﻿using BIL.Logic;
+using PLInput;
+using System.Security.Cryptography;
 
 namespace PL
 {
     public class Menu
     {
-
-        internal static ConsoleKey keyIninze() 
+        public static void MainMenu()
         {
-            Console.Write("Press key: ");
-            ConsoleKey keyInfo = Console.ReadKey().Key;
-            return keyInfo;
-        }
-
-
-        public static void MainMenu() 
-        {
-            switch((HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
+            switch ((HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
             {
                 case (true, true):
                     Console.WriteLine("Data of created hotels with appropriate name was found and loaded.");
@@ -38,38 +31,38 @@ namespace PL
             }
 
             ConsoleKey keyInfo;
-            bool not_4_key = true;
+            bool not_5_key = true;
 
-            while (not_4_key) 
+            while (not_5_key)
             {
                 Console.Clear();
                 Console.WriteLine(MenusToShow.ShowMainMenu());
-                keyInfo = keyIninze();
+                keyInfo = CommonMethods.keyIninze();
 
-                switch (keyInfo) 
+                switch (keyInfo)
                 {
                     //1. Hotels management.
                     case ConsoleKey.D1:
                     wrong_key1:
-                        
+
                         Console.Clear();
                         Console.WriteLine(MenusToShow.HotelManagementMenu());
-                        
-                        keyInfo = keyIninze();
+
+                        keyInfo = CommonMethods.keyIninze();
 
                         switch (keyInfo)
                         {
                             case ConsoleKey.D1:
                                 Console.Clear();
-                                PLMethodsForHotel.AddHotel();
-                                    break;
+                                InputForHotel.AddHotel();
+                                break;
 
                             case ConsoleKey.D2:
-                                try 
-                                { 
-                                    PLMethodsForHotel.RemoveHotel();
+                                try
+                                {
+                                    InputForHotel.RemoveHotel();
                                 }
-                                catch(Exception e) 
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e.Message);
                                 }
@@ -80,7 +73,7 @@ namespace PL
                                 try
                                 {
                                     Console.Clear();
-                                    PLMethodsForHotel.ShowHotels(keyInfo);
+                                    InputForHotel.ShowHotels(keyInfo);
                                 }
                                 catch (Exception e)
                                 {
@@ -94,7 +87,7 @@ namespace PL
                                 try
                                 {
                                     Console.Clear();
-                                    PLMethodsForHotel.ShowHotels(keyInfo);
+                                    InputForHotel.ShowHotels(keyInfo);
                                 }
                                 catch (Exception e)
                                 {
@@ -122,168 +115,143 @@ namespace PL
                         }
                         break;
 
-                    
+
 
                     //2.Customers management.
                     case ConsoleKey.D2:
                     wrong_key2:
 
                         Console.Clear();
-                        Console.WriteLine(MenusToShow.CustomersManagementMenu());
-
-                        keyInfo = keyIninze();
+                        Console.WriteLine(MenusToShow.CustomerManagement());
+                        keyInfo = CommonMethods.keyIninze();
 
                         switch (keyInfo)
                         {
+                            //Add customer
                             case ConsoleKey.D1:
-
-                            wrong_key21:
-
                                 Console.Clear();
-                                Console.WriteLine(MenusToShow.CustomerInformationMenu());
-                                keyInfo = keyIninze();
-
-                                switch (keyInfo)
-                                {
-                                    case ConsoleKey.D1:
-                                        Console.Clear();
-                                        PLMethodsForCustomerInformation.AddCustomer();
-                                        break;
-
-                                    case ConsoleKey.D2:
-                                        Console.Clear();
-                                        try
-                                        {
-                                            PLMethodsForCustomerInformation.RemoveCustomer();
-                                        }
-                                        catch(Exception e) 
-                                        {
-                                            Console.WriteLine(e.Message);
-                                        }
-                                        break;
-
-                                    case ConsoleKey.D3:
-                                        Console.Clear();
-                                        try
-                                        {
-                                            //PLMethodsForCustomerInformation.ShowCustomers(keyInfo);
-
-                                            PLMethodsForCustomerInformation.ChangeCustomer();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Console.WriteLine(e.Message);
-                                        }
-
-                                        break;
-
-                                    case ConsoleKey.D4:
-                                        Console.Clear();
-                                        try
-                                        {
-                                            PLMethodsForCustomerInformation.ShowCustomers(keyInfo);
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Console.WriteLine(e.Message);
-                                        }
-                                        break;
-
-                                    case ConsoleKey.D5:
-                                        Console.Clear();
-                                        break;
-
-                                    case ConsoleKey.D6:
-                                        Console.Clear();
-
-                                        break;
-
-                                    case ConsoleKey.D7:
-                                        Console.Clear();
-
-                                        break;
-
-                                    case ConsoleKey.D8:
-                                        Console.Clear();
-
-                                        break;
-
-                                    case ConsoleKey.R:
-                                        goto wrong_key2;
-
-                                    default:
-                                        goto wrong_key21;
-                                }
+                                InputForCustomer.AddCustomer();
                                 break;
 
 
+                            //Remove customer
                             case ConsoleKey.D2:
-                            wrong_key22:
-
                                 Console.Clear();
-                                Console.WriteLine(MenusToShow.CustomerInteractionWithHotelMenu());
-                                keyInfo = keyIninze();
-
-                                switch (keyInfo)
+                                try
                                 {
-                                    case ConsoleKey.D1:
-                                        break;
-
-                                    case ConsoleKey.D2:
-                                        break;
-
-                                    case ConsoleKey.D3:
-                                        break;
-
-                                    case ConsoleKey.D4:
-                                        break;
-
-                                    case ConsoleKey.D5:
-                                        break;
-
-                                    case ConsoleKey.D6:
-                                        break;
-
-                                    case ConsoleKey.D7:
-                                        break;
-
-
-                                    case ConsoleKey.R:
-                                        goto wrong_key2;
-
-                                    default:
-                                        goto wrong_key22;
+                                    InputForCustomer.RemoveCustomer();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
                                 }
                                 break;
 
-                            case ConsoleKey.R:
+
+                            //Change customer
+                            case ConsoleKey.D3:
+                                Console.Clear();
+                                try
+                                {
+                                    InputForCustomer.ChangeCustomer();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
+                                break;
+
+
+                            //Show SPECIFIC customer
+                            case ConsoleKey.D4:
+                                Console.Clear();
+                                try
+                                {
+                                    InputForCustomer.ShowCustomers(keyInfo);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
+                                break;
+
+
+                            //Show all customer
+                            case ConsoleKey.D5:
+                                Console.Clear();
+
+
+
+
+
+
+                                break;
+
+
+                            //Sort the list by first/lastname and ascednding/descending order
+                            case ConsoleKey.D6:
+                            case ConsoleKey.D7:
+
+                                Console.Clear();
+                                try
+                                {
+                                    InputForCustomer.SortList(keyInfo);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
                             default:
                                 goto wrong_key2;
                         }
                         break;
-                     
 
 
-                    //3. Search
+
+                    //3.Room management.
                     case ConsoleKey.D3:
                     wrong_key3:
-
                         Console.Clear();
-                        Console.WriteLine(MenusToShow.SearchMenu());
+                        Console.WriteLine(MenusToShow.RoomManagement());
+                        keyInfo = CommonMethods.keyIninze();
 
-                        keyInfo = keyIninze();
-
-                        switch (keyInfo) 
+                        switch (keyInfo)
                         {
                             case ConsoleKey.D1:
+                                try 
+                                {
+                                    InputForRoom.BookRoom();
+                                }
+                                catch(Exception e) 
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
+
 
                             case ConsoleKey.D2:
                                 break;
 
-                            case ConsoleKey.R:
+
+                            case ConsoleKey.D3:
+                                break;
+
+
+                            case ConsoleKey.D4:
+                                break;
+
+
+                            case ConsoleKey.D5:
+                                break;
+
+
+                            case ConsoleKey.D6:
+                                break;
+
+
+                            case ConsoleKey.D7:
                                 break;
 
                             default:
@@ -293,10 +261,37 @@ namespace PL
 
 
 
-                    //4. Exit.
+                    //4. Search
                     case ConsoleKey.D4:
-                        not_4_key = false;
+                    wrong_key4:
+
+                        Console.Clear();
+                        Console.WriteLine(MenusToShow.SearchMenu());
+
+                        keyInfo = CommonMethods.keyIninze();
+
+                        switch (keyInfo)
+                        {
+                            case ConsoleKey.D1:
+                                break;
+
+                            case ConsoleKey.D2:
+                                break;
+
+                            case ConsoleKey.R:
+                                break;
+
+                            default:
+                                goto wrong_key4;
+                        }
                         break;
+
+
+
+                    //5. Exit.
+                    case ConsoleKey.D5:
+                        not_5_key = false;
+                        return;
                 }
             }
         }

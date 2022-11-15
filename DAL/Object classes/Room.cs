@@ -13,6 +13,7 @@ namespace DAL
         public int Room_Number { get; set; }
         public int Room_Price_For_1_Day { get; set; }
         public bool Is_Booked { get; set; } = false;
+        public int Days { get; set; }
 
         public Customer Customer_of_Room = new Customer();
 

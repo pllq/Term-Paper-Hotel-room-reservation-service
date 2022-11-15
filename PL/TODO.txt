@@ -1,19 +1,20 @@
 ﻿------------------------------------------------------------------
 Tofix:
-- TO DELETE Room BOOKED_ROOM IN CUSTOMER CLASS
+
+- !WHEN CHANGE CUSTOMER, OLD DATA STAYS IN HOTEL[INDEX].ROOMS[INDEX].CUSTOMER!
+- Bil.Logic.CustomerMethods line 73 Probably add here Hotel.Rooms.Customer = CustomerList[index] or smth
+
 - to edit: public static string SpecificCustomer(int index)
 
-- Bil.Logic.CustomerMethods line 73 Probably add here Hotel.Rooms.Customer = CustomerList[index] or smth
-- to add CHNGADE BOOK in ChangeCustomer method
+- ?to add CHANGE BOOK in ChangeCustomer method?
 
-- in PLMethodsForHotel class -> AddHotel() method to block user possebillity to create same room numbers
-- XMLSeriallization delets file if it exists.
-- fix Deserialization of hotel
-- in Hotel class for serialization has to be Rooms = info.GetRoom("Rooms") but NOT Rooms = info.GetString("Rooms");
 - To fix in Remove:
 	-- it writes that i can return to main menu, but i don have to do this
 	-- writline
 
+
+- ?in Hotel class for serialization has to be Rooms = info.GetRoom("Rooms") but NOT Rooms = info.GetString("Rooms");?
+- Carefuilly with Deserialization of hotel
 
 
 

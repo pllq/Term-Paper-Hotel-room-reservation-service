@@ -8,11 +8,21 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PL
+namespace PLInput
 {
-    internal class PLMethodsForHotel
+    public class InputForHotel
     {
-        public static void AddHotel() 
+        internal static void IfHotelsListLenghtIsZero()
+        {
+            int HotelsListLenghtIsZero = HotelMethods.HotelListLenght();
+            if (HotelsListLenghtIsZero == 0)
+            {
+                throw new HotelListIsEmptyExeption($"List of hotels is equal to {HotelsListLenghtIsZero}.");
+            }
+        }
+
+
+        public static void AddHotel()
         {
             string Name_of_Hotel = "", Description_of_Hotel = "";
             int Hotel_Stars_Rate, Number_of_Rooms, Room_Number, Room_Price_For_1_Day;
@@ -22,7 +32,7 @@ namespace PL
             Console.Write("Input name of the hotel: ");
             Name_of_Hotel = Console.ReadLine();
 
-            while (String.IsNullOrEmpty(Name_of_Hotel))
+            while (string.IsNullOrEmpty(Name_of_Hotel))
             {
                 Console.Clear();
                 Console.Write("Wrong input of hotel name, please try again: ");
@@ -32,7 +42,7 @@ namespace PL
             Console.Clear();
             Console.Write("Write decsription of hotel: ");
             Description_of_Hotel = Console.ReadLine();
-            while (String.IsNullOrEmpty(Description_of_Hotel))
+            while (string.IsNullOrEmpty(Description_of_Hotel))
             {
                 Console.Clear();
                 Console.Write("Wrong input of hotel desctiption, please try again: ");
@@ -54,12 +64,12 @@ namespace PL
             List<int> list_of_room_numbers = new List<int>();
 
             ConsoleKey keyInfo;
-            for (int i = 0; i < Number_of_Rooms; i++) 
+            for (int i = 0; i < Number_of_Rooms; i++)
             {
                 Console.Clear();
                 string_Room_Number = CommonMethods.Initialize("room number", @"^\d+$");
                 Room_Number = int.Parse(string_Room_Number);
-                while (list_of_room_numbers != null && list_of_room_numbers.Contains(Room_Number)) 
+                while (list_of_room_numbers != null && list_of_room_numbers.Contains(Room_Number))
                 {
                     Console.Clear();
                     Console.WriteLine("You have already created room with this number.");
@@ -75,13 +85,13 @@ namespace PL
                 Console.WriteLine();
 
                 array_of_Room_Number[i] = Room_Number;
-                array_of_Room_Price_For_1_Day[i]= Room_Price_For_1_Day;
+                array_of_Room_Price_For_1_Day[i] = Room_Price_For_1_Day;
             }
 
             List_of_arrays_for_Room_iniz.Add(array_of_Room_Number);
             List_of_arrays_for_Room_iniz.Add(array_of_Room_Price_For_1_Day);
 
-        
+
         wrong_key:
             Console.Clear();
             Console.WriteLine
@@ -95,12 +105,12 @@ namespace PL
 
             Console.WriteLine
                 (
-                    "Do you want to create this hotel?\n"+
+                    "Do you want to create this hotel?\n" +
                     "Press \"Y\" key, to create hotel, or \"N\" key, to cancel the creation."
                 );
             Console.WriteLine();
 
-            keyInfo = Menu.keyIninze();
+            keyInfo = CommonMethods.keyIninze();
             switch (keyInfo)
             {
                 case ConsoleKey.Y:
@@ -121,17 +131,14 @@ namespace PL
             Console.ReadKey();
         }
 
-        public static void RemoveHotel() 
+        public static void RemoveHotel()
         {
             ConsoleKey keyInfo;
 
-            switch (HotelMethods.HotelListLenght()) 
+            switch (HotelMethods.HotelListLenght())
             {
                 case 0:
-                    if (HotelMethods.HotelListLenght() == 0)
-                    {
-                        throw new HotelListIsEmptyExeption($"List of hotels is equal to {HotelMethods.HotelListLenght()}.");
-                    }
+                    IfHotelsListLenghtIsZero();
                     break;
 
 
@@ -142,7 +149,7 @@ namespace PL
                     Console.WriteLine("Do you want to see the information about this hotel?");
                     Console.WriteLine("Press \"Y\" key, to see information about this single hotel, or any other to delete it without showing it.");
 
-                    keyInfo = Menu.keyIninze();
+                    keyInfo = CommonMethods.keyIninze();
 
                     switch (keyInfo)
                     {
@@ -154,7 +161,7 @@ namespace PL
                             Console.WriteLine("Do you still want to delete this hotel?");
                             Console.WriteLine("Press \"Y\" key, to delete it, or press any other key to return to Main menu without deleteing this hotel. ");
 
-                            keyInfo = Menu.keyIninze();
+                            keyInfo = CommonMethods.keyIninze();
                             switch (keyInfo)
                             {
                                 case ConsoleKey.Y:
@@ -184,10 +191,10 @@ namespace PL
 
 
                     Console.Clear();
-                    string user_input = CommonMethods.forIniz("index of hotel, you want to delete. " +
-                                                    "If you don't want to remove anything, then write 'R' to return to Main menu", 
+                    string user_input = CommonMethods.ForIndexIniz("index of hotel, you want to delete. " +
+                                                    "If you don't want to remove anything, then write 'R' to return to Main menu",
                                                     @"^[1-9]$|[1-9][0-9]+$|^R$|^r$");
-                    
+
                     switch (user_input)
                     {
                         case "R":
@@ -196,12 +203,12 @@ namespace PL
 
                         default:
                             int index_of_hotel_to_remove = int.Parse(user_input) - 1;
-                                      
+
                             while (index_of_hotel_to_remove > HotelMethods.HotelListLenght())
                             {
                                 string string_index_of_hotel_to_remove;
                                 Console.WriteLine($"Index \"{index_of_hotel_to_remove}\" is greater then lenght of the list of hotels: {HotelMethods.HotelListLenght()}.");
-                                string_index_of_hotel_to_remove = CommonMethods.forIniz($"write index as digit, strting from 1 to {HotelMethods.HotelListLenght()}",
+                                string_index_of_hotel_to_remove = CommonMethods.ForIndexIniz($"write index as digit, strting from 1 to {HotelMethods.HotelListLenght()}",
                                     @"^[1-9]$|[1-9][0-9]+$");
                                 index_of_hotel_to_remove = int.Parse(string_index_of_hotel_to_remove) - 1;
                             }
@@ -218,16 +225,12 @@ namespace PL
         }
 
 
-        public static void ShowHotels(ConsoleKey consoleKey) 
+        public static void ShowHotels(ConsoleKey consoleKey)
         {
-            if (HotelMethods.HotelListLenght() == 0)
-            {
-                throw new HotelListIsEmptyExeption($"List of hotels is equal to {HotelMethods.HotelListLenght()}.");
-            }
-
+            IfHotelsListLenghtIsZero();
 
             string[] array_of_hotels_info = new string[1];
-            switch(consoleKey)
+            switch (consoleKey)
             {
                 case ConsoleKey.D3:
                     array_of_hotels_info = HotelMethods.HotelsList();

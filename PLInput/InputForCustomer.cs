@@ -8,10 +8,21 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PL
+namespace PLInput
 {
-    internal class PLMethodsForCustomerInformation
+    public class InputForCustomer
     {
+
+        internal static void IfCustomerListLenghtIsZero() 
+        {
+            int CustomerListLenghtIsZero = CustomerMethods.CustomerListLenght();
+            if (CustomerListLenghtIsZero == 0)
+            {
+                throw new CustomerListIsEmptyExeption($"List of customers is equal to {CustomerListLenghtIsZero}.");
+            }
+        }
+
+
         public static void AddCustomer()
         {
             string First_Name_of_the_Customer = CommonMethods.Initialize("first name", @"^[a-zA-Z]+$").ToLower();
@@ -41,7 +52,7 @@ namespace PL
                 );
             Console.WriteLine();
 
-            ConsoleKey keyInfo = Menu.keyIninze();
+            ConsoleKey keyInfo = CommonMethods.keyIninze();
             switch (keyInfo)
             {
                 case ConsoleKey.Y:
@@ -67,10 +78,7 @@ namespace PL
             switch (CustomerMethods.CustomerListLenght())
             {
                 case 0:
-                    if (CustomerMethods.CustomerListLenght() == 0)
-                    {
-                        throw new CustomerListIsEmptyExeption($"List of customers is equal to {CustomerMethods.CustomerListLenght()}.");
-                    }
+                    IfCustomerListLenghtIsZero();
                     break;
 
 
@@ -81,7 +89,7 @@ namespace PL
                     Console.WriteLine("Do you want to see the information about this customer?");
                     Console.WriteLine("Press \"Y\" key, to see information about this single cusotomer, or any other to delete him without showing it.");
 
-                    keyInfo = Menu.keyIninze();
+                    keyInfo = CommonMethods.keyIninze();
 
                     switch (keyInfo)
                     {
@@ -93,7 +101,7 @@ namespace PL
                             Console.WriteLine("Do you still want to delete this customer?");
                             Console.WriteLine("Press \"Y\" key, to delete him, or press any other key to return to Main menu without deleteing this customer. ");
 
-                            keyInfo = Menu.keyIninze();
+                            keyInfo = CommonMethods.keyIninze();
                             switch (keyInfo)
                             {
                                 case ConsoleKey.Y:
@@ -123,7 +131,7 @@ namespace PL
                     Console.WriteLine("Do you want to see the information about customers?");
                     Console.WriteLine("Press \"Y\" key, to see information about all customers, or any other key, to delete without showing.");
 
-                    keyInfo = Menu.keyIninze();
+                    keyInfo = CommonMethods.keyIninze();
 
                     switch (keyInfo)
                     {
@@ -189,13 +197,11 @@ namespace PL
             }
         }
 
-
-        public static void SpecificCustomer()
-        {
-
-        }
         public static void ChangeCustomer()
         {
+            IfCustomerListLenghtIsZero();
+
+
             Console.WriteLine("Choose what customer you want to edit:");
 
             ShowCustomers(ConsoleKey.D4);
@@ -203,16 +209,10 @@ namespace PL
 
             string user_change;
 
-            string string_index_user_input = CommonMethods.forIniz("index of customer, you want to edit", @"^[1-9]$|[1-9][0-9]+$");
-            int index_user_input = int.Parse(string_index_user_input)-1;
-            
-            while (index_user_input > CustomerMethods.CustomerListLenght())
-            {
-                string_index_user_input = CommonMethods.forIniz("index of customer, you want to edit", @"^[1-9]$|[1-9][0-9]+$");
-                index_user_input = int.Parse(string_index_user_input);
-            }
+            int index_user_input = CommonMethods.InputIndex("customer", ", you want to edit");
 
-            changewronginpu:
+
+        changewronginpu:
             Console.Clear();
             Console.WriteLine(CustomerMethods.SpecificCustomer(index_user_input));
 
@@ -223,14 +223,14 @@ namespace PL
             Console.WriteLine("Press \"A\" key, to change age.");
             //Console.WriteLine("Press \"B\" key, to change room, that user booked (if so).");
 
-            ConsoleKey consoleKey = Menu.keyIninze();
+            ConsoleKey consoleKey = CommonMethods.keyIninze();
             Console.Clear();
             string what_to_edit = "";
 
-            switch (consoleKey) 
+            switch (consoleKey)
             {
                 case ConsoleKey.N:
-                    string first_name = CommonMethods.forIniz("new first name", @"^[a-zA-Z]+$");
+                    string first_name = CommonMethods.ForIndexIniz("new first name", @"^[a-zA-Z]+$");
                     first_name = char.ToUpper(first_name[0]) + first_name.Substring(1);
 
                     user_change = CommonMethods.Initialize($"new last name", @"^[a-zA-Z]+$").ToLower();
@@ -269,10 +269,10 @@ namespace PL
                     CustomerMethods.ChangeCustomer(index_user_input, user_change, what_to_edit);
                     break;
 
-/*
-                case ConsoleKey.B:
-                    break;
-*/
+                /*
+                                case ConsoleKey.B:
+                                    break;
+                */
 
                 default:
                     goto changewronginpu;
@@ -282,7 +282,7 @@ namespace PL
             Console.WriteLine("Do you still want to delete change this custmoer?");
             Console.WriteLine("Press \"Y\" key, to change him, or press any other key to return to Main menu without deleteing this hotel. ");
 
-            consoleKey = Menu.keyIninze();
+            consoleKey = CommonMethods.keyIninze();
             switch (consoleKey)
             {
                 case ConsoleKey.Y:
@@ -300,12 +300,64 @@ namespace PL
         }
 
 
+        delegate void DelegateForSorting(ConsoleKey number);
+        public static void SortList(ConsoleKey keyInfo) 
+        {
+            IfCustomerListLenghtIsZero();
+
+            DelegateForSorting sorting_delegate = null;
+            string first_of_last_name = "";
+            switch (keyInfo)
+            {
+                case ConsoleKey.D6:
+                    first_of_last_name = "first name";
+                    sorting_delegate = new DelegateForSorting(CustomerMethods.SortByFirstName);
+                    break;
+
+                case ConsoleKey.D7:
+                    first_of_last_name = "last name";
+                    sorting_delegate = new DelegateForSorting(CustomerMethods.SortByLastName);
+                    break;
+            }
+
+        sortbyfirst_or_lastname:
+            Console.Clear();
+            Console.WriteLine("What type of sorting_delegate by name?\n");
+            Console.WriteLine($"Press \"A\" to sort lisy by {first_of_last_name} in ascdending order [A-Y].");
+            Console.WriteLine($"Press \"D\" to sort lisy by {first_of_last_name} in descdending order [Y-A].");
+            keyInfo = CommonMethods.keyIninze();
+
+            switch (keyInfo)
+            {
+                case ConsoleKey.A:
+                case ConsoleKey.D:
+                    sorting_delegate(keyInfo);
+                        break;
+
+                default:
+                    goto sortbyfirst_or_lastname;
+            }
+            Console.Clear();
+
+            switch (keyInfo)
+            {
+                case ConsoleKey.A:
+                    Console.WriteLine($"List was sorted in ascending order by {first_of_last_name}.");
+                    break;
+
+                case ConsoleKey.D:
+                    Console.WriteLine($"List was sorted in descending order by {first_of_last_name}.");
+                    break;
+            }
+            Console.WriteLine("Press any key, to return to Main menu.");
+            Console.ReadKey();
+        }
+
+
+
         public static void ShowCustomers(ConsoleKey consoleKey)
         {
-            if (CustomerMethods.CustomerListLenght() == 0)
-            {
-                throw new CustomerListIsEmptyExeption($"List of customers is equal to {CustomerMethods.CustomerListLenght()}.");
-            }
+            IfCustomerListLenghtIsZero();
 
 
             string[] array_of_customers_info = new string[1];

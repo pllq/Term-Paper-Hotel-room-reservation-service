@@ -9,19 +9,19 @@ namespace BIL.Logic
         internal static List<Hotel> HotelList = new List<Hotel>();
         internal static XMLSerialization<List<Hotel>> xml_serialize_list_of_hotels = new XMLSerialization<List<Hotel>>();
         internal static JSONSerialization<List<Hotel>> json_serialize_list_of_hotels = new JSONSerialization<List<Hotel>>();
-        private static string name_of_file = "hotel_list";
+        internal const string Name_of_file = "hotel_list";
 
 
         public static bool HotelDataFileExists()
         {
-            if (File.Exists(name_of_file + ".xml"))
+            if (File.Exists(Name_of_file + ".xml"))
             {
-                HotelList = xml_serialize_list_of_hotels.Deserialize(name_of_file);
+                HotelList = xml_serialize_list_of_hotels.Deserialize(Name_of_file);
                 return true;
             }
-            if (File.Exists(name_of_file + ".json"))
+            if (File.Exists(Name_of_file + ".json"))
             {
-                HotelList = json_serialize_list_of_hotels.Deserialize(name_of_file);
+                HotelList = json_serialize_list_of_hotels.Deserialize(Name_of_file);
                 return true;
             }
 
@@ -55,9 +55,9 @@ namespace BIL.Logic
             HotelList.Add(Hotel);
 
             //
-            xml_serialize_list_of_hotels.Serialize(HotelList, name_of_file);
+            xml_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
 
-            json_serialize_list_of_hotels.Serialize(HotelList, name_of_file);
+            json_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
 
         }
 
@@ -67,12 +67,42 @@ namespace BIL.Logic
         {
             HotelList.RemoveAt(index_of_hotel_to_remove);
 
-            xml_serialize_list_of_hotels.Serialize(HotelList, name_of_file);
+            xml_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
 
-            json_serialize_list_of_hotels.Serialize(HotelList, name_of_file);
+            json_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
         }
 
 
+
+        public static ArrayList  ShowSpecificHotel(int index)
+        {
+            ArrayList  array_info_of_hotels = new ArrayList();
+
+            array_info_of_hotels[0] = 
+                $"Hotel name: {HotelList[index].Name_of_Hotel}\n" +
+                $"Description of the hotel: {HotelList[index].Description_of_Hotel}\n" +
+                $"Hotel stars rate: {HotelList[index].Hotel_Stars_Rate}\n" +
+                $"Number of Rooms: {HotelList[index].Number_of_Rooms}\n" +
+                $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n";
+
+
+            int[] array_of_Room_Number = new int[HotelList[index].Rooms.Count];
+            int[] array_of_Room_Price_For_1_Day = new int[HotelList[index].Rooms.Count];
+            bool[] array_of_Is_Booked = new bool[HotelList[index].Rooms.Count];
+
+            for (int i = 0; i < HotelList[index].Rooms.Count; i++) 
+            {
+                array_of_Room_Number[i] = HotelList[index].Rooms[i].Room_Number;
+                array_of_Room_Price_For_1_Day [i] = HotelList[index].Rooms[i].Room_Price_For_1_Day;
+                array_of_Is_Booked [i] = HotelList[index].Rooms[i].Is_Booked;
+            }
+
+            array_info_of_hotels.Add(array_of_Room_Number);
+            array_info_of_hotels.Add(array_of_Room_Price_For_1_Day);
+            array_info_of_hotels.Add(array_of_Is_Booked);
+
+            return array_info_of_hotels;
+        }
 
         public static string[] HotelsList()
         {
@@ -93,7 +123,7 @@ namespace BIL.Logic
             for (int i = 0; i < HotelList.Count; i++)
             {
                 array_info_of_hotels[i] =
-                    $"{i + 1}. Hotle name: {HotelList[i].Name_of_Hotel}\n" +
+                    $"{i + 1}. Hotel name: {HotelList[i].Name_of_Hotel}\n" +
                     $"   Description of the hotel: {HotelList[i].Description_of_Hotel}\n" +
                     $"   Hotel stars rate: {HotelList[i].Hotel_Stars_Rate}\n" +
                     $"   Number of Rooms: {HotelList[i].Number_of_Rooms}\n" +
@@ -105,6 +135,11 @@ namespace BIL.Logic
         public static int HotelListLenght()
         {
             return HotelList.Count;
+        }
+
+        public static int NumberOfRoomsInSpecificHotel(int index)
+        {
+            return HotelList[index].Rooms.Count;
         }
     }
 }

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PLInput\PLInput.csproj" />
+    <ProjectReference Include="..\BIL\BIL.csproj" />
   </ItemGroup>
 
 </Project>

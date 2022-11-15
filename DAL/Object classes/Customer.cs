@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DAL
 {
     [Serializable]
-    public class Customer : ISerializable
+    public class Customer : ISerializable/*, IComparable, IComparable<Customer>*/
     {
         public string First_name { get; set; }
         public string Last_name { get; set; }
