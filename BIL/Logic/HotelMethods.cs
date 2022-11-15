@@ -32,7 +32,6 @@ namespace BIL.Logic
         public static void CreateHotel(string Name_of_Hotel, string Decsription_of_Hotel, int Hotel_Stars_Rate,
                      int Number_of_Rooms, ArrayList for_room)
         {
-
             int[] array_of_Room_Number = (int[])for_room[0];
             int[] array_of_Room_Price_For_1_Day = (int[])for_room[1];
             //bool[] array_of_Is_Reserved = (bool[])for_room[2];

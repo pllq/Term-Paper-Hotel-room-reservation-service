@@ -189,6 +189,11 @@ namespace PL
             }
         }
 
+
+        public static void SpecificCustomer()
+        {
+
+        }
         public static void ChangeCustomer()
         {
             Console.WriteLine("Choose what customer you want to edit:");
@@ -196,25 +201,102 @@ namespace PL
             ShowCustomers(ConsoleKey.D4);
             Console.WriteLine();
 
+            string user_change;
 
             string string_index_user_input = CommonMethods.forIniz("index of customer, you want to edit", @"^[1-9]$|[1-9][0-9]+$");
-            int index_user_input = int.Parse(string_index_user_input);
-
+            int index_user_input = int.Parse(string_index_user_input)-1;
+            
             while (index_user_input > CustomerMethods.CustomerListLenght())
             {
                 string_index_user_input = CommonMethods.forIniz("index of customer, you want to edit", @"^[1-9]$|[1-9][0-9]+$");
                 index_user_input = int.Parse(string_index_user_input);
             }
 
-            Console.WriteLine("Choose what exectly you want to change in customer's data.");
-            CustomerMethods.SpecificCustomer(index_user_input);
+            changewronginpu:
+            Console.Clear();
+            Console.WriteLine(CustomerMethods.SpecificCustomer(index_user_input));
+
+            Console.WriteLine("Choose what exectly you want to change in customer's data.\n");
+            Console.WriteLine("Press \"N\" key, to change first name and last name.");
+            Console.WriteLine("Press \"F\" key, to change first name.");
+            Console.WriteLine("Press \"L\" key, to change last name.");
+            Console.WriteLine("Press \"A\" key, to change age.");
+            //Console.WriteLine("Press \"B\" key, to change room, that user booked (if so).");
 
             ConsoleKey consoleKey = Menu.keyIninze();
+            Console.Clear();
+            string what_to_edit = "";
+
+            switch (consoleKey) 
+            {
+                case ConsoleKey.N:
+                    string first_name = CommonMethods.forIniz("new first name", @"^[a-zA-Z]+$");
+                    first_name = char.ToUpper(first_name[0]) + first_name.Substring(1);
+
+                    user_change = CommonMethods.Initialize($"new last name", @"^[a-zA-Z]+$").ToLower();
+                    user_change = char.ToUpper(user_change[0]) + user_change.Substring(1);
+
+                    user_change = first_name + user_change;
+                    what_to_edit = "N";
+                    break;
+
+                case ConsoleKey.F:
+                case ConsoleKey.L:
+                    string forlname = "";
+                    switch (consoleKey)
+                    {
+                        case ConsoleKey.F:
+                            forlname = "first";
+                            what_to_edit = "F";
+                            break;
+
+                        case ConsoleKey.L:
+                            forlname = "last";
+                            what_to_edit = "L";
+                            break;
+                    }
+
+                    user_change = CommonMethods.Initialize($"new {forlname} name", @"^[a-zA-Z]+$").ToLower();
+                    user_change = char.ToUpper(user_change[0]) + user_change.Substring(1);
+                    break;
 
 
+                case ConsoleKey.A:
+                    Console.WriteLine("Customer cannot be younger then 10!");
+                    user_change = CommonMethods.Initialize("new age", @"^[1-9]$|[1-9][0-9]+$");
+                    what_to_edit = "A";
+
+                    CustomerMethods.ChangeCustomer(index_user_input, user_change, what_to_edit);
+                    break;
+
+/*
+                case ConsoleKey.B:
+                    break;
+*/
+
+                default:
+                    goto changewronginpu;
+            }
 
 
+            Console.WriteLine("Do you still want to delete change this custmoer?");
+            Console.WriteLine("Press \"Y\" key, to change him, or press any other key to return to Main menu without deleteing this hotel. ");
 
+            consoleKey = Menu.keyIninze();
+            switch (consoleKey)
+            {
+                case ConsoleKey.Y:
+                    CustomerMethods.ChangeCustomer(index_user_input, user_change, what_to_edit);
+
+                    Console.Clear();
+                    Console.WriteLine(CustomerMethods.SpecificCustomer(index_user_input));
+                    Console.WriteLine("Customer was successfuly edited! To continue work press any button.");
+                    Console.ReadKey();
+                    return;
+
+                default:
+                    return;
+            }
         }
 
 

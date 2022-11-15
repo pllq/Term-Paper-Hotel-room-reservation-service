@@ -1,5 +1,10 @@
 ﻿------------------------------------------------------------------
 Tofix:
+- TO DELETE Room BOOKED_ROOM IN CUSTOMER CLASS
+- to edit: public static string SpecificCustomer(int index)
+
+- Bil.Logic.CustomerMethods line 73 Probably add here Hotel.Rooms.Customer = CustomerList[index] or smth
+- to add CHNGADE BOOK in ChangeCustomer method
 
 - in PLMethodsForHotel class -> AddHotel() method to block user possebillity to create same room numbers
 - XMLSeriallization delets file if it exists.

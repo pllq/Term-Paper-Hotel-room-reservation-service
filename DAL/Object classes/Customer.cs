@@ -15,7 +15,8 @@ namespace DAL
         public int Age { get; set; }
         public bool Have_Booked_the_Room { get; set; } = false;
 
-        public Room Booked_Room;
+        //to delete:
+        //public Room Booked_Room;
 
 
         public Customer(){}
@@ -32,7 +33,7 @@ namespace DAL
             info.AddValue("First_name", First_name);
             info.AddValue("Last_name", Last_name);
             info.AddValue("Age", Age);
-            info.AddValue("Booked_Room", Booked_Room);
+            //info.AddValue("Booked_Room", Booked_Room);
 
         }
 

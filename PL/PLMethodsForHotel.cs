@@ -51,6 +51,7 @@ namespace PL
             ArrayList List_of_arrays_for_Room_iniz = new ArrayList();
             int[] array_of_Room_Number = new int[Number_of_Rooms];
             int[] array_of_Room_Price_For_1_Day = new int[Number_of_Rooms];
+            List<int> list_of_room_numbers = new List<int>();
 
             ConsoleKey keyInfo;
             for (int i = 0; i < Number_of_Rooms; i++) 
@@ -58,6 +59,14 @@ namespace PL
                 Console.Clear();
                 string_Room_Number = CommonMethods.Initialize("room number", @"^\d+$");
                 Room_Number = int.Parse(string_Room_Number);
+                while (list_of_room_numbers != null && list_of_room_numbers.Contains(Room_Number)) 
+                {
+                    Console.Clear();
+                    Console.WriteLine("You have already created room with this number.");
+                    string_Room_Number = CommonMethods.Initialize("another room number", @"^\d+$");
+                    Room_Number = int.Parse(string_Room_Number);
+                }
+                list_of_room_numbers.Add(Room_Number);
                 Console.WriteLine();
 
                 Console.Clear();

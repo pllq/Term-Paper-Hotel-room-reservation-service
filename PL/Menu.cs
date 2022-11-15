@@ -166,7 +166,9 @@ namespace PL
                                         Console.Clear();
                                         try
                                         {
-                                            PLMethodsForCustomerInformation.ShowCustomers(keyInfo);
+                                            //PLMethodsForCustomerInformation.ShowCustomers(keyInfo);
+
+                                            PLMethodsForCustomerInformation.ChangeCustomer();
                                         }
                                         catch (Exception e)
                                         {
