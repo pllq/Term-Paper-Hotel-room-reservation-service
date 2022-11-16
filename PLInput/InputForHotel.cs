@@ -14,10 +14,9 @@ namespace PLInput
 {
     public class InputForHotel
     {
-        internal static void IfHotelsListLenghtIsZero()
+        public static void IfHotelsListLenghtIsZero()
         {
-            int HotelsListLenghtIsZero = HotelMethods.HotelListLenght();
-            if (HotelsListLenghtIsZero == 0)
+            if (BIL.Logic.HotelMethods.HotelListLenght() == 0)
             {
                 throw new HotelListIsEmptyExeption();
             }
@@ -126,7 +125,7 @@ namespace PLInput
             }
             Console.WriteLine();
 
-            HotelMethods.CreateHotel(Name_of_Hotel, Description_of_Hotel, Hotel_Stars_Rate,
+            BIL.Logic.HotelMethods.CreateHotel(Name_of_Hotel, Description_of_Hotel, Hotel_Stars_Rate,
                                      Number_of_Rooms, List_of_arrays_for_Room_iniz);
 
             Console.Write("Hotel was successfully created! To return to Main menu press any key.");
@@ -139,7 +138,7 @@ namespace PLInput
 
             ConsoleKey keyInfo;
 
-            switch (HotelMethods.HotelListLenght())
+            switch (BIL.Logic.HotelMethods.HotelListLenght())
             {
                 case 1:
                     Console.Clear();
@@ -177,7 +176,7 @@ namespace PLInput
                             break;
                     }
 
-                    HotelMethods.RemoveHotel(0);
+                    BIL.Logic.HotelMethods.RemoveHotel(0);
 
                     Console.Clear();
                     Console.WriteLine("Hotel was successfully deleted.");
@@ -207,16 +206,16 @@ namespace PLInput
                         default:
                             int index_of_hotel_to_remove = int.Parse(user_input) - 1;
 
-                            while (index_of_hotel_to_remove > HotelMethods.HotelListLenght())
+                            while (index_of_hotel_to_remove > BIL.Logic.HotelMethods.HotelListLenght())
                             {
                                 string string_index_of_hotel_to_remove;
-                                Console.WriteLine($"Index \"{index_of_hotel_to_remove}\" is greater then lenght of the list of hotels: {HotelMethods.HotelListLenght()}.");
-                                string_index_of_hotel_to_remove = CommonMethods.ForIndexIniz($"write index as digit, strting from 1 to {HotelMethods.HotelListLenght()}",
+                                Console.WriteLine($"Index \"{index_of_hotel_to_remove}\" is greater then lenght of the list of hotels: {BIL.Logic.HotelMethods.HotelListLenght()}.");
+                                string_index_of_hotel_to_remove = CommonMethods.ForIndexIniz($"write index as digit, strting from 1 to {BIL.Logic.HotelMethods.HotelListLenght()}",
                                     @"^[1-9]$|[1-9][0-9]+$");
                                 index_of_hotel_to_remove = int.Parse(string_index_of_hotel_to_remove) - 1;
                             }
 
-                            HotelMethods.RemoveHotel(index_of_hotel_to_remove);
+                            BIL.Logic.HotelMethods.RemoveHotel(index_of_hotel_to_remove);
                             Console.Clear();
                             Console.WriteLine("Hotel was successfully deleted.");
                             Console.WriteLine("Press any key to returen to Main menu.");
@@ -235,20 +234,20 @@ namespace PLInput
             switch (consoleKey)
             {
                 case ConsoleKey.D3:
-                    array_of_hotels_info = HotelMethods.ShowListOfCreatedHotels();
+                    array_of_hotels_info = BIL.Logic.HotelMethods.ShowListOfCreatedHotels();
                     break;
 
                 case ConsoleKey.D4:
-                    array_of_hotels_info = HotelMethods.ShowHotelInfoWithoutRooms();
+                    array_of_hotels_info = BIL.Logic.HotelMethods.ShowHotelInfoWithoutRooms();
                     break;
             }
-            Console.WriteLine("All created hotels:");
+            Console.WriteLine("\tAll created hotels\n");
 
             for (int i = 0; i < array_of_hotels_info.Length; i++)
             {
                 Console.Write(array_of_hotels_info[i]);
             }
-            Console.WriteLine();
+            //Console.WriteLine();
             //Console.WriteLine("Press any key to returen to continue work.");
             //Console.ReadKey();
         }
@@ -260,21 +259,24 @@ namespace PLInput
             Console.Clear();
 
             ShowHotels(ConsoleKey.D3);
-            Console.WriteLine("Press any key to returen to continue work.");
-            Console.ReadKey();
+            Console.WriteLine();
 
             int index_of_hotel = CommonMethods.InputIndex("hotel", "whole information you want to see");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to returen to continue work.");
             Console.Clear();
 
             SpecificHotelInfo(index_of_hotel);
+            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.ReadKey();
         }
         internal static void SpecificHotelInfo(int index_of_hotel)
         {
             Console.WriteLine("\tChosen hotel\n");
 
-            ArrayList array_of_specific_hotel = HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
+            ArrayList array_of_specific_hotel = BIL.Logic.HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
 
-            int number_of_rooms_in_specific_hotel = HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
+            int number_of_rooms_in_specific_hotel = BIL.Logic.HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
 
             int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
             int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];
@@ -285,9 +287,9 @@ namespace PLInput
 
             for (int i = 0; i < number_of_rooms_in_specific_hotel; i++)
             {
-                Console.WriteLine($"{i + 1}. Room No. {array_of_Room_Number[i]}");
+                Console.WriteLine($"{i + 1}. Room #{array_of_Room_Number[i]}");
                 Console.WriteLine($"   Rrice for 1 day = {array_of_Room_Price_For_1_Day[i]}");
-                Console.WriteLine($"   Is room booked = {array_of_Is_Booked[i]}");
+                Console.WriteLine($"   Is room reserved = {array_of_Is_Booked[i]}");
             }
             Console.WriteLine();
         }

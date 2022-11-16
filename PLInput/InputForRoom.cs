@@ -1,5 +1,6 @@
 ﻿using BaseLibS.Graph;
 using BIL.Logic;
+using BIL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace PLInput
         private static int InputCustomerIndex(string todo) 
         {
             InputForCustomer.ShowCustomers(ConsoleKey.D4);
-            Console.WriteLine();
+            Console.WriteLine("Press any key to returen to continue work.");
+            Console.ReadKey();
+
             int index_of_customer_that_books_room = CommonMethods.InputIndex("customer", $"{todo}");
 
             return index_of_customer_that_books_room;
@@ -30,8 +33,8 @@ namespace PLInput
         private static int InputHotelIndex(string todo)
         {
             InputForHotel.ShowHotels(ConsoleKey.D4);
-            Console.WriteLine("Press any key to returen to continue work.");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to returen to continue work.");
+            //Console.ReadKey();
 
             Console.WriteLine();
             int index_of_hotel = CommonMethods.InputIndex("hotel", $"{todo}");
@@ -97,25 +100,65 @@ namespace PLInput
             Console.Clear();
 
             InputForHotel.SpecificHotelInfo(index_of_hotel);
+            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.ReadKey();
         }
 
-        public static void ViewInfoAndNumberOfReservedRooms()
+        public static void ShowInfoOfAllFreeRooms()
         {
+
             //Not only number, but details of room
+            Console.Clear();
 
+            CheckIfListOfHotelsAndCustomersAreNotEmpty();
+
+            int index_of_hotel = InputHotelIndex("");
+            Console.Clear();
+
+            //TOdo:
+            SpecificHotelInfo(index_of_hotel);
+
+            List<string[]> free_and_reserved_rooms_with_price_info = HotelMethods.ShowFreeAndReservedRoomsANDPrice(index_of_hotel);
+
+            string[] array_of_free_rooms = free_and_reserved_rooms_with_price_info[0];
+            string[] array_of_reserved_rooms = free_and_reserved_rooms_with_price_info[1];
+
+            Console.WriteLine("\tFree rooms:");
+            for(int i = 0; i < array_of_free_rooms.Length; i++) 
+            {
+                Console.WriteLine(array_of_free_rooms[i]);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("\tReserved rooms:");
+            for (int i = 0; i < array_of_reserved_rooms.Length; i++)
+            {
+                Console.WriteLine(array_of_reserved_rooms[i]);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.ReadKey();
         }
 
-        public static void ShowPriceOfTheRoom()
+        internal static void SpecificHotelInfo(int index_of_hotel)
         {
+            Console.WriteLine("\tChosen hotel\n");
 
+            ArrayList array_of_specific_hotel = BIL.Logic.HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
 
+            int number_of_rooms_in_specific_hotel = BIL.Logic.HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
+
+            int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
+            int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];
+            bool[] array_of_Is_Booked = (bool[])array_of_specific_hotel[3];
+
+            Console.WriteLine(array_of_specific_hotel[0]);
+            Console.WriteLine();
         }
 
-        public static void SeRoom()
-        {
 
 
-        }
 
     }
 }

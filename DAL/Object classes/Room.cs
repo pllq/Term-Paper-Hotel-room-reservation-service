@@ -17,9 +17,7 @@ namespace DAL
 
         public Customer Customer_of_Room = new Customer();
 
-        public Room()
-        {
-        }
+        public Room() {}
 
         public Room(int Room_Number, int Room_Price_For_1_Day)
         {

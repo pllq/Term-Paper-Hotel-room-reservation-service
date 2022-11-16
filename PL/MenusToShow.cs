@@ -53,11 +53,8 @@ namespace PL
                        "Press key from the list to open one of the menus.\n\n" +
                        "1. Book a room at a particular hotel.\n" +
                        "2. Cancel a customer’s room reservation at a particular hotel.\n" +
-                       "3. View the details of a specific room reservation at a particular hotel..\n" +
-                       "4. View the number of reserved rooms in a hotel(Specify each room’s number).\n" +
-                       "5. View the information about the number of reserved rooms in a hotel(Specify each room’s number).\n" +
-                       "6. View the information about the price of service for one - day room reservation.\n" +
-                       "7. View the information about customers who have booked rooms at the hotel.\n" +
+                       "3. Show list or fooms in the hotel.\n" +
+                       "4. Show Free and Reserved rooms, thier price who booked and and for how many days.\n" +
                        "R. Return to the Customers management menu";
         }
         internal static string SearchMenu()

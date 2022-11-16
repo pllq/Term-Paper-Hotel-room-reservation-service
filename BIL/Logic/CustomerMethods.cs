@@ -73,10 +73,7 @@ namespace BIL.Logic
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
-        private static void FindCustomerInListOfHotels() 
-        { 
-        
-        }
+
 
         public static void ChangeCustomer(int index, string data_to_edit, string what_field_to_edit)
         {
@@ -224,6 +221,18 @@ namespace BIL.Logic
             return data_of_specific_customer;
         }
 
+        /// <summary>
+        /// This method returns array with the names of all created customers.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. Customer: *firstname lastname1*
+        /// 2. Customer: *firstname lastname2*
+        /// 3. Customer: *firstname lastname3*
+        /// </code>
+        /// </example>
+        /// </summary>
+
         public static string[] CustomersList()
         {
             string[] array_info_of_hotels = new string[CustomerList.Count];
@@ -236,6 +245,20 @@ namespace BIL.Logic
             return array_info_of_hotels;
         }
 
+
+        /// <summary>
+        /// This method returns string array with information about all customers.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. Hotel name: *Hotel_name*
+        /// 2. Description of the hotel: *Hotel_description*
+        /// 3. Hotel stars rate: *Hotel_stars_rate*
+        /// 4. Number of Rooms: *Hotel_number_rooms*
+        /// 5. Number of free rooms: *Hotel_number_of_free_rooms*
+        /// </code>
+        /// </example>
+        /// </summary>
 
         public static string[] ViewWholeInfoOfCustomers()
         {

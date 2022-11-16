@@ -138,7 +138,8 @@ namespace BIL.Logic
                     $"   Description of the hotel: {HotelList[i].Description_of_Hotel}\n" +
                     $"   Hotel stars rate: {HotelList[i].Hotel_Stars_Rate}\n" +
                     $"   Number of Rooms: {HotelList[i].Number_of_Rooms}\n" +
-                    $"   Number of free rooms: {HotelList[i].Number_of_Free_Rooms}\n\n";
+                    $"   Number of free rooms: {HotelList[i].Number_of_Free_Rooms}\n"+
+                    $"   Number of reserved rooms: {HotelList[i].Number_of_Reserved_Rooms}\n\n";
             }
             return array_info_of_hotels;
         }
@@ -168,7 +169,8 @@ namespace BIL.Logic
                     $"Description of the hotel: {HotelList[index].Description_of_Hotel}\n" +
                     $"Hotel stars rate: {HotelList[index].Hotel_Stars_Rate}\n" +
                     $"Number of Rooms: {HotelList[index].Number_of_Rooms}\n" +
-                    $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n"
+                    $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n"+
+                    $"Number of reserved rooms: {HotelList[index].Number_of_Reserved_Rooms}\n"
                 );
 
 
@@ -190,11 +192,72 @@ namespace BIL.Logic
             return array_info_of_hotels;
         }
 
+        public static List<string[]> ShowFreeAndReservedRoomsANDPrice(int index_of_hotel)
+        {
+            int free_rooms = 0, reserved_rooms = 0;
 
+            for (int i = 0; i < HotelList[index_of_hotel].Rooms.Count; i++)
+            {
+                switch (HotelList[index_of_hotel].Rooms[i].Is_Booked)
+                {
+                    case false:
+                        free_rooms++;
+                        break;
 
+                    case true:
+                        reserved_rooms++;
+                        break;
+                }
+            }
 
+            string[] array_of_free_rooms = new string[free_rooms];
+            if (free_rooms == 0)
+            {
+                array_of_free_rooms = new string[1];
+                array_of_free_rooms[0] = "All rooms are reserved.";
+            }
 
+            string[] array_of_reserved_rooms = new string[reserved_rooms];
+            if (reserved_rooms == 0) 
+            {
+                array_of_reserved_rooms = new string[1];
+                array_of_reserved_rooms[0] = "All rooms are free.";
+            }
 
+            free_rooms = 0;
+            reserved_rooms = 0;
+
+            for (int i = 0; i < HotelList[index_of_hotel].Rooms.Count; i++) 
+            { 
+                switch (HotelList[index_of_hotel].Rooms[i].Is_Booked) 
+                {
+                    case false:
+                        array_of_free_rooms[free_rooms] = 
+                            $"{free_rooms+1}. Room number #{HotelList[index_of_hotel].Rooms[i].Room_Number}\n"+
+                            $"   Price for 1 day: {HotelList[index_of_hotel].Rooms[i].Room_Number}";
+                        free_rooms++;
+                        break;
+
+                    case true:
+                        array_of_reserved_rooms[reserved_rooms] =
+                            $"{reserved_rooms + 1}. Room number #{HotelList[index_of_hotel].Rooms[i].Room_Number}.\n" +
+                            $"   Price for 1 day: {HotelList[index_of_hotel].Rooms[i].Room_Number}.\n" +
+                            $"   Reserved by: {HotelList[index_of_hotel].Rooms[i].Customer_of_Room.First_name} " +
+                                                 $"{HotelList[index_of_hotel].Rooms[i].Customer_of_Room.Last_name}.\n" +
+                            $"   Reserved for {HotelList[index_of_hotel].Rooms[i].Days} day(s).";
+                        reserved_rooms++;
+                        break;
+                }
+            }
+
+            List<string[]> arrays_of_free_and_reserved_rooms = new List<string[]>();
+            arrays_of_free_and_reserved_rooms.Add(array_of_free_rooms);
+            arrays_of_free_and_reserved_rooms.Add(array_of_reserved_rooms);
+
+            return arrays_of_free_and_reserved_rooms;
+        }
+
+        
         public static int HotelListLenght() =>  HotelList.Count;
         public static int NumberOfRoomsInSpecificHotel(int index) => HotelList[index].Rooms.Count;
 

@@ -8,7 +8,7 @@ namespace PL
     {
         public static void MainMenu()
         {
-            switch ((HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
+            switch ((BIL.Logic.HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
             {
                 case (true, true):
                     Console.WriteLine("Data of created hotels with appropriate name was found and loaded.");
@@ -53,6 +53,7 @@ namespace PL
 
                         switch (keyInfo)
                         {
+
                             //1. Add hotel
                             case ConsoleKey.D1:
                                 Console.Clear();
@@ -71,26 +72,14 @@ namespace PL
                                 }
                                 break;
 
-                                //3. Change hotel
+                            //3. Show info about one hotel (D3)
                             case ConsoleKey.D3:
-                                try
-                                {
-                                    Console.Clear();
-                                    //InputForHotel.ChangeHotel();
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine(e.Message);
-                                }
-                                break;
-
-
-                            //4. Show info about one hotel (D3)
                             case ConsoleKey.D4:
+
                                 try
                                 {
                                     Console.Clear();
-                                    InputForHotel.ShowHotels(ConsoleKey.D3);
+                                    InputForHotel.ShowHotels(keyInfo);
                                     Console.WriteLine("Press any key to returen to continue work.");
                                     Console.ReadKey();
                                 }
@@ -103,21 +92,6 @@ namespace PL
 
                             //5. Show info about all hotels (D4)
                             case ConsoleKey.D5:
-                                try
-                                {
-                                    Console.Clear();
-                                    InputForHotel.ShowHotels(ConsoleKey.D4);
-                                    Console.WriteLine("Press any key to returen to continue work.");
-                                    Console.ReadKey();
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine(e.Message);
-                                }
-                                break;
-
-                            //6. Show info about all hotels (D4)
-                            case ConsoleKey.D6:
                                 try
                                 {
                                     InputForHotel.SpecificHotelInfo();
@@ -149,14 +123,14 @@ namespace PL
 
                         switch (keyInfo)
                         {
-                            //Add customer
+                            //1. Add customer
                             case ConsoleKey.D1:
                                 Console.Clear();
                                 InputForCustomer.AddCustomer();
                                 break;
 
 
-                            //Remove customer
+                            //2. Remove customer
                             case ConsoleKey.D2:
                                 Console.Clear();
                                 try
@@ -170,7 +144,7 @@ namespace PL
                                 break;
 
 
-                            //Change customer
+                            //3. Change customer
                             case ConsoleKey.D3:
                                 Console.Clear();
                                 try
@@ -184,12 +158,14 @@ namespace PL
                                 break;
 
 
-                            //Show SPECIFIC customer
+                            //4. This method returns array with the names of all created customers.
                             case ConsoleKey.D4:
                                 Console.Clear();
                                 try
                                 {
-                                    InputForCustomer.ShowCustomers(keyInfo);
+                                    InputForCustomer.ShowCustomers(ConsoleKey.D3);
+                                    Console.WriteLine("Press any key to returen to continue work.");
+                                    Console.ReadKey();
                                 }
                                 catch (Exception e)
                                 {
@@ -198,14 +174,23 @@ namespace PL
                                 break;
 
 
-                            //Show all customer
+                            //5. This method returns string array with information about all customers.
                             case ConsoleKey.D5:
                                 Console.Clear();
-                                InputForCustomer.ShowCustomers(ConsoleKey.D4);
+                                try
+                                {
+                                    InputForCustomer.ShowCustomers(ConsoleKey.D4);
+                                    Console.WriteLine("Press any key to returen to continue work.");
+                                    Console.ReadKey();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
 
-                            //Sort the list by first/lastname and ascednding/descending order
+                            //6. and 7. Sort the list by first/lastname and ascednding/descending order
                             case ConsoleKey.D6:
                             case ConsoleKey.D7:
 
@@ -234,7 +219,22 @@ namespace PL
 
                     //3.Room management.
                     case ConsoleKey.D3:
+                        Console.Clear();
+                        try
+                        {
+                            InputForHotel.IfHotelsListLenghtIsZero();
+                            InputForCustomer.IfCustomerListLenghtIsZero();
+                        }
+                        catch (Exception e) 
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Press any key to returen to Main menu.");
+                            Console.ReadKey();
+                            break;
+                        }
+
                     wrong_key3:
+
                         Console.Clear();
                         Console.WriteLine(MenusToShow.RoomManagement());
                         keyInfo = CommonMethods.keyIninze();
@@ -255,7 +255,14 @@ namespace PL
 
                             //Cancel reservation
                             case ConsoleKey.D2:
-                                InputForRoom.CancelReservation();
+                                try 
+                                { 
+                                    InputForRoom.CancelReservation();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
 
@@ -272,20 +279,11 @@ namespace PL
                                 break;
 
 
+                            //4. An ability to view the number of free rooms in a hotel
                             case ConsoleKey.D4:
+                                InputForRoom.ShowInfoOfAllFreeRooms();
                                 break;
 
-
-                            case ConsoleKey.D5:
-                                break;
-
-
-                            case ConsoleKey.D6:
-                                break;
-
-
-                            case ConsoleKey.D7:
-                                break;
 
                             case ConsoleKey.R:
                                 break;
@@ -299,6 +297,23 @@ namespace PL
 
                     //4. Search
                     case ConsoleKey.D4:
+                        //Smth like that:
+                        Console.Clear();
+                        try
+                        {
+                            //BUT NOT 'AND'!!
+                            //HERE HAS TO BE 'OR'
+                            InputForHotel.IfHotelsListLenghtIsZero();
+                            InputForCustomer.IfCustomerListLenghtIsZero();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Press any key to returen to Main menu.");
+                            Console.ReadKey();
+                            break;
+                        }
+
                     wrong_key4:
 
                         /*

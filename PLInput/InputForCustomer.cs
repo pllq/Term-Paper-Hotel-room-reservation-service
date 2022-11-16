@@ -14,10 +14,9 @@ namespace PLInput
     public class InputForCustomer
     {
 
-        internal static void IfCustomerListLenghtIsZero() 
+        public static void IfCustomerListLenghtIsZero() 
         {
-            int CustomerListLenghtIsZero = CustomerMethods.CustomerListLenght();
-            if (CustomerListLenghtIsZero == 0)
+            if (CustomerMethods.CustomerListLenght() == 0)
             {
                 throw new CustomerListIsEmptyExeption();
             }
@@ -74,15 +73,12 @@ namespace PLInput
 
         public static void RemoveCustomer()
         {
+            IfCustomerListLenghtIsZero();
+
             ConsoleKey keyInfo;
 
             switch (CustomerMethods.CustomerListLenght())
             {
-                case 0:
-                    IfCustomerListLenghtIsZero();
-                    break;
-
-
                 case 1:
                     Console.Clear();
 
@@ -98,6 +94,8 @@ namespace PLInput
                             keyInfo = ConsoleKey.D4;
                             Console.Clear();
                             ShowCustomers(keyInfo);
+                            Console.WriteLine("Press any key to returen to continue work.");
+                            Console.ReadKey();
 
                             Console.WriteLine("Do you still want to delete this customer?");
                             Console.WriteLine("Press \"Y\" key, to delete him, or press any other key to return to Main menu without deleteing this customer. ");
@@ -140,7 +138,8 @@ namespace PLInput
                             keyInfo = ConsoleKey.D4;
                             Console.Clear();
                             ShowCustomers(keyInfo);
-
+                            Console.WriteLine("Press any key to returen to continue work.");
+                            Console.ReadKey();
                             break;
 
                         case ConsoleKey.N:
@@ -206,7 +205,8 @@ namespace PLInput
             Console.WriteLine("Choose what customer you want to edit:");
 
             ShowCustomers(ConsoleKey.D4);
-            Console.WriteLine();
+            Console.WriteLine("Press any key to returen to continue work.");
+            Console.ReadKey();
 
             string user_change;
 
@@ -354,8 +354,6 @@ namespace PLInput
             Console.ReadKey();
         }
 
-
-
         public static void ShowCustomers(ConsoleKey consoleKey)
         {
             IfCustomerListLenghtIsZero();
@@ -372,7 +370,7 @@ namespace PLInput
                     array_of_customers_info = CustomerMethods.ViewWholeInfoOfCustomers();
                     break;
             }
-            Console.WriteLine("All created customers:");
+            Console.WriteLine("\tAll created customers\n");
 
             for (int i = 0; i < array_of_customers_info.Length; i++)
             {
@@ -380,8 +378,8 @@ namespace PLInput
             }
             Console.WriteLine();
 
-            Console.WriteLine("Press any key to returen to continue work.");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to returen to continue work.");
+            //Console.ReadKey();
         }
 
     }

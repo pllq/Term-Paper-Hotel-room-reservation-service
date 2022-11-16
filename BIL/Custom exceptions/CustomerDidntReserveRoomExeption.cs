@@ -2,7 +2,7 @@
 {
     public class CustomerDidntReserveRoomExeption:Exception
     {
-        public CustomerDidntReserveRoomExeption() => throw new CustomerDidntReserveRoomExeption("Customer haven't reserved any of rooms.");
+        public CustomerDidntReserveRoomExeption() => throw new CustomerDidntReserveRoomExeption("ERROR: Customer haven't reserved any of rooms.");
 
         public CustomerDidntReserveRoomExeption(string message): base(String.Format($"{message}\n")) {}
 
