@@ -28,8 +28,9 @@ namespace PL
                     "Press key from the list to open one of the menus.\n" +
                     "1. Add hotel.\n" +
                     "2. Remove hotel.\n" +
-                    "3. View specific hotel.\n" +
-                    "4. View all hotels (description, star rate and number of free rooms).\n" +
+                    "3. Show list of created hotels.\n" +
+                    "4. Show hotel information (without rooms).\n" +
+                    "5. Show hotel information with all created rooms.\n" +
                     "R. Return to the Main menu";
         }
         internal static string CustomerManagement()

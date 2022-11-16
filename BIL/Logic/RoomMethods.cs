@@ -9,7 +9,6 @@ namespace BIL.Logic
 {
     public class RoomMethods
     {
-
         public static void BookRoom(int index_of_customer_that_books_room, int index_of_hotel, int index_of_room, int days_to_book_room)
         {
             //If in chosen hotel, chosen room is booked, throw exception

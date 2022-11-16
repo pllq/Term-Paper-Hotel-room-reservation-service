@@ -256,11 +256,7 @@ namespace BIL.Logic
 
 
 
-        public static int CustomerListLenght()
-        {
-            return CustomerList.Count;
-        }
-
+        public static int CustomerListLenght() => CustomerList.Count;
 
 
 

@@ -34,7 +34,6 @@ namespace DAL
             info.AddValue("Last_name", Last_name);
             info.AddValue("Age", Age);
             //info.AddValue("Booked_Room", Booked_Room);
-
         }
 
         public int CompareTo(object? obj)
@@ -56,15 +55,15 @@ namespace DAL
 
         public override bool Equals(object obj) => this.Equals(obj as Customer);
 
-        public bool Equals(Customer p)
+        public bool Equals(Customer customer)
         {
-            if (p is null)
+            if (customer is null)
             {
                 return false;
             }
 
             // If run-time types are not exactly the same, return false.
-            if (this.GetType() != p.GetType())
+            if (this.GetType() != customer.GetType())
             {
                 return false;
             }
@@ -72,17 +71,17 @@ namespace DAL
             // Return true if the fields match.
             // Note that the base class is not invoked because it is
             // System.Object, which defines Equals as reference equality.
-            return (First_name == p.First_name) &&
-                   (Last_name == p.Last_name) &&
-                   (Age == p.Age) &&
-                   (Have_Booked_the_Room == p.Have_Booked_the_Room);
+            return (First_name == customer.First_name) &&
+                   (Last_name == customer.Last_name) &&
+                   (Age == customer.Age) &&
+                   (Have_Booked_the_Room == customer.Have_Booked_the_Room);
         }
 
-        public static bool operator ==(Customer lhs, Customer rhs)
+        public static bool operator ==(Customer left_customer, Customer right_customer)
         {
-            if (lhs is null)
+            if (left_customer is null)
             {
-                if (rhs is null)
+                if (right_customer is null)
                 {
                     return true;
                 }
@@ -91,10 +90,10 @@ namespace DAL
                 return false;
             }
             // Equals handles case of null on right side.
-            return lhs.Equals(rhs);
+            return left_customer.Equals(right_customer);
         }
 
-        public static bool operator !=(Customer lhs, Customer rhs) => !(lhs == rhs);
+        public static bool operator !=(Customer left_customer, Customer right_customer) => !(left_customer == right_customer);
 
 
 

@@ -19,7 +19,7 @@ namespace PLInput
             int CustomerListLenghtIsZero = CustomerMethods.CustomerListLenght();
             if (CustomerListLenghtIsZero == 0)
             {
-                throw new CustomerListIsEmptyExeption($"List of customers is equal to {CustomerListLenghtIsZero}.");
+                throw new CustomerListIsEmptyExeption();
             }
         }
 

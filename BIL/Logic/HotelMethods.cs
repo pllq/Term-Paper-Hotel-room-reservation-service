@@ -62,15 +62,17 @@ namespace BIL.Logic
         }
 
 
-
         public static void RemoveHotel(int index_of_hotel_to_remove)
         {
+            //Think about people, who ordered in that hotel room
+
             HotelList.RemoveAt(index_of_hotel_to_remove);
 
             xml_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
 
             json_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
         }
+
 
         internal static void RoomIsBooked(int i, int j, int days)
         {
@@ -88,9 +90,75 @@ namespace BIL.Logic
             HotelList[i].Rooms[j].Days = 0;
         }
 
+        /// <summary>
+        /// This method returns array with the names of all created hotels.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. *Hotel_name1*
+        /// 2. *Hotel_name2*
+        /// 3. *Hotel_name3*
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static string[] ShowListOfCreatedHotels()
+        {
+            string[] array_info_of_hotels = new string[HotelList.Count];
+
+            for (int i = 0; i < HotelList.Count; i++)
+            {
+                array_info_of_hotels[i] =
+                    $"{i + 1}. {HotelList[i].Name_of_Hotel}\n";
+            }
+            return array_info_of_hotels;
+        }
 
 
-        public static ArrayList ShowSpecificHotel(int index)
+        /// <summary>
+        /// This method returns string array with hotel information without rooms data.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. Hotel name: *Hotel_name*
+        /// 2. Description of the hotel: *Hotel_description*
+        /// 3. Hotel stars rate: *Hotel_stars_rate*
+        /// 4. Number of Rooms: *Hotel_number_rooms*
+        /// 5. Number of free rooms: *Hotel_number_of_free_rooms*
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static string[] ShowHotelInfoWithoutRooms()
+        {
+            string[] array_info_of_hotels = new string[HotelList.Count];
+
+            for (int i = 0; i < HotelList.Count; i++)
+            {
+                array_info_of_hotels[i] =
+                    $"{i + 1}. Hotel name: {HotelList[i].Name_of_Hotel}\n" +
+                    $"   Description of the hotel: {HotelList[i].Description_of_Hotel}\n" +
+                    $"   Hotel stars rate: {HotelList[i].Hotel_Stars_Rate}\n" +
+                    $"   Number of Rooms: {HotelList[i].Number_of_Rooms}\n" +
+                    $"   Number of free rooms: {HotelList[i].Number_of_Free_Rooms}\n\n";
+            }
+            return array_info_of_hotels;
+        }
+
+
+        /// <summary>
+        /// This method returns ArrayList with full description about specific hotel.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. Hotel name: *Hotel_name*
+        /// 2. Description of the hotel: *Hotel_description*
+        /// 3. Hotel stars rate: *Hotel_stars_rate*
+        /// 4. Number of Rooms: *Hotel_number_rooms*
+        /// 5. Number of free rooms: *Hotel_number_of_free_rooms*
+        /// 6. Brief information about all rooms.
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static ArrayList ShowInfoAboutSpecificHotelWithRoomsInfo(int index)
         {
             ArrayList  array_info_of_hotels = new ArrayList();
 
@@ -122,42 +190,13 @@ namespace BIL.Logic
             return array_info_of_hotels;
         }
 
-        public static string[] HotelsList()
-        {
-            string[] array_info_of_hotels = new string[HotelList.Count];
 
-            for (int i = 0; i < HotelList.Count; i++)
-            {
-                array_info_of_hotels[i] =
-                    $"{i + 1}. {HotelList[i].Name_of_Hotel}\n";
-            }
-            return array_info_of_hotels;
-        }
 
-        public static string[] ViewWholeInfoOfHotels()
-        {
-            string[] array_info_of_hotels = new string[HotelList.Count];
 
-            for (int i = 0; i < HotelList.Count; i++)
-            {
-                array_info_of_hotels[i] =
-                    $"{i + 1}. Hotel name: {HotelList[i].Name_of_Hotel}\n" +
-                    $"   Description of the hotel: {HotelList[i].Description_of_Hotel}\n" +
-                    $"   Hotel stars rate: {HotelList[i].Hotel_Stars_Rate}\n" +
-                    $"   Number of Rooms: {HotelList[i].Number_of_Rooms}\n" +
-                    $"   Number of free rooms: {HotelList[i].Number_of_Free_Rooms}\n\n";
-            }
-            return array_info_of_hotels;
-        }
 
-        public static int HotelListLenght()
-        {
-            return HotelList.Count;
-        }
 
-        public static int NumberOfRoomsInSpecificHotel(int index)
-        {
-            return HotelList[index].Rooms.Count;
-        }
+        public static int HotelListLenght() =>  HotelList.Count;
+        public static int NumberOfRoomsInSpecificHotel(int index) => HotelList[index].Rooms.Count;
+
     }
 }

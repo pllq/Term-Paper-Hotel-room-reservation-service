@@ -30,10 +30,11 @@ namespace PL
                     break;
             }
 
-            ConsoleKey keyInfo;
-            bool not_5_key = true;
 
-            while (not_5_key)
+            ConsoleKey keyInfo;
+            bool not_Exit_key = true;
+
+            while (not_Exit_key)
             {
                 Console.Clear();
                 Console.WriteLine(MenusToShow.ShowMainMenu());
@@ -52,11 +53,13 @@ namespace PL
 
                         switch (keyInfo)
                         {
+                            //1. Add hotel
                             case ConsoleKey.D1:
                                 Console.Clear();
                                 InputForHotel.AddHotel();
                                 break;
 
+                            //2. Remove hotel
                             case ConsoleKey.D2:
                                 try
                                 {
@@ -68,26 +71,28 @@ namespace PL
                                 }
                                 break;
 
+                                //3. Change hotel
                             case ConsoleKey.D3:
-
                                 try
                                 {
                                     Console.Clear();
-                                    InputForHotel.ShowHotels(keyInfo);
+                                    //InputForHotel.ChangeHotel();
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e.Message);
                                 }
-
                                 break;
 
+
+                            //4. Show info about one hotel (D3)
                             case ConsoleKey.D4:
-
                                 try
                                 {
                                     Console.Clear();
-                                    InputForHotel.ShowHotels(keyInfo);
+                                    InputForHotel.ShowHotels(ConsoleKey.D3);
+                                    Console.WriteLine("Press any key to returen to continue work.");
+                                    Console.ReadKey();
                                 }
                                 catch (Exception e)
                                 {
@@ -95,17 +100,34 @@ namespace PL
                                 }
                                 break;
 
+
+                            //5. Show info about all hotels (D4)
                             case ConsoleKey.D5:
+                                try
+                                {
+                                    Console.Clear();
+                                    InputForHotel.ShowHotels(ConsoleKey.D4);
+                                    Console.WriteLine("Press any key to returen to continue work.");
+                                    Console.ReadKey();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
+                            //6. Show info about all hotels (D4)
                             case ConsoleKey.D6:
+                                try
+                                {
+                                    InputForHotel.SpecificHotelInfo();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
                                 break;
 
-                            case ConsoleKey.D7:
-                                break;
-
-                            case ConsoleKey.D8:
-                                break;
 
                             case ConsoleKey.R:
                                 break;
@@ -279,6 +301,19 @@ namespace PL
                     case ConsoleKey.D4:
                     wrong_key4:
 
+                        /*
+                         //Here will be:
+
+                        try
+                        {
+                            InputForSearch.Search();
+                        }
+                        catch(Exception e )
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                         */
                         Console.Clear();
                         Console.WriteLine(MenusToShow.SearchMenu());
 
@@ -304,7 +339,7 @@ namespace PL
 
                     //5. Exit.
                     case ConsoleKey.D5:
-                        not_5_key = false;
+                        not_Exit_key = false;
                         return;
                 }
             }

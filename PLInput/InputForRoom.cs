@@ -30,35 +30,16 @@ namespace PLInput
         private static int InputHotelIndex(string todo)
         {
             InputForHotel.ShowHotels(ConsoleKey.D4);
+            Console.WriteLine("Press any key to returen to continue work.");
+            Console.ReadKey();
+
             Console.WriteLine();
             int index_of_hotel = CommonMethods.InputIndex("hotel", $"{todo}");
 
             return index_of_hotel;
         }
 
-        private static void SpecificHotelInfo(int index_of_hotel)
-        {
-            Console.WriteLine("\tChosen hotel\n");
 
-            ArrayList array_of_specific_hotel = HotelMethods.ShowSpecificHotel(index_of_hotel);
-
-            int number_of_rooms_in_specific_hotel = HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
-
-            int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
-            int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];
-            bool[] array_of_Is_Booked = (bool[])array_of_specific_hotel[3];
-
-
-            Console.WriteLine(array_of_specific_hotel[0]);
-
-            for (int i = 0; i < number_of_rooms_in_specific_hotel; i++)
-            {
-                Console.WriteLine($"{i + 1}. Room No. {array_of_Room_Number[i]}");
-                Console.WriteLine($"   Rrice for 1 day = {array_of_Room_Price_For_1_Day[i]}");
-                Console.WriteLine($"   Is room booked = {array_of_Is_Booked[i]}");
-            }
-            Console.WriteLine();
-        }
 
         public static void BookRoom()
         {
@@ -73,7 +54,7 @@ namespace PLInput
             int index_of_hotel = InputHotelIndex(", in which room will be booked");
             Console.Clear();
 
-            SpecificHotelInfo(index_of_hotel);
+            InputForHotel.SpecificHotelInfo(index_of_hotel);
 
             int index_of_room = CommonMethods.InputIndex("room", ", that will be booked");
             Console.Clear();
@@ -115,7 +96,7 @@ namespace PLInput
             int index_of_hotel = InputHotelIndex("");
             Console.Clear();
 
-            SpecificHotelInfo(index_of_hotel);
+            InputForHotel.SpecificHotelInfo(index_of_hotel);
         }
 
         public static void ViewInfoAndNumberOfReservedRooms()
