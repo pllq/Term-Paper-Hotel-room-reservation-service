@@ -17,7 +17,7 @@ namespace PL
                     "Press key from the list to open one of the menus.\n\n" +
                     "1. Hotels management.\n" +
                     "2. Customers management.\n" +
-                    "2. Room management.\n" +
+                    "3. Room management.\n" +
                     "4. Search.\n" +
                     "5. Exit.\n";
         }

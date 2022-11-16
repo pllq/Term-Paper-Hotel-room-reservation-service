@@ -72,18 +72,36 @@ namespace BIL.Logic
             json_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
         }
 
+        internal static void RoomIsBooked(int i, int j, int days)
+        {
+            HotelList[i].Rooms[j].Is_Booked = true;
+            HotelList[i].Number_of_Free_Rooms -= 1;
+            HotelList[i].Number_of_Reserved_Rooms += 1;
+            HotelList[i].Rooms[j].Days = days;
+        }
+        internal static void RoomIsNotBooked(int i, int j) 
+        {
+            HotelList[i].Rooms[j].Is_Booked = false;
+            HotelList[i].Number_of_Free_Rooms += 1;
+            HotelList[i].Number_of_Reserved_Rooms -= 1;
+            HotelList[i].Rooms[j].Customer_of_Room = null;
+            HotelList[i].Rooms[j].Days = 0;
+        }
 
 
-        public static ArrayList  ShowSpecificHotel(int index)
+
+        public static ArrayList ShowSpecificHotel(int index)
         {
             ArrayList  array_info_of_hotels = new ArrayList();
 
-            array_info_of_hotels[0] = 
-                $"Hotel name: {HotelList[index].Name_of_Hotel}\n" +
-                $"Description of the hotel: {HotelList[index].Description_of_Hotel}\n" +
-                $"Hotel stars rate: {HotelList[index].Hotel_Stars_Rate}\n" +
-                $"Number of Rooms: {HotelList[index].Number_of_Rooms}\n" +
-                $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n";
+            array_info_of_hotels.Add
+                ( 
+                    $"Hotel name: {HotelList[index].Name_of_Hotel}\n" +
+                    $"Description of the hotel: {HotelList[index].Description_of_Hotel}\n" +
+                    $"Hotel stars rate: {HotelList[index].Hotel_Stars_Rate}\n" +
+                    $"Number of Rooms: {HotelList[index].Number_of_Rooms}\n" +
+                    $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n"
+                );
 
 
             int[] array_of_Room_Number = new int[HotelList[index].Rooms.Count];

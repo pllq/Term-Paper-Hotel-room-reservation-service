@@ -12,11 +12,11 @@ namespace BIL.Custom_exceptions
         public RoomIsBookedException()
         {
             //May be wrong:
-            throw new RoomIsBookedException("Room is booked by another customer.\n");
+            throw new RoomIsBookedException("The room, you have chosen, is already booked by someone.");
         }
 
         public RoomIsBookedException(string message)
-            : base(String.Format("Room is booked by another customer.\n"))
+            : base(String.Format($"{message}\n"))
         {
         }
 

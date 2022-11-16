@@ -45,7 +45,7 @@ namespace PLInput
             while (index_user_input > CustomerMethods.CustomerListLenght())
             {
                 string_index_user_input = CommonMethods.ForIndexIniz($"index of {index_of} {todo}", @"^[1-9]$|[1-9][0-9]+$");
-                index_user_input = int.Parse(string_index_user_input);
+                index_user_input = int.Parse(string_index_user_input) - 1;
             }
 
             return index_user_input;

@@ -179,12 +179,7 @@ namespace PL
                             //Show all customer
                             case ConsoleKey.D5:
                                 Console.Clear();
-
-
-
-
-
-
+                                InputForCustomer.ShowCustomers(ConsoleKey.D4);
                                 break;
 
 
@@ -203,6 +198,11 @@ namespace PL
                                 }
                                 break;
 
+
+
+                            case ConsoleKey.R:
+                                break;
+
                             default:
                                 goto wrong_key2;
                         }
@@ -219,6 +219,7 @@ namespace PL
 
                         switch (keyInfo)
                         {
+                            //Book a room
                             case ConsoleKey.D1:
                                 try 
                                 {
@@ -230,12 +231,22 @@ namespace PL
                                 }
                                 break;
 
-
+                            //Cancel reservation
                             case ConsoleKey.D2:
+                                InputForRoom.CancelReservation();
                                 break;
 
 
                             case ConsoleKey.D3:
+                                try
+                                {
+                                    InputForRoom.ShowDetailsOfSpecificRoomInSpecificHotel();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                }
+
                                 break;
 
 
@@ -252,6 +263,9 @@ namespace PL
 
 
                             case ConsoleKey.D7:
+                                break;
+
+                            case ConsoleKey.R:
                                 break;
 
                             default:

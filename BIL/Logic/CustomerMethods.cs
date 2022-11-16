@@ -1,4 +1,5 @@
 ﻿using DAL;
+using System;
 
 namespace BIL.Logic
 {
@@ -28,6 +29,7 @@ namespace BIL.Logic
 
         public static void CreateCustomer(string First_Name_of_the_Customer, string Last_Name_of_the_Customer, int Age)
         {
+            //if exist == throw new?
             Customer Cusomter = new Customer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
 
             CustomerList.Add(Cusomter);
@@ -36,12 +38,108 @@ namespace BIL.Logic
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
-        public static void RemoveCustomer(int index_of_hotel_to_remove)
+        public static void RemoveCustomer(int index_of_customer_to_remove)
         {
-            CustomerList.RemoveAt(index_of_hotel_to_remove);
+            int hotel_index = 0, room_index = 0;
+            bool have_found = false;
+
+            if (CustomerList[index_of_customer_to_remove].Have_Booked_the_Room) 
+            {
+                for (int i = 0; i < HotelMethods.HotelList.Count; i++)
+                {
+                    for (int j = 0; j < HotelMethods.HotelList[i].Rooms.Count; j++)
+                    {
+                        if (HotelMethods.HotelList[i].Rooms[j].Customer_of_Room == CustomerList[index_of_customer_to_remove])
+                        {
+                            hotel_index = i;
+                            room_index = j;
+                            have_found = true;
+                            break;
+                        }
+                    }
+                }
+
+                HotelMethods.HotelList[hotel_index].Rooms[room_index].Customer_of_Room = null;
+                HotelMethods.HotelList[hotel_index].Rooms[room_index].Is_Booked = false;
+
+                HotelMethods.xml_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
+                HotelMethods.json_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
+            }
+
+            CustomerList.RemoveAt(index_of_customer_to_remove);
 
             xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
 
+            json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
+        }
+
+        private static void FindCustomerInListOfHotels() 
+        { 
+        
+        }
+
+        public static void ChangeCustomer(int index, string data_to_edit, string what_field_to_edit)
+        {
+            int hotel_index = 0, room_index = 0;
+            bool have_found = false;
+            for (int i = 0; i < HotelMethods.HotelList.Count; i++)
+            {
+                for (int j = 0; j < HotelMethods.HotelList[i].Rooms.Count; j++)
+                {
+                    if (HotelMethods.HotelList[i].Rooms[j].Customer_of_Room == CustomerList[index])
+                    {
+                        hotel_index = i;
+                        room_index = j;
+                        have_found = true;
+                        break;
+                    }
+                }
+            }
+
+
+            switch (what_field_to_edit)
+            {
+                case "N":
+                    string last_name = "";
+
+                    for (int i = 0; i < data_to_edit.Length; i++)
+                    {
+                        if (i != 0 && RegexPatternCheck.Pattern_of_the_Data_check(data_to_edit[i].ToString(), @"^[A-Z]$"))
+                        {
+
+                            last_name = data_to_edit.Substring(i, (data_to_edit.Length - i));
+                            data_to_edit = data_to_edit.Substring(0, i);
+
+                            CustomerList[index].First_name = data_to_edit;
+                            CustomerList[index].Last_name = last_name;
+
+                            break;
+                        }
+                    }
+                    break;
+
+                case "F":
+                    CustomerList[index].First_name = data_to_edit;
+                    break;
+
+                case "L":
+                    CustomerList[index].Last_name = data_to_edit;
+                    break;
+
+                case "A":
+                    CustomerList[index].Age = int.Parse(data_to_edit);
+                    break;
+            }
+
+            if (have_found)
+            {
+                HotelMethods.HotelList[hotel_index].Rooms[room_index].Customer_of_Room = CustomerList[index];
+
+                HotelMethods.xml_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
+                HotelMethods.json_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
+            }
+
+            xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
@@ -91,47 +189,6 @@ namespace BIL.Logic
         }
 
 
-        public static void ChangeCustomer(int index, string data_to_edit, string what_field_to_edit)
-        {
-            switch (what_field_to_edit) 
-            {
-                case "N":
-                    string last_name = "";
-
-                    for (int i = 0; i < data_to_edit.Length; i++) 
-                    {
-                        if(i != 0 && RegexPatternCheck.Pattern_of_the_Data_check(data_to_edit[i].ToString(), @"^[A-Z]$")) 
-                        {
-                            
-                            last_name = data_to_edit.Substring(i, (data_to_edit.Length - i));
-                            data_to_edit = data_to_edit.Substring(0, i);
-
-                            CustomerList[index].First_name = data_to_edit;
-                            CustomerList[index].Last_name = last_name;
-
-                            //Probably add here Hotel.Rooms.Customer = CustomerList[index] or smt
-
-
-                            xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
-                            json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
-                            return;
-                        }
-                    }
-                    break;
-
-                case "F":
-                    CustomerList[index].First_name = data_to_edit;
-                    break;
-
-                case "L":
-                    CustomerList[index].Last_name = data_to_edit;
-                    break;
-
-                case "A":
-                    CustomerList[index].Age = int.Parse(data_to_edit);
-                    break;
-            }
-        }
 
         public static string SpecificCustomer(int index)
         {
@@ -189,8 +246,8 @@ namespace BIL.Logic
                 array_info_of_hotels[i] =
                     $"{i + 1}. Customer: {CustomerList[i].First_name} {CustomerList[i].Last_name}\n" +
                     $"   Age: {CustomerList[i].Age}\n" +
-                    $"   Have booked the room: {CustomerList[i].Have_Booked_the_Room}\n"/* +
-                    $"   Number of Rooms: {CustomerList[i].Booked_Room}\n"*/;
+                    $"   Have booked the room: {CustomerList[i].Have_Booked_the_Room}\n" /*+
+                    $"   Rooms number: {HotelList[i]}\n"*/;
             }
             return array_info_of_hotels;
         }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace BIL
+namespace BIL.Custom_exceptions
 {
     public class CustomerListIsEmptyExeption : Exception
     {
