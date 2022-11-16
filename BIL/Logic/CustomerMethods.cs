@@ -91,11 +91,11 @@ namespace BIL.Logic
                         hotel_index = i;
                         room_index = j;
                         have_found = true;
-                        break;
+                        goto found_needed_customer;
                     }
                 }
             }
-
+            found_needed_customer:
 
             switch (what_field_to_edit)
             {

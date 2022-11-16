@@ -27,11 +27,11 @@ namespace PLInput
             return index_of_customer_that_books_room;
         }
 
-        private static int InputHotelIndex()
+        private static int InputHotelIndex(string todo)
         {
             InputForHotel.ShowHotels(ConsoleKey.D4);
             Console.WriteLine();
-            int index_of_hotel = CommonMethods.InputIndex("hotel", ", in which room will be booked");
+            int index_of_hotel = CommonMethods.InputIndex("hotel", $"{todo}");
 
             return index_of_hotel;
         }
@@ -53,7 +53,7 @@ namespace PLInput
 
             for (int i = 0; i < number_of_rooms_in_specific_hotel; i++)
             {
-                Console.WriteLine($"{i + 1}. Room number = {array_of_Room_Number[i]}");
+                Console.WriteLine($"{i + 1}. Room No. {array_of_Room_Number[i]}");
                 Console.WriteLine($"   Rrice for 1 day = {array_of_Room_Price_For_1_Day[i]}");
                 Console.WriteLine($"   Is room booked = {array_of_Is_Booked[i]}");
             }
@@ -70,7 +70,7 @@ namespace PLInput
             int index_of_customer_that_books_room = InputCustomerIndex(", that will book the room");
             Console.Clear();
 
-            int index_of_hotel = InputHotelIndex();
+            int index_of_hotel = InputHotelIndex(", in which room will be booked");
             Console.Clear();
 
             SpecificHotelInfo(index_of_hotel);
@@ -112,15 +112,7 @@ namespace PLInput
 
             CheckIfListOfHotelsAndCustomersAreNotEmpty();
 
-
-
-            InputForHotel.ShowHotels(ConsoleKey.D4);
-
-/*            int index_of_customer_that_books_room = InputCustomerIndex("");
-            Console.Clear();
-*/
-
-            int index_of_hotel = InputHotelIndex();
+            int index_of_hotel = InputHotelIndex("");
             Console.Clear();
 
             SpecificHotelInfo(index_of_hotel);
