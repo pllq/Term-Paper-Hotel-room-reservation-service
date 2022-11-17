@@ -257,8 +257,22 @@ namespace BIL.Logic
             return arrays_of_free_and_reserved_rooms;
         }
 
-        
-        public static int HotelListLenght() =>  HotelList.Count;
+
+        public static bool HotelWithSuchNameExists(string name_to_check)
+        {
+            for(int i = 0; i < HotelList.Count; i++) 
+            {
+                if (name_to_check.ToUpper() == HotelList[i].Name_of_Hotel.ToUpper()) 
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+            public static int HotelListLenght() =>  HotelList.Count;
         public static int NumberOfRoomsInSpecificHotel(int index) => HotelList[index].Rooms.Count;
 
     }

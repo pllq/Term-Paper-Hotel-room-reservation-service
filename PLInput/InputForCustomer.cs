@@ -32,7 +32,10 @@ namespace PLInput
             string Last_Name_of_the_Customer = CommonMethods.Initialize("last name", @"^[a-zA-Z]+$").ToLower();
             Last_Name_of_the_Customer = char.ToUpper(Last_Name_of_the_Customer[0]) + Last_Name_of_the_Customer.Substring(1);
 
-
+            if (CustomerMethods.CustomerAlreadyCreated(First_Name_of_the_Customer, Last_Name_of_the_Customer)) 
+            {
+                throw new CustomerAlreadyCreatedExeption();
+            }
 
             string string_Age = CommonMethods.Initialize("age", @"^[1-9][0-9]$|^1[0-2]\d$");
             int Age = int.Parse(string_Age);

@@ -31,7 +31,8 @@ namespace PLInput
             string string_Hotel_Stars_Rate, string_Number_of_Rooms, string_Room_Number, string_Room_Price_For_1_Day;
 
             Console.Write("Input name of the hotel: ");
-            Name_of_Hotel = Console.ReadLine();
+            Name_of_Hotel = Console.ReadLine().Trim();
+
 
             while (string.IsNullOrEmpty(Name_of_Hotel))
             {
@@ -40,9 +41,14 @@ namespace PLInput
                 Name_of_Hotel = Console.ReadLine();
             }
 
+            if (HotelMethods.HotelWithSuchNameExists(Name_of_Hotel))
+            {
+                throw new HotelWithSuchNameAlreadyExistsExeption();
+            }
+
             Console.Clear();
             Console.Write("Write decsription of hotel: ");
-            Description_of_Hotel = Console.ReadLine();
+            Description_of_Hotel = Console.ReadLine().Trim();
             while (string.IsNullOrEmpty(Description_of_Hotel))
             {
                 Console.Clear();

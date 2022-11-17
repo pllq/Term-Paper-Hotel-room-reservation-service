@@ -38,12 +38,12 @@ namespace BIL.Logic
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
-        public static void RemoveCustomer(int index_of_customer_to_remove)
+
+        private static void IfCustomerHaveBookedTheRoom(int index_of_customer_to_remove)
         {
             int hotel_index = 0, room_index = 0;
-            bool have_found = false;
 
-            if (CustomerList[index_of_customer_to_remove].Have_Booked_the_Room) 
+            if (CustomerList[index_of_customer_to_remove].Have_Booked_the_Room)
             {
                 for (int i = 0; i < HotelMethods.HotelList.Count; i++)
                 {
@@ -53,46 +53,35 @@ namespace BIL.Logic
                         {
                             hotel_index = i;
                             room_index = j;
-                            have_found = true;
-                            break;
+                            goto have_found;
                         }
                     }
                 }
 
-                HotelMethods.HotelList[hotel_index].Rooms[room_index].Customer_of_Room = null;
-                HotelMethods.HotelList[hotel_index].Rooms[room_index].Is_Booked = false;
+                have_found:
+
+                HotelMethods.RoomIsNotBooked(hotel_index, room_index);
 
                 HotelMethods.xml_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
                 HotelMethods.json_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
             }
+        }
+
+        public static void RemoveCustomer(int index_of_customer_to_remove)
+        {
+            IfCustomerHaveBookedTheRoom(index_of_customer_to_remove);
 
             CustomerList.RemoveAt(index_of_customer_to_remove);
 
             xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
-
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
 
 
-        public static void ChangeCustomer(int index, string data_to_edit, string what_field_to_edit)
+        public static void ChangeCustomer(int index_of_customer_to_remove, string data_to_edit, string what_field_to_edit)
         {
-            int hotel_index = 0, room_index = 0;
-            bool have_found = false;
-            for (int i = 0; i < HotelMethods.HotelList.Count; i++)
-            {
-                for (int j = 0; j < HotelMethods.HotelList[i].Rooms.Count; j++)
-                {
-                    if (HotelMethods.HotelList[i].Rooms[j].Customer_of_Room == CustomerList[index])
-                    {
-                        hotel_index = i;
-                        room_index = j;
-                        have_found = true;
-                        goto found_needed_customer;
-                    }
-                }
-            }
-            found_needed_customer:
+            IfCustomerHaveBookedTheRoom(index_of_customer_to_remove);
 
             switch (what_field_to_edit)
             {
@@ -107,8 +96,8 @@ namespace BIL.Logic
                             last_name = data_to_edit.Substring(i, (data_to_edit.Length - i));
                             data_to_edit = data_to_edit.Substring(0, i);
 
-                            CustomerList[index].First_name = data_to_edit;
-                            CustomerList[index].Last_name = last_name;
+                            CustomerList[index_of_customer_to_remove].First_name = data_to_edit;
+                            CustomerList[index_of_customer_to_remove].Last_name = last_name;
 
                             break;
                         }
@@ -116,24 +105,16 @@ namespace BIL.Logic
                     break;
 
                 case "F":
-                    CustomerList[index].First_name = data_to_edit;
+                    CustomerList[index_of_customer_to_remove].First_name = data_to_edit;
                     break;
 
                 case "L":
-                    CustomerList[index].Last_name = data_to_edit;
+                    CustomerList[index_of_customer_to_remove].Last_name = data_to_edit;
                     break;
 
                 case "A":
-                    CustomerList[index].Age = int.Parse(data_to_edit);
+                    CustomerList[index_of_customer_to_remove].Age = int.Parse(data_to_edit);
                     break;
-            }
-
-            if (have_found)
-            {
-                HotelMethods.HotelList[hotel_index].Rooms[room_index].Customer_of_Room = CustomerList[index];
-
-                HotelMethods.xml_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
-                HotelMethods.json_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
             }
 
             xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
@@ -145,7 +126,7 @@ namespace BIL.Logic
         {
             switch (consoleKey)
             {
-                //Ascending order A-Z
+                //Ascending order A-Y
                 case ConsoleKey.A:
                     CustomerList.Sort(delegate (Customer first, Customer second)
                     {
@@ -153,7 +134,7 @@ namespace BIL.Logic
                     });
                     return;
 
-                //Descending order Z-A
+                //Descending order Y-A
                 case ConsoleKey.D:
                     CustomerList.Sort(delegate (Customer first, Customer second)
                     {
@@ -195,7 +176,7 @@ namespace BIL.Logic
                     $"First name: {CustomerList[index].First_name}\n" +
                     $"Last name: {CustomerList[index].Last_name}\n" +
                     $"Age: {CustomerList[index].Age}\n" /*+
-                    $"Have booked the room: {CustomerList[index].Have_Booked_the_Room}\n"*/;
+                    $"Have booked the room: {CustomerList[index_of_customer_to_remove].Have_Booked_the_Room}\n"*/;
 
 
             //HotelMethods.HotelList[i].Rooms[j].Customer_of_Room.First_name;
@@ -210,11 +191,11 @@ namespace BIL.Logic
                             }
                         }
 
-                        if (CustomerList[index].Have_Booked_the_Room) 
+                        if (CustomerList[index_of_customer_to_remove].Have_Booked_the_Room) 
                         {
-                            data_of_specific_customer += $"Room number: {CustomerList[index].Booked_Room.Room_Number}\n";
-                            data_of_specific_customer += $"Have booked the room: {CustomerList[index].Booked_Room.Room_Price_For_1_Day}\n";
-                            data_of_specific_customer += $"Have booked the room: {CustomerList[index].Booked_Room.Is_Booked}\n";
+                            data_of_specific_customer += $"Room number: {CustomerList[index_of_customer_to_remove].Booked_Room.Room_Number}\n";
+                            data_of_specific_customer += $"Have booked the room: {CustomerList[index_of_customer_to_remove].Booked_Room.Room_Price_For_1_Day}\n";
+                            data_of_specific_customer += $"Have booked the room: {CustomerList[index_of_customer_to_remove].Booked_Room.Is_Booked}\n";
 
                         }
             */
@@ -275,7 +256,19 @@ namespace BIL.Logic
             return array_info_of_hotels;
         }
 
+        public static bool CustomerAlreadyCreated(string first_name_to_check, string last_name_to_check)
+        {
+            for (int i = 0; i < CustomerList.Count; i++)
+            {
+                if (first_name_to_check.ToUpper() == CustomerList[i].First_name.ToUpper() &&
+                    last_name_to_check.ToUpper() == CustomerList[i].Last_name.ToUpper())
+                {
+                    return true;
+                }
+            }
 
+            return false;
+        }
 
 
 

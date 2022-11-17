@@ -1,9 +1,6 @@
 ﻿------------------------------------------------------------------
 Tofix:
 
-- Fix try catch blocks in menu
-- Block ability to create sam person             //if exist == throw new?
-- !WHEN CHANGE CUSTOMER, OLD DATA STAYS IN HOTEL[INDEX].ROOMS[INDEX].CUSTOMER!
 - Bil.Logic.CustomerMethods line 73 Probably add here Hotel.Rooms.Customer = CustomerList[index] or smth
 
 - to edit: public static string SpecificCustomer(int index)
