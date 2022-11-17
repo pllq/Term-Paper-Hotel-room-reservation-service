@@ -1,0 +1,8 @@
+﻿PL project is a Presentation layer. User interacts with it, input and ouputs values. 
+	In my execution, PL can access only	PLInput [intermediate layer between PL (Presentation layer) 
+	and BLL (Bistes Logic Layer)].
+
+1. Menu.cs is called from Main(). In this class you can interact with menu, input values,
+	which will be transfere to lower layers, and see output.
+
+2. MenusToShow.cs contains methods, that return visual menu (Main menu, Hotel menu, Customer menu etc).

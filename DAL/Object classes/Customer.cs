@@ -8,15 +8,12 @@ using System.Threading.Tasks;
 namespace DAL
 {
     [Serializable]
-    public class Customer : ISerializable /*, IComparable, IComparable<Customer>*/
+    public class Customer : ISerializable
     {
         public string First_name { get; set; }
         public string Last_name { get; set; }
         public int Age { get; set; }
         public bool Have_Booked_the_Room { get; set; } = false;
-
-        //to delete:
-        //public Room Booked_Room;
 
 
         public Customer(){}
@@ -34,14 +31,6 @@ namespace DAL
             info.AddValue("Last_name", Last_name);
             info.AddValue("Age", Age);
             //info.AddValue("Booked_Room", Booked_Room);
-        }
-
-        public int CompareTo(object? obj)
-        {
-            Customer temp = obj as Customer;
-
-
-            throw new NotImplementedException();
         }
 
         public Customer(SerializationInfo info, StreamingContext context)
@@ -94,10 +83,5 @@ namespace DAL
         }
 
         public static bool operator !=(Customer left_customer, Customer right_customer) => !(left_customer == right_customer);
-
-
-
-
-
     }
 }

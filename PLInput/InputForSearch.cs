@@ -34,7 +34,7 @@ namespace PLInput
                     {
                         Console.Clear();
                         int index = HotelMethods.HotelIndexByName(Name_of_Hotel);
-                        InputForHotel.SpecificHotelInfo(index);
+                        InputForHotel.ShowInfoAboutSpecificHotel(index);
                         Console.Write("Hotel was successfully found! To return to Main Menu press any key.");
                         Console.ReadKey();
                     }
@@ -58,7 +58,7 @@ namespace PLInput
                     {
                         Console.Clear();
                         int index = CustomerMethods.CustomerIndexByFirstAndLastName(First_Name_of_the_Customer, Last_Name_of_the_Customer);
-                        InputForCustomer.SpecificCustomerInfo(index);
+                        InputForCustomer.ShowInfoAboutSpecificCustomer(index);
 
                         Console.Write("Customer was successfully found! To return to Main Menu press any key.");
                         Console.ReadKey();

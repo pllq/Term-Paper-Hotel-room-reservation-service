@@ -12,8 +12,7 @@ namespace BIL.Logic
         public static void BookRoom(int index_of_customer_that_books_room, int index_of_hotel, int index_of_room, int days_to_book_room)
         {
             //If in chosen hotel, chosen room is booked, throw exception
-            if (HotelMethods.HotelList[index_of_hotel].Rooms[index_of_room].Is_Booked 
-                /*|| HotelMethods.HotelList[index_of_hotel].Rooms[index_of_room].Customer_of_Room == null*/) 
+            if (HotelMethods.HotelList[index_of_hotel].Rooms[index_of_room].Is_Booked) 
             {
                 throw new Custom_exceptions.RoomIsBookedException();
             }
@@ -59,10 +58,5 @@ namespace BIL.Logic
                 }
             }
         }
-
-
-
-
-
     }
 }

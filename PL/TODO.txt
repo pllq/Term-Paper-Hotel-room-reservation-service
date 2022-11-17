@@ -2,15 +2,8 @@
 Tofix:
 
 
-- ?to add CHANGE BOOK in ChangeCustomer method?
-
-- To fix in Remove:
-	-- it writes that i can return to Main Menu, but i don have to do this
-	-- writline
-
-
 - ?in Hotel class for serialization has to be Rooms = info.GetRoom("Rooms") but NOT Rooms = info.GetString("Rooms");?
-- Carefuilly with Deserialization of hotel
+- Carefully with Deserialization of hotel
 
 
 

@@ -17,7 +17,7 @@ namespace PLInput
         }
 
 
-        public static void AddCustomer()
+        public static void CreateCustomer()
         {
             string First_Name_of_the_Customer = CommonMethods.Initialize("first name", @"^[a-zA-Z]+$").ToLower();
             First_Name_of_the_Customer = char.ToUpper(First_Name_of_the_Customer[0]) + First_Name_of_the_Customer.Substring(1);// to make first letter Upper case and others lower case
@@ -208,8 +208,7 @@ namespace PLInput
             Console.WriteLine("Choose what customer you want to edit:");
 
             ShowCustomers(ConsoleKey.D4);
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey();
+
 
             string user_change;
 
@@ -283,7 +282,7 @@ namespace PLInput
             }
 
 
-            Console.WriteLine("Do you still want to delete change this custmoer?");
+            Console.WriteLine("Do you still want to change this custmoer?");
             Console.WriteLine("Press \"Y\" key, to change him, or press any other key to return to Main Menu without deleteing this hotel. ");
 
             consoleKey = CommonMethods.keyIninze();
@@ -326,7 +325,7 @@ namespace PLInput
 
         sortbyfirst_or_lastname:
             Console.Clear();
-            Console.WriteLine("What type of sorting_delegate by name?\n");
+            Console.WriteLine("Choose type of sorting:\n");
             Console.WriteLine($"Press \"A\" to sort lisy by {first_of_last_name} in ascdending order [A-Y].");
             Console.WriteLine($"Press \"D\" to sort lisy by {first_of_last_name} in descdending order [Y-A].");
             keyInfo = CommonMethods.keyIninze();
@@ -382,7 +381,7 @@ namespace PLInput
             Console.WriteLine();
         }
 
-        public static void SpecificCustomerInfo()
+        public static void ShowInfoAboutSpecificCustomer()
         {
             Console.Clear();
 
@@ -393,9 +392,9 @@ namespace PLInput
             Console.WriteLine();
             Console.Clear();
 
-            SpecificCustomerInfo(index_of_hotel);
+            ShowInfoAboutSpecificCustomer(index_of_hotel);
         }
-        internal static void SpecificCustomerInfo(int index_of_hotel)
+        internal static void ShowInfoAboutSpecificCustomer(int index_of_hotel)
         {
             Console.WriteLine("\tChosen customer\n");
 

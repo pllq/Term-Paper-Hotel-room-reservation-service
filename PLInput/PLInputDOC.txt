@@ -1,0 +1,17 @@
+﻿PLInput is intermediate layer between PL (Presentation layer) and BLL (Bistes Logic Layer).
+	It has access to BLL methods, which implement logic of this work.
+
+1. CommomMethods.cs class was created to reduce code repetition. There is all common methods for: 
+	InputForCustomer.cs, InputForHotel.cs, InputForRoom.cs, InputForSearch.cs classes
+
+2. InputForCustomer.cs every input and output, which refers to customers, is implemented here. 
+	In this class all input and output for functionality of customers.
+
+3. InputForHotel.cs every input and output, which refers to hotels, is implemented here. 
+	In this class all input and output for functionality of hotels.
+
+4. InputForRoom.cs every input and output, which refers to rooms, is implemented here. 
+	In this class all input and output for functionality of rooms.
+
+5. InputForSearch.cs every input and output, which refers to search, is implemented here. 
+	In this class all input and output for functionality of search.

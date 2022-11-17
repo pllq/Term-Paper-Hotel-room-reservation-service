@@ -23,7 +23,7 @@ namespace PLInput
         }
 
 
-        public static void AddHotel()
+        public static void CreateHotel()
         {
             string Name_of_Hotel = "", Description_of_Hotel = "";
             int Hotel_Stars_Rate, Number_of_Rooms, Room_Number, Room_Price_For_1_Day;
@@ -253,7 +253,7 @@ namespace PLInput
 
 
 
-        public static void SpecificHotelInfo()
+        public static void ShowInfoAboutSpecificHotel()
         {
             Console.Clear();
 
@@ -265,11 +265,11 @@ namespace PLInput
             Console.WriteLine("Press any key to continue.");
             Console.Clear();
 
-            SpecificHotelInfo(index_of_hotel);
+            ShowInfoAboutSpecificHotel(index_of_hotel);
             Console.WriteLine("Press any key to return to Main Menu.");
             Console.ReadKey();
         }
-        internal static void SpecificHotelInfo(int index_of_hotel)
+        internal static void ShowInfoAboutSpecificHotel(int index_of_hotel)
         {
             Console.WriteLine("\tChosen hotel\n");
 

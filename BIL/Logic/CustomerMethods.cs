@@ -1,5 +1,6 @@
 ﻿using DAL;
 using System;
+using System.Collections.Generic;
 
 namespace BIL.Logic
 {
@@ -78,7 +79,6 @@ namespace BIL.Logic
         }
 
 
-
         public static void ChangeCustomer(int index_of_customer_to_remove, string data_to_edit, string what_field_to_edit)
         {
             IfCustomerHaveBookedTheRoom(index_of_customer_to_remove);
@@ -96,6 +96,12 @@ namespace BIL.Logic
                             last_name = data_to_edit.Substring(i, (data_to_edit.Length - i));
                             data_to_edit = data_to_edit.Substring(0, i);
 
+                            if (CustomerList[index_of_customer_to_remove].First_name.ToUpper() == data_to_edit.ToUpper() &&
+                                        CustomerList[index_of_customer_to_remove].Last_name.ToUpper() == last_name.ToUpper())
+                            {
+                                throw new CustomerNewDataIsEqualToOld("first and last names are");
+                            }
+
                             CustomerList[index_of_customer_to_remove].First_name = data_to_edit;
                             CustomerList[index_of_customer_to_remove].Last_name = last_name;
 
@@ -105,14 +111,27 @@ namespace BIL.Logic
                     break;
 
                 case "F":
+                    if (CustomerList[index_of_customer_to_remove].First_name.ToUpper() == data_to_edit.ToUpper())
+                    {
+                        throw new CustomerNewDataIsEqualToOld("first name is");
+                    }
                     CustomerList[index_of_customer_to_remove].First_name = data_to_edit;
                     break;
 
                 case "L":
+                    if (CustomerList[index_of_customer_to_remove].Last_name.ToUpper() == data_to_edit.ToUpper())
+                    {
+                        throw new CustomerNewDataIsEqualToOld("last name is");
+                    }
                     CustomerList[index_of_customer_to_remove].Last_name = data_to_edit;
                     break;
 
                 case "A":
+                    if (CustomerList[index_of_customer_to_remove].Age == int.Parse(data_to_edit))
+                    {
+                        throw new CustomerNewDataIsEqualToOld("age is");
+                    }
+
                     CustomerList[index_of_customer_to_remove].Age = int.Parse(data_to_edit);
                     break;
             }
@@ -168,27 +187,6 @@ namespace BIL.Logic
 
 
 
-        public static string SpecificCustomer(int index)
-        {
-            string data_of_specific_customer;
-
-            data_of_specific_customer =
-                    $"First name: {CustomerList[index].First_name}\n" +
-                    $"Last name: {CustomerList[index].Last_name}\n" +
-                    $"Age: {CustomerList[index].Age}\n";
-
-            switch (CustomerList[index].Have_Booked_the_Room) 
-            {
-                case true:
-                    data_of_specific_customer += $"Have reserved room: {YesOrNo(index)}\n";
-                    break;
-
-                case false:
-                    return data_of_specific_customer;
-            }
-
-            return data_of_specific_customer;
-        }
 
         /// <summary>
         /// This method returns array with the names of all created customers.
@@ -203,48 +201,53 @@ namespace BIL.Logic
         /// </summary>
         public static string[] CustomersList()
         {
-            string[] array_info_of_hotels = new string[CustomerList.Count];
+            string[] array_info_of_customers = new string[CustomerList.Count];
 
             for (int i = 0; i < CustomerList.Count; i++)
             {
-                array_info_of_hotels[i] =
+                array_info_of_customers[i] =
                     $"{i + 1}. {CustomerList[i].First_name} {CustomerList[i].Last_name}\n";
             }
-            return array_info_of_hotels;
+            return array_info_of_customers;
         }
 
 
         /// <summary>
-        /// This method returns string array with information about all customers.
+        /// This method returns string with name, age and room reservation information of specific customers.
         /// <example>
         /// For example:
         /// <code>
-        /// 1. Hotel name: *Hotel_name*
-        /// 2. Description of the hotel: *Hotel_description*
-        /// 3. Hotel stars rate: *Hotel_stars_rate*
-        /// 4. Number of Rooms: *Hotel_number_rooms*
-        /// 5. Number of free rooms: *Hotel_number_of_free_rooms*
+        /// First name: *First_name*
+        /// Last name: *Last_name*
+        /// Age: *Age*
+        /// Have reserved room: *Yes/No*
         /// </code>
         /// </example>
         /// </summary>
-        public static string[] ViewWholeInfoOfCustomers()
+        public static string SpecificCustomer(int index)
         {
-            string[] array_info_of_hotels = new string[CustomerList.Count];
+            string data_of_specific_customer;
 
-            for (int i = 0; i < CustomerList.Count; i++)
+            data_of_specific_customer =
+                    $"First name: {CustomerList[index].First_name}\n" +
+                    $"Last name: {CustomerList[index].Last_name}\n" +
+                    $"Age: {CustomerList[index].Age}\n";
+
+            switch (CustomerList[index].Have_Booked_the_Room)
             {
-                array_info_of_hotels[i] =
-                    $"{i + 1}. Customer: {CustomerList[i].First_name} {CustomerList[i].Last_name}\n" +
-                    $"   Age: {CustomerList[i].Age}\n" +
-                    $"   Have booked the room: {YesOrNo(i)}\n";
-                    //$"Have booked the room: {CustomerList[i].Have_Booked_the_Room}\n";
-            }
-            return array_info_of_hotels;
-        }
+                case true:
+                    data_of_specific_customer += $"Have reserved room: {YesOrNo(index)}\n";
+                    break;
 
-        internal static string YesOrNo(int index) 
+                case false:
+                    return data_of_specific_customer;
+            }
+
+            return data_of_specific_customer;
+        }
+        internal static string YesOrNo(int index)
         {
-            switch (CustomerList[index].Have_Booked_the_Room) 
+            switch (CustomerList[index].Have_Booked_the_Room)
             {
                 case true:
                     return "Yes";
@@ -254,6 +257,34 @@ namespace BIL.Logic
             }
         }
 
+
+        /// <summary>
+        /// This method returns string array with information about all customers.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. Customer: *Customer_first_name_1* *Customer_last_name_1*
+        ///    Age: *Age_1*
+        ///    Have booked the room: *Yes/No*
+        /// 2. Customer: *Customer_first_name_2* *Customer_last_name_2*
+        ///    Age: *Age_2*
+        ///    Have booked the room: *Yes/No*
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static string[] ViewWholeInfoOfCustomers()
+        {
+            string[] array_info_of_customers = new string[CustomerList.Count];
+
+            for (int i = 0; i < CustomerList.Count; i++)
+            {
+                array_info_of_customers[i] =
+                    $"{i + 1}. Customer: {CustomerList[i].First_name} {CustomerList[i].Last_name}\n" +
+                    $"   Age: {CustomerList[i].Age}\n" +
+                    $"   Have booked the room: {YesOrNo(i)}\n";
+            }
+            return array_info_of_customers;
+        }
 
 
 
@@ -273,22 +304,19 @@ namespace BIL.Logic
 
         public static int CustomerIndexByFirstAndLastName(string first_Name_of_the_Customer, string last_Name_of_the_Customer)
         {
-            int hotel_index = 0;
+            int customer_index = 0;
             for (int i = 0; i < CustomerList.Count; i++)
             {
                 if (CustomerList[i].First_name.ToUpper() == first_Name_of_the_Customer.ToUpper() &&
                     CustomerList[i].Last_name.ToUpper() == last_Name_of_the_Customer.ToUpper())
                 {
-                    return hotel_index = i;
+                    return customer_index = i;
                 }
             }
 
             return -1;
         }
 
-
         public static int CustomerListLenght() => CustomerList.Count;
-
-
     }
 }

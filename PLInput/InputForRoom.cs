@@ -53,7 +53,7 @@ namespace PLInput
             int index_of_hotel = InputHotelIndex(", in which room will be booked");
             Console.Clear();
 
-            InputForHotel.SpecificHotelInfo(index_of_hotel);
+            InputForHotel.ShowInfoAboutSpecificHotel(index_of_hotel);
 
             int index_of_room = CommonMethods.InputIndex("room", ", that will be booked");
             Console.Clear();
@@ -95,7 +95,7 @@ namespace PLInput
             int index_of_hotel = InputHotelIndex("");
             Console.Clear();
 
-            InputForHotel.SpecificHotelInfo(index_of_hotel);
+            InputForHotel.ShowInfoAboutSpecificHotel(index_of_hotel);
             Console.WriteLine("Press any key to return to Main Menu.");
             Console.ReadKey();
         }
@@ -147,14 +147,10 @@ namespace PLInput
 
             int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
             int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];
-            bool[] array_of_Is_Booked = (bool[])array_of_specific_hotel[3];
+            string[] array_of_Is_Booked = (string[])array_of_specific_hotel[3];
 
             Console.WriteLine(array_of_specific_hotel[0]);
             Console.WriteLine();
         }
-
-
-
-
     }
 }

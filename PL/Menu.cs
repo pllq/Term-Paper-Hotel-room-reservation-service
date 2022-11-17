@@ -61,7 +61,7 @@ namespace PL
                                     //1. Add hotel
                                     case ConsoleKey.D1:
                                         Console.Clear();
-                                        InputForHotel.AddHotel();
+                                        InputForHotel.CreateHotel();
                                         break;
 
                                     //2. Remove hotel
@@ -71,21 +71,26 @@ namespace PL
 
                                     //3. Show info about one hotel (D3)
                                     case ConsoleKey.D3:
-                                    case ConsoleKey.D4:
-                                            Console.Clear();
-                                            InputForHotel.ShowHotels(keyInfo);
-                                            Console.WriteLine("Press any key to return to Main Nenu.");
-                                            Console.ReadKey();
+                                        Console.Clear();
+                                        InputForHotel.ShowHotels(keyInfo);
+                                        Console.WriteLine("Press any key to return to Main Nenu.");
+                                        Console.ReadKey();
                                         break;
 
+
+                                    case ConsoleKey.D4:
+                                        InputForHotel.ShowInfoAboutSpecificHotel();
+                                        break;
 
                                     //5. Show info about all hotels (D4)
-                                    case ConsoleKey.D5:
-                                        InputForHotel.SpecificHotelInfo();
+                                        case ConsoleKey.D5:
+                                        Console.Clear();
+                                        InputForHotel.ShowHotels(ConsoleKey.D4);
+                                        Console.WriteLine("Press any key to return to Main Nenu.");
+                                        Console.ReadKey();
                                         break;
 
-
-                                    case ConsoleKey.R:
+                                case ConsoleKey.R:
                                         break;
 
                                     default:
@@ -108,7 +113,7 @@ namespace PL
                                 //1. Add customer
                                 case ConsoleKey.D1:
                                     Console.Clear();
-                                    InputForCustomer.AddCustomer();
+                                    InputForCustomer.CreateCustomer();
                                     break;
 
 
@@ -138,7 +143,7 @@ namespace PL
                                 //5. Information about SPECIFIC cusotmer.
                                 case ConsoleKey.D5:
                                     Console.Clear();
-                                    InputForCustomer.SpecificCustomerInfo();
+                                    InputForCustomer.ShowInfoAboutSpecificCustomer();
                                     Console.WriteLine("Press any key to return to Main Menu.");
                                     Console.ReadKey();
                                     break;

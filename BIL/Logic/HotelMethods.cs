@@ -90,6 +90,7 @@ namespace BIL.Logic
             HotelList[i].Rooms[j].Days = 0;
         }
 
+
         /// <summary>
         /// This method returns array with the names of all created hotels.
         /// <example>
@@ -111,6 +112,66 @@ namespace BIL.Logic
                     $"{i + 1}. {HotelList[i].Name_of_Hotel}\n";
             }
             return array_info_of_hotels;
+        }
+
+
+        /// <summary>
+        /// This method returns ArrayList with full description about specific hotel.
+        /// <example>
+        /// For example:
+        /// <code>
+        /// 1. Hotel name: *Hotel_name*
+        /// 2. Description of the hotel: *Hotel_description*
+        /// 3. Hotel stars rate: *Hotel_stars_rate*
+        /// 4. Number of Rooms: *Hotel_number_rooms*
+        /// 5. Number of free rooms: *Hotel_number_of_free_rooms*
+        /// 6. Brief information about all rooms.
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static ArrayList ShowInfoAboutSpecificHotelWithRoomsInfo(int index)
+        {
+            ArrayList array_info_of_hotels = new ArrayList();
+
+            array_info_of_hotels.Add
+                (
+                    $"Hotel name: {HotelList[index].Name_of_Hotel}\n" +
+                    $"Description of the hotel: {HotelList[index].Description_of_Hotel}\n" +
+                    $"Hotel stars rate: {HotelList[index].Hotel_Stars_Rate}\n" +
+                    $"Number of Rooms: {HotelList[index].Number_of_Rooms}\n" +
+                    $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n" +
+                    $"Number of reserved rooms: {HotelList[index].Number_of_Reserved_Rooms}\n"
+                );
+
+
+            int[] array_of_Room_Number = new int[HotelList[index].Rooms.Count];
+            int[] array_of_Room_Price_For_1_Day = new int[HotelList[index].Rooms.Count];
+            string[] array_of_Is_Booked = new string[HotelList[index].Rooms.Count];
+
+            for (int i = 0; i < HotelList[index].Rooms.Count; i++)
+            {
+                array_of_Room_Number[i] = HotelList[index].Rooms[i].Room_Number;
+                array_of_Room_Price_For_1_Day[i] = HotelList[index].Rooms[i].Room_Price_For_1_Day;
+                array_of_Is_Booked[i] = YesOrNo(index, i);
+                //array_of_Is_Booked[i] = HotelList[index].Rooms[i].Is_Booked;
+            }
+
+            array_info_of_hotels.Add(array_of_Room_Number);
+            array_info_of_hotels.Add(array_of_Room_Price_For_1_Day);
+            array_info_of_hotels.Add(array_of_Is_Booked);
+
+            return array_info_of_hotels;
+        }
+        internal static string YesOrNo(int index_of_hotel, int index_of_room)
+        {
+            switch (HotelList[index_of_hotel].Rooms[index_of_room].Is_Booked)
+            {
+                case true:
+                    return "Yes";
+
+                case false:
+                    return "No";
+            }
         }
 
 
@@ -145,65 +206,6 @@ namespace BIL.Logic
         }
 
 
-        /// <summary>
-        /// This method returns ArrayList with full description about specific hotel.
-        /// <example>
-        /// For example:
-        /// <code>
-        /// 1. Hotel name: *Hotel_name*
-        /// 2. Description of the hotel: *Hotel_description*
-        /// 3. Hotel stars rate: *Hotel_stars_rate*
-        /// 4. Number of Rooms: *Hotel_number_rooms*
-        /// 5. Number of free rooms: *Hotel_number_of_free_rooms*
-        /// 6. Brief information about all rooms.
-        /// </code>
-        /// </example>
-        /// </summary>
-        public static ArrayList ShowInfoAboutSpecificHotelWithRoomsInfo(int index)
-        {
-            ArrayList  array_info_of_hotels = new ArrayList();
-
-            array_info_of_hotels.Add
-                ( 
-                    $"Hotel name: {HotelList[index].Name_of_Hotel}\n" +
-                    $"Description of the hotel: {HotelList[index].Description_of_Hotel}\n" +
-                    $"Hotel stars rate: {HotelList[index].Hotel_Stars_Rate}\n" +
-                    $"Number of Rooms: {HotelList[index].Number_of_Rooms}\n" +
-                    $"Number of free rooms: {HotelList[index].Number_of_Free_Rooms}\n"+
-                    $"Number of reserved rooms: {HotelList[index].Number_of_Reserved_Rooms}\n"
-                );
-
-
-            int[] array_of_Room_Number = new int[HotelList[index].Rooms.Count];
-            int[] array_of_Room_Price_For_1_Day = new int[HotelList[index].Rooms.Count];
-            string[] array_of_Is_Booked = new string[HotelList[index].Rooms.Count];
-
-            for (int i = 0; i < HotelList[index].Rooms.Count; i++) 
-            {
-                array_of_Room_Number[i] = HotelList[index].Rooms[i].Room_Number;
-                array_of_Room_Price_For_1_Day [i] = HotelList[index].Rooms[i].Room_Price_For_1_Day;
-                array_of_Is_Booked[i] = YesOrNo(index, i);
-                //array_of_Is_Booked[i] = HotelList[index].Rooms[i].Is_Booked;
-            }
-
-            array_info_of_hotels.Add(array_of_Room_Number);
-            array_info_of_hotels.Add(array_of_Room_Price_For_1_Day);
-            array_info_of_hotels.Add(array_of_Is_Booked);
-
-            return array_info_of_hotels;
-        }
-
-        internal static string YesOrNo(int index_of_hotel, int index_of_room)
-        {
-            switch (HotelList[index_of_hotel].Rooms[index_of_room].Is_Booked)
-            {
-                case true:
-                    return "Yes";
-
-                case false:
-                    return "No";
-            }
-        }
 
         public static List<string[]> ShowFreeAndReservedRoomsANDPrice(int index_of_hotel)
         {
@@ -301,6 +303,5 @@ namespace BIL.Logic
 
         public static int HotelListLenght() =>  HotelList.Count;
         public static int NumberOfRoomsInSpecificHotel(int index) => HotelList[index].Rooms.Count;
-
     }
 }
