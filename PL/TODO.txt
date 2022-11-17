@@ -1,14 +1,11 @@
 ﻿------------------------------------------------------------------
 Tofix:
 
-- Bil.Logic.CustomerMethods line 73 Probably add here Hotel.Rooms.Customer = CustomerList[index] or smth
-
-- to edit: public static string SpecificCustomer(int index)
 
 - ?to add CHANGE BOOK in ChangeCustomer method?
 
 - To fix in Remove:
-	-- it writes that i can return to main menu, but i don have to do this
+	-- it writes that i can return to Main Menu, but i don have to do this
 	-- writline
 
 

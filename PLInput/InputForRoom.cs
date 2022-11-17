@@ -22,8 +22,6 @@ namespace PLInput
         private static int InputCustomerIndex(string todo) 
         {
             InputForCustomer.ShowCustomers(ConsoleKey.D4);
-            Console.WriteLine("Press any key to returen to continue work.");
-            Console.ReadKey();
 
             int index_of_customer_that_books_room = CommonMethods.InputIndex("customer", $"{todo}");
 
@@ -33,8 +31,6 @@ namespace PLInput
         private static int InputHotelIndex(string todo)
         {
             InputForHotel.ShowHotels(ConsoleKey.D4);
-            //Console.WriteLine("Press any key to returen to continue work.");
-            //Console.ReadKey();
 
             Console.WriteLine();
             int index_of_hotel = CommonMethods.InputIndex("hotel", $"{todo}");
@@ -100,7 +96,7 @@ namespace PLInput
             Console.Clear();
 
             InputForHotel.SpecificHotelInfo(index_of_hotel);
-            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.WriteLine("Press any key to return to Main Menu.");
             Console.ReadKey();
         }
 
@@ -137,7 +133,7 @@ namespace PLInput
             }
             Console.WriteLine();
 
-            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.WriteLine("Press any key to return to Main Menu.");
             Console.ReadKey();
         }
 

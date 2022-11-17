@@ -61,7 +61,7 @@ namespace PLInput
             Hotel_Stars_Rate = int.Parse(string_Hotel_Stars_Rate);
 
             Console.Clear();
-            string_Number_of_Rooms = CommonMethods.Initialize("number of rooms in the hotel", @"^\d+$");
+            string_Number_of_Rooms = CommonMethods.Initialize("number of rooms in the hotel", @"^[1-9]$|^[1-9][0-9]+$");
             Number_of_Rooms = int.Parse(string_Number_of_Rooms);
 
 
@@ -134,7 +134,7 @@ namespace PLInput
             BIL.Logic.HotelMethods.CreateHotel(Name_of_Hotel, Description_of_Hotel, Hotel_Stars_Rate,
                                      Number_of_Rooms, List_of_arrays_for_Room_iniz);
 
-            Console.Write("Hotel was successfully created! To return to Main menu press any key.");
+            Console.Write("Hotel was successfully created! To return to Main Menu press any key.");
             Console.ReadKey();
         }
 
@@ -161,11 +161,11 @@ namespace PLInput
                             keyInfo = ConsoleKey.D4;
                             Console.Clear();
                             ShowHotels(keyInfo);
-                            Console.WriteLine("Press any key to returen to continue work.");
+                            Console.WriteLine("Press any key to continue.");
                             Console.ReadKey();
 
                             Console.WriteLine("Do you still want to delete this hotel?");
-                            Console.WriteLine("Press \"Y\" key, to delete it, or press any other key to return to Main menu without deleteing this hotel. ");
+                            Console.WriteLine("Press \"Y\" key, to delete it, or press any other key to return to Main Menu without deleteing this hotel. ");
 
                             keyInfo = CommonMethods.keyIninze();
                             switch (keyInfo)
@@ -186,7 +186,7 @@ namespace PLInput
 
                     Console.Clear();
                     Console.WriteLine("Hotel was successfully deleted.");
-                    Console.WriteLine("Press any key to returen to Main menu.");
+                    Console.WriteLine("Press any key to return to Main Menu.");
                     Console.ReadKey();
                     break;
 
@@ -194,13 +194,9 @@ namespace PLInput
                 case > 1:
                     Console.Clear();
                     ShowHotels(ConsoleKey.D4);
-                    Console.WriteLine("Press any key to returen to continue work.");
-                    Console.ReadKey();
 
-
-                    Console.Clear();
                     string user_input = CommonMethods.ForIndexIniz("index of hotel, you want to delete. " +
-                                                    "If you don't want to remove anything, then write 'R' to return to Main menu",
+                                                    "If you don't want to remove anything, then write 'R' to return to Main Menu",
                                                     @"^[1-9]$|[1-9][0-9]+$|^R$|^r$");
 
                     switch (user_input)
@@ -224,7 +220,7 @@ namespace PLInput
                             BIL.Logic.HotelMethods.RemoveHotel(index_of_hotel_to_remove);
                             Console.Clear();
                             Console.WriteLine("Hotel was successfully deleted.");
-                            Console.WriteLine("Press any key to returen to Main menu.");
+                            Console.WriteLine("Press any key to return to Main Menu.");
                             Console.ReadKey();
                             break;
                     }
@@ -253,9 +249,6 @@ namespace PLInput
             {
                 Console.Write(array_of_hotels_info[i]);
             }
-            //Console.WriteLine();
-            //Console.WriteLine("Press any key to returen to continue work.");
-            //Console.ReadKey();
         }
 
 
@@ -269,11 +262,11 @@ namespace PLInput
 
             int index_of_hotel = CommonMethods.InputIndex("hotel", "whole information you want to see");
             Console.WriteLine();
-            Console.WriteLine("Press any key to returen to continue work.");
+            Console.WriteLine("Press any key to continue.");
             Console.Clear();
 
             SpecificHotelInfo(index_of_hotel);
-            Console.WriteLine("Press any key to returen to Main menu.");
+            Console.WriteLine("Press any key to return to Main Menu.");
             Console.ReadKey();
         }
         internal static void SpecificHotelInfo(int index_of_hotel)
@@ -286,7 +279,7 @@ namespace PLInput
 
             int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
             int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];
-            bool[] array_of_Is_Booked = (bool[])array_of_specific_hotel[3];
+            string[] array_of_Is_Booked = (string[])array_of_specific_hotel[3];
 
 
             Console.WriteLine(array_of_specific_hotel[0]);
@@ -294,8 +287,8 @@ namespace PLInput
             for (int i = 0; i < number_of_rooms_in_specific_hotel; i++)
             {
                 Console.WriteLine($"{i + 1}. Room #{array_of_Room_Number[i]}");
-                Console.WriteLine($"   Rrice for 1 day = {array_of_Room_Price_For_1_Day[i]}");
-                Console.WriteLine($"   Is room reserved = {array_of_Is_Booked[i]}");
+                Console.WriteLine($"   Rrice for 1 day: {array_of_Room_Price_For_1_Day[i]}");
+                Console.WriteLine($"   Is room reserved: {array_of_Is_Booked[i]}");
             }
             Console.WriteLine();
         }

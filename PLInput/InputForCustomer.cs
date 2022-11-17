@@ -1,13 +1,7 @@
 ﻿using BIL;
 using BIL.Custom_exceptions;
 using BIL.Logic;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLInput
 {
@@ -70,7 +64,7 @@ namespace PLInput
             Console.WriteLine();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
-            Console.Write("Customer was successfully created! To return to Main menu press any key.");
+            Console.Write("Customer was successfully created! To return to Main Menu press any key.");
             Console.ReadKey();
         }
 
@@ -97,11 +91,11 @@ namespace PLInput
                             keyInfo = ConsoleKey.D4;
                             Console.Clear();
                             ShowCustomers(keyInfo);
-                            Console.WriteLine("Press any key to returen to continue work.");
+                            Console.WriteLine("Press any key to continue.");
                             Console.ReadKey();
 
                             Console.WriteLine("Do you still want to delete this customer?");
-                            Console.WriteLine("Press \"Y\" key, to delete him, or press any other key to return to Main menu without deleteing this customer. ");
+                            Console.WriteLine("Press \"Y\" key, to delete him, or press any other key to return to Main Menu without deleteing this customer. ");
 
                             keyInfo = CommonMethods.keyIninze();
                             switch (keyInfo)
@@ -122,7 +116,7 @@ namespace PLInput
 
                     Console.Clear();
                     Console.WriteLine("Customer was successfully deleted.");
-                    Console.WriteLine("Press any key to returen to Main menu.");
+                    Console.WriteLine("Press any key to return to Main Menu.");
                     Console.ReadKey();
 
                     break;
@@ -141,7 +135,7 @@ namespace PLInput
                             keyInfo = ConsoleKey.D4;
                             Console.Clear();
                             ShowCustomers(keyInfo);
-                            Console.WriteLine("Press any key to returen to continue work.");
+                            Console.WriteLine("Press any key to continue.");
                             Console.ReadKey();
                             break;
 
@@ -154,14 +148,14 @@ namespace PLInput
 
 
                     Console.WriteLine("NOTICE: index starts from 1 !");
-                    Console.Write("Input index of customer, you want to delete. If you don't want to remove anything, then write 'R' to return to Main menu: ");
+                    Console.Write("Input index of customer, you want to delete. If you don't want to remove anything, then write 'R' to return to Main Menu: ");
 
                     string user_input = Console.ReadLine();
                     while (!RegexPatternCheck.Pattern_of_the_Data_check(user_input, @"^[1-9]$|[1-9][0-9]+$|^R$|^r$"))
                     {
                         Console.Clear();
                         Console.WriteLine("NOTICE: index starts from 1 !");
-                        Console.Write("Wrong input. Please write index as digit, strting from 1, or 'R' to return to Main menu: ");
+                        Console.Write("Wrong input. Please write index as digit, strting from 1, or 'R' to return to Main Menu: ");
                         user_input = Console.ReadLine();
                     }
 
@@ -194,6 +188,12 @@ namespace PLInput
                             }
 
                             CustomerMethods.RemoveCustomer(index_of_customer_to_remove);
+
+                            Console.Clear();
+                            Console.WriteLine("Customer was successfully deleted.");
+                            Console.WriteLine("Press any key to return to Main Menu.");
+                            Console.ReadKey();
+
                             break;
                     }
                     break;
@@ -208,7 +208,7 @@ namespace PLInput
             Console.WriteLine("Choose what customer you want to edit:");
 
             ShowCustomers(ConsoleKey.D4);
-            Console.WriteLine("Press any key to returen to continue work.");
+            Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
 
             string user_change;
@@ -284,7 +284,7 @@ namespace PLInput
 
 
             Console.WriteLine("Do you still want to delete change this custmoer?");
-            Console.WriteLine("Press \"Y\" key, to change him, or press any other key to return to Main menu without deleteing this hotel. ");
+            Console.WriteLine("Press \"Y\" key, to change him, or press any other key to return to Main Menu without deleteing this hotel. ");
 
             consoleKey = CommonMethods.keyIninze();
             switch (consoleKey)
@@ -294,7 +294,7 @@ namespace PLInput
 
                     Console.Clear();
                     Console.WriteLine(CustomerMethods.SpecificCustomer(index_user_input));
-                    Console.WriteLine("Customer was successfuly edited! To continue work press any button.");
+                    Console.WriteLine("Customer was successfuly edited! To return to Main Menu press any button.");
                     Console.ReadKey();
                     return;
 
@@ -313,12 +313,12 @@ namespace PLInput
             string first_of_last_name = "";
             switch (keyInfo)
             {
-                case ConsoleKey.D6:
+                case ConsoleKey.D7:
                     first_of_last_name = "first name";
                     sorting_delegate = new DelegateForSorting(CustomerMethods.SortByFirstName);
                     break;
 
-                case ConsoleKey.D7:
+                case ConsoleKey.D8:
                     first_of_last_name = "last name";
                     sorting_delegate = new DelegateForSorting(CustomerMethods.SortByLastName);
                     break;
@@ -353,7 +353,7 @@ namespace PLInput
                     Console.WriteLine($"List was sorted in descending order by {first_of_last_name}.");
                     break;
             }
-            Console.WriteLine("Press any key, to return to Main menu.");
+            Console.WriteLine("Press any key, to return to Main Menu.");
             Console.ReadKey();
         }
 
@@ -380,10 +380,28 @@ namespace PLInput
                 Console.Write(array_of_customers_info[i]);
             }
             Console.WriteLine();
-
-            //Console.WriteLine("Press any key to returen to continue work.");
-            //Console.ReadKey();
         }
 
+        public static void SpecificCustomerInfo()
+        {
+            Console.Clear();
+
+            ShowCustomers(ConsoleKey.D3);
+            Console.WriteLine();
+
+            int index_of_hotel = CommonMethods.InputIndex("customer", "whole information you want to see");
+            Console.WriteLine();
+            Console.Clear();
+
+            SpecificCustomerInfo(index_of_hotel);
+        }
+        internal static void SpecificCustomerInfo(int index_of_hotel)
+        {
+            Console.WriteLine("\tChosen customer\n");
+
+            string array_of_specific_customer = CustomerMethods.SpecificCustomer(index_of_hotel);
+            Console.WriteLine(array_of_specific_customer);
+            Console.WriteLine();
+        }
     }
 }

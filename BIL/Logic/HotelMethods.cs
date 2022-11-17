@@ -176,13 +176,14 @@ namespace BIL.Logic
 
             int[] array_of_Room_Number = new int[HotelList[index].Rooms.Count];
             int[] array_of_Room_Price_For_1_Day = new int[HotelList[index].Rooms.Count];
-            bool[] array_of_Is_Booked = new bool[HotelList[index].Rooms.Count];
+            string[] array_of_Is_Booked = new string[HotelList[index].Rooms.Count];
 
             for (int i = 0; i < HotelList[index].Rooms.Count; i++) 
             {
                 array_of_Room_Number[i] = HotelList[index].Rooms[i].Room_Number;
                 array_of_Room_Price_For_1_Day [i] = HotelList[index].Rooms[i].Room_Price_For_1_Day;
-                array_of_Is_Booked [i] = HotelList[index].Rooms[i].Is_Booked;
+                array_of_Is_Booked[i] = YesOrNo(index, i);
+                //array_of_Is_Booked[i] = HotelList[index].Rooms[i].Is_Booked;
             }
 
             array_info_of_hotels.Add(array_of_Room_Number);
@@ -190,6 +191,18 @@ namespace BIL.Logic
             array_info_of_hotels.Add(array_of_Is_Booked);
 
             return array_info_of_hotels;
+        }
+
+        internal static string YesOrNo(int index_of_hotel, int index_of_room)
+        {
+            switch (HotelList[index_of_hotel].Rooms[index_of_room].Is_Booked)
+            {
+                case true:
+                    return "Yes";
+
+                case false:
+                    return "No";
+            }
         }
 
         public static List<string[]> ShowFreeAndReservedRoomsANDPrice(int index_of_hotel)
@@ -271,8 +284,22 @@ namespace BIL.Logic
             return false;
         }
 
+        public static int HotelIndexByName(string name_to_check)
+        {
+            int hotel_index = 0;
+            for (int i = 0; i < HotelList.Count; i++)
+            {
+                if (HotelList[i].Name_of_Hotel.ToUpper() == name_to_check.ToUpper())
+                {
+                    return hotel_index = i;
+                }
+            }
 
-            public static int HotelListLenght() =>  HotelList.Count;
+            return -1;
+        }
+
+
+        public static int HotelListLenght() =>  HotelList.Count;
         public static int NumberOfRoomsInSpecificHotel(int index) => HotelList[index].Rooms.Count;
 
     }

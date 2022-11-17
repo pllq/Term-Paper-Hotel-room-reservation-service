@@ -175,30 +175,18 @@ namespace BIL.Logic
             data_of_specific_customer =
                     $"First name: {CustomerList[index].First_name}\n" +
                     $"Last name: {CustomerList[index].Last_name}\n" +
-                    $"Age: {CustomerList[index].Age}\n" /*+
-                    $"Have booked the room: {CustomerList[index_of_customer_to_remove].Have_Booked_the_Room}\n"*/;
+                    $"Age: {CustomerList[index].Age}\n";
 
+            switch (CustomerList[index].Have_Booked_the_Room) 
+            {
+                case true:
+                    data_of_specific_customer += $"Have reserved room: {YesOrNo(index)}\n";
+                    break;
 
-            //HotelMethods.HotelList[i].Rooms[j].Customer_of_Room.First_name;
+                case false:
+                    return data_of_specific_customer;
+            }
 
-            /*
-                        for (int i = 0; i < HotelMethods.HotelList.Count; i++)
-                        {
-                            for (int j = 0; j < HotelMethods.HotelList[i].Rooms.Count; j++)
-                            {
-
-
-                            }
-                        }
-
-                        if (CustomerList[index_of_customer_to_remove].Have_Booked_the_Room) 
-                        {
-                            data_of_specific_customer += $"Room number: {CustomerList[index_of_customer_to_remove].Booked_Room.Room_Number}\n";
-                            data_of_specific_customer += $"Have booked the room: {CustomerList[index_of_customer_to_remove].Booked_Room.Room_Price_For_1_Day}\n";
-                            data_of_specific_customer += $"Have booked the room: {CustomerList[index_of_customer_to_remove].Booked_Room.Is_Booked}\n";
-
-                        }
-            */
             return data_of_specific_customer;
         }
 
@@ -213,7 +201,6 @@ namespace BIL.Logic
         /// </code>
         /// </example>
         /// </summary>
-
         public static string[] CustomersList()
         {
             string[] array_info_of_hotels = new string[CustomerList.Count];
@@ -240,7 +227,6 @@ namespace BIL.Logic
         /// </code>
         /// </example>
         /// </summary>
-
         public static string[] ViewWholeInfoOfCustomers()
         {
             string[] array_info_of_hotels = new string[CustomerList.Count];
@@ -250,11 +236,26 @@ namespace BIL.Logic
                 array_info_of_hotels[i] =
                     $"{i + 1}. Customer: {CustomerList[i].First_name} {CustomerList[i].Last_name}\n" +
                     $"   Age: {CustomerList[i].Age}\n" +
-                    $"   Have booked the room: {CustomerList[i].Have_Booked_the_Room}\n" /*+
-                    $"   Rooms number: {HotelList[i]}\n"*/;
+                    $"   Have booked the room: {YesOrNo(i)}\n";
+                    //$"Have booked the room: {CustomerList[i].Have_Booked_the_Room}\n";
             }
             return array_info_of_hotels;
         }
+
+        internal static string YesOrNo(int index) 
+        {
+            switch (CustomerList[index].Have_Booked_the_Room) 
+            {
+                case true:
+                    return "Yes";
+
+                case false:
+                    return "No";
+            }
+        }
+
+
+
 
         public static bool CustomerAlreadyCreated(string first_name_to_check, string last_name_to_check)
         {
@@ -270,10 +271,23 @@ namespace BIL.Logic
             return false;
         }
 
+        public static int CustomerIndexByFirstAndLastName(string first_Name_of_the_Customer, string last_Name_of_the_Customer)
+        {
+            int hotel_index = 0;
+            for (int i = 0; i < CustomerList.Count; i++)
+            {
+                if (CustomerList[i].First_name.ToUpper() == first_Name_of_the_Customer.ToUpper() &&
+                    CustomerList[i].Last_name.ToUpper() == last_Name_of_the_Customer.ToUpper())
+                {
+                    return hotel_index = i;
+                }
+            }
+
+            return -1;
+        }
 
 
         public static int CustomerListLenght() => CustomerList.Count;
-
 
 
     }

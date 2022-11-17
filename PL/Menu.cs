@@ -74,7 +74,7 @@ namespace PL
                                     case ConsoleKey.D4:
                                             Console.Clear();
                                             InputForHotel.ShowHotels(keyInfo);
-                                            Console.WriteLine("Press any key to return to main manu work.");
+                                            Console.WriteLine("Press any key to return to Main Nenu.");
                                             Console.ReadKey();
                                         break;
 
@@ -130,23 +130,33 @@ namespace PL
                                 case ConsoleKey.D4:
                                     Console.Clear();
                                     InputForCustomer.ShowCustomers(ConsoleKey.D3);
-                                    Console.WriteLine("Press any key to returen to continue work.");
+                                    Console.WriteLine("Press any key to return to Main Menu.");
                                     Console.ReadKey();
                                     break;
 
 
-                                //5. This method returns string array with information about all customers.
+                                //5. Information about SPECIFIC cusotmer.
                                 case ConsoleKey.D5:
                                     Console.Clear();
+                                    InputForCustomer.SpecificCustomerInfo();
+                                    Console.WriteLine("Press any key to return to Main Menu.");
+                                    Console.ReadKey();
+                                    break;
+
+                                //6. Information about ALL customers.
+                                case ConsoleKey.D6:
+                                    Console.Clear();
                                     InputForCustomer.ShowCustomers(ConsoleKey.D4);
-                                    Console.WriteLine("Press any key to returen to continue work.");
+                                    Console.WriteLine("Press any key to return to Main Menu.");
                                     Console.ReadKey();
                                     break;
 
 
-                                //6. and 7. Sort the list by first/lastname and ascednding/descending order
-                                case ConsoleKey.D6:
+
+
+                                //7. and 8. Sort the list by first/lastname and ascednding/descending order
                                 case ConsoleKey.D7:
+                                case ConsoleKey.D8:
                                     Console.Clear();
                                         InputForCustomer.SortList(keyInfo);
                                     break;
@@ -219,20 +229,6 @@ namespace PL
                             InputForCustomer.IfCustomerListLenghtIsZero();
 
                         wrong_key4:
-
-                            /*
-                             //Here will be:
-
-                            try
-                            {
-                                InputForSearch.Search();
-                            }
-                            catch(Exception e )
-                            {
-                                Console.WriteLine(e.Message);
-                            }
-
-                             */
                             Console.Clear();
                             Console.WriteLine(MenusToShow.SearchMenu());
 
@@ -241,9 +237,8 @@ namespace PL
                             switch (keyInfo)
                             {
                                 case ConsoleKey.D1:
-                                    break;
-
                                 case ConsoleKey.D2:
+                                    InputForSearch.Search(keyInfo);
                                     break;
 
                                 case ConsoleKey.R:
@@ -266,7 +261,7 @@ namespace PL
                 {
                     Console.Clear();
                     Console.WriteLine(e.Message);
-                    Console.WriteLine("Press any key to returen to Main menu.");
+                    Console.WriteLine("Press any key to return to Main Menu.");
                     Console.ReadKey();
                 }
             }

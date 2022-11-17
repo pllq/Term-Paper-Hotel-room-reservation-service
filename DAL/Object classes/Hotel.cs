@@ -95,5 +95,52 @@ namespace DAL
             //Tofix: has to be Rooms = info.GetRoom("Rooms");
             //Rooms = info.GetString("Rooms");
         }
+
+
+
+        public override bool Equals(object obj) => this.Equals(obj as Hotel);
+
+        public bool Equals(Hotel hotel)
+        {
+            if (hotel is null)
+            {
+                return false;
+            }
+
+            // If run-time types are not exactly the same, return false.
+            if (this.GetType() != hotel.GetType())
+            {
+                return false;
+            }
+
+            // Return true if the fields match.
+            // Note that the base class is not invoked because it is
+            // System.Object, which defines Equals as reference equality.
+            return (Name_of_Hotel == hotel.Name_of_Hotel) &&
+                    (Description_of_Hotel == hotel.Description_of_Hotel) &&
+                    (Hotel_Stars_Rate == hotel.Hotel_Stars_Rate) &&
+                    (Number_of_Rooms == hotel.Number_of_Rooms) &&
+                    (Number_of_Free_Rooms == hotel.Number_of_Free_Rooms)&&
+                    (Number_of_Reserved_Rooms == hotel.Number_of_Reserved_Rooms)&&
+                    (Rooms == hotel.Rooms);
+        }
+
+        public static bool operator ==(Hotel left_hotel, Hotel right_hotel)
+        {
+            if (left_hotel is null)
+            {
+                if (right_hotel is null)
+                {
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return left_hotel.Equals(right_hotel);
+        }
+
+        public static bool operator !=(Hotel left_hotel, Hotel right_hotel) => !(left_hotel == right_hotel);
     }
 }

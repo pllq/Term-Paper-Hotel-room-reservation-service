@@ -29,8 +29,8 @@ namespace PL
                     "1. Add hotel.\n" +
                     "2. Remove hotel.\n" +
                     "3. Show list of created hotels.\n" +
-                    "4. Show hotel information (without rooms).\n" +
-                    "5. Show hotel information with all created rooms.\n" +
+                    "4. Show hotels information (without rooms).\n" +
+                    "5. Show specific hotel information with all created rooms.\n" +
                     "R. Return to the Main menu";
         }
         internal static string CustomerManagement()
@@ -41,10 +41,11 @@ namespace PL
                       "1. Add customer.\n" +
                       "2. Remove customer.\n" +
                       "3. Change the customer’s information.\n" +
-                      "4. View information about specific customer.\n" +
-                      "5. View the information about all customers.\n" +
-                      "6. Sort the list by first name (ascending or descending order).\n" +
-                      "7. Sort the list by last name (ascending or descending order).\n" +
+                      "4. Show list of created customers.\n" +
+                      "5. Show information about specific customer.\n" +
+                      "6. Show the information about all customers.\n" +
+                      "7. Sort the list by first name (ascending or descending order).\n" +
+                      "8. Sort the list by last name (ascending or descending order).\n" +
                       "R. Return to the Customers management menu";
         }
         internal static string RoomManagement()
