@@ -1,6 +1,6 @@
-﻿using BIL;
-using BIL.Custom_exceptions;
-using BIL.Logic;
+﻿using BLL;
+using BLL.Custom_exceptions;
+using BLL.Logic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace PLInput
     {
         public static void IfHotelsListLenghtIsZero()
         {
-            if (BIL.Logic.HotelMethods.HotelListLenght() == 0)
+            if (BLL.Logic.HotelMethods.HotelListLenght() == 0)
             {
                 throw new HotelListIsEmptyExeption();
             }
@@ -131,7 +131,7 @@ namespace PLInput
             }
             Console.WriteLine();
 
-            BIL.Logic.HotelMethods.CreateHotel(Name_of_Hotel, Description_of_Hotel, Hotel_Stars_Rate,
+            BLL.Logic.HotelMethods.CreateHotel(Name_of_Hotel, Description_of_Hotel, Hotel_Stars_Rate,
                                      Number_of_Rooms, List_of_arrays_for_Room_iniz);
 
             Console.Write("Hotel was successfully created! To return to Main Menu press any key.");
@@ -144,7 +144,7 @@ namespace PLInput
 
             ConsoleKey keyInfo;
 
-            switch (BIL.Logic.HotelMethods.HotelListLenght())
+            switch (BLL.Logic.HotelMethods.HotelListLenght())
             {
                 case 1:
                     Console.Clear();
@@ -182,7 +182,7 @@ namespace PLInput
                             break;
                     }
 
-                    BIL.Logic.HotelMethods.RemoveHotel(0);
+                    BLL.Logic.HotelMethods.RemoveHotel(0);
 
                     Console.Clear();
                     Console.WriteLine("Hotel was successfully deleted.");
@@ -208,16 +208,16 @@ namespace PLInput
                         default:
                             int index_of_hotel_to_remove = int.Parse(user_input) - 1;
 
-                            while (index_of_hotel_to_remove > BIL.Logic.HotelMethods.HotelListLenght())
+                            while (index_of_hotel_to_remove > BLL.Logic.HotelMethods.HotelListLenght())
                             {
                                 string string_index_of_hotel_to_remove;
-                                Console.WriteLine($"Index \"{index_of_hotel_to_remove}\" is greater then lenght of the list of hotels: {BIL.Logic.HotelMethods.HotelListLenght()}.");
-                                string_index_of_hotel_to_remove = CommonMethods.ForIndexIniz($"write index as digit, strting from 1 to {BIL.Logic.HotelMethods.HotelListLenght()}",
+                                Console.WriteLine($"Index \"{index_of_hotel_to_remove}\" is greater then lenght of the list of hotels: {BLL.Logic.HotelMethods.HotelListLenght()}.");
+                                string_index_of_hotel_to_remove = CommonMethods.ForIndexIniz($"write index as digit, strting from 1 to {BLL.Logic.HotelMethods.HotelListLenght()}",
                                     @"^[1-9]$|[1-9][0-9]+$");
                                 index_of_hotel_to_remove = int.Parse(string_index_of_hotel_to_remove) - 1;
                             }
 
-                            BIL.Logic.HotelMethods.RemoveHotel(index_of_hotel_to_remove);
+                            BLL.Logic.HotelMethods.RemoveHotel(index_of_hotel_to_remove);
                             Console.Clear();
                             Console.WriteLine("Hotel was successfully deleted.");
                             Console.WriteLine("Press any key to return to Main Menu.");
@@ -236,11 +236,11 @@ namespace PLInput
             switch (consoleKey)
             {
                 case ConsoleKey.D3:
-                    array_of_hotels_info = BIL.Logic.HotelMethods.ShowListOfCreatedHotels();
+                    array_of_hotels_info = BLL.Logic.HotelMethods.ShowListOfCreatedHotels();
                     break;
 
                 case ConsoleKey.D4:
-                    array_of_hotels_info = BIL.Logic.HotelMethods.ShowHotelInfoWithoutRooms();
+                    array_of_hotels_info = BLL.Logic.HotelMethods.ShowHotelInfoWithoutRooms();
                     break;
             }
             Console.WriteLine("\tAll created hotels\n");
@@ -273,9 +273,9 @@ namespace PLInput
         {
             Console.WriteLine("\tChosen hotel\n");
 
-            ArrayList array_of_specific_hotel = BIL.Logic.HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
+            ArrayList array_of_specific_hotel = BLL.Logic.HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
 
-            int number_of_rooms_in_specific_hotel = BIL.Logic.HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
+            int number_of_rooms_in_specific_hotel = BLL.Logic.HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
 
             int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
             int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];

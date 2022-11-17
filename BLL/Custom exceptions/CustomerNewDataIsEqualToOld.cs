@@ -1,11 +1,11 @@
-﻿using BIL.Custom_exceptions;
+﻿using BLL.Custom_exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIL
+namespace BLL
 {
     partial class CustomerNewDataIsEqualToOld : Exception
     {

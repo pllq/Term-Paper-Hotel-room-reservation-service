@@ -1,5 +1,5 @@
-﻿using BIL.Logic;
-using BIL;
+﻿using BLL.Logic;
+using BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;

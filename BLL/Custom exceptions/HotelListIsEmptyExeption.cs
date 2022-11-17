@@ -1,4 +1,4 @@
-﻿namespace BIL.Custom_exceptions
+﻿namespace BLL.Custom_exceptions
 {
     public class HotelListIsEmptyExeption : Exception
     {

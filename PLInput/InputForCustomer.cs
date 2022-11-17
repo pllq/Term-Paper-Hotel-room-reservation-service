@@ -1,6 +1,6 @@
-﻿using BIL;
-using BIL.Custom_exceptions;
-using BIL.Logic;
+﻿using BLL;
+using BLL.Custom_exceptions;
+using BLL.Logic;
 using System.Collections;
 
 namespace PLInput

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BIL.Logic
+namespace BLL.Logic
 {
     public class CustomerMethods
     {

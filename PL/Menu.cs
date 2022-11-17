@@ -1,4 +1,4 @@
-﻿using BIL.Logic;
+﻿using BLL.Logic;
 using PLInput;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -9,7 +9,7 @@ namespace PL
     {
         public static void MainMenu()
         {
-            switch ((BIL.Logic.HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
+            switch ((BLL.Logic.HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
             {
                 case (true, true):
                     Console.WriteLine("Data of created hotels with appropriate name was found and loaded.");

@@ -1,6 +1,6 @@
 ﻿using BaseLibS.Graph;
-using BIL.Logic;
-using BIL;
+using BLL.Logic;
+using BLL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -141,9 +141,9 @@ namespace PLInput
         {
             Console.WriteLine("\tChosen hotel\n");
 
-            ArrayList array_of_specific_hotel = BIL.Logic.HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
+            ArrayList array_of_specific_hotel = BLL.Logic.HotelMethods.ShowInfoAboutSpecificHotelWithRoomsInfo(index_of_hotel);
 
-            int number_of_rooms_in_specific_hotel = BIL.Logic.HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
+            int number_of_rooms_in_specific_hotel = BLL.Logic.HotelMethods.NumberOfRoomsInSpecificHotel(index_of_hotel);
 
             int[] array_of_Room_Number = (int[])array_of_specific_hotel[1];
             int[] array_of_Room_Price_For_1_Day = (int[])array_of_specific_hotel[2];

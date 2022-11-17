@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace BIL.Logic
+namespace BLL.Logic
 {
     public class HotelMethods
     {
