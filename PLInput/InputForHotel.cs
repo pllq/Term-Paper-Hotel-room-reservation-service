@@ -255,6 +255,8 @@ namespace PLInput
 
         public static void ShowInfoAboutSpecificHotel()
         {
+            IfHotelsListLenghtIsZero();
+
             Console.Clear();
 
             ShowHotels(ConsoleKey.D3);
