@@ -6,11 +6,11 @@ namespace BLL.Logic
 {
     public class CustomerMethods
     {
-        internal static List<Customer> CustomerList = new List<Customer>();
+        public static List<Customer> CustomerList = new List<Customer>();
         internal static XMLSerialization<List<Customer>> xml_serialize_list_of_customers = new XMLSerialization<List<Customer>>();
         internal static JSONSerialization<List<Customer>> json_serialize_list_of_customers = new JSONSerialization<List<Customer>>();
-        internal const string Name_of_file = "customer_list";
-
+        public static string Name_of_file = @"G:\Studying\2) NAU (01.09.2021 - XX.06.2025)\NAU\Homeworks\Second grade\1st Semester\1) OOP\6) Term Paper\TP\DAL\BD\customer_list";
+        //internal const string Name_of_file = "customer_list";
 
         public static bool CustomerDataFileExists()
         {
@@ -38,7 +38,6 @@ namespace BLL.Logic
             xml_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
-
 
         private static void IfCustomerHaveBookedTheRoom(int index_of_customer_to_remove)
         {
@@ -78,10 +77,9 @@ namespace BLL.Logic
             json_serialize_list_of_customers.Serialize(CustomerList, Name_of_file);
         }
 
-
-        public static void ChangeCustomer(int index_of_customer_to_remove, string data_to_edit, string what_field_to_edit)
+        public static void ChangeCustomer(int index_of_customer_to_change, string data_to_edit, string what_field_to_edit)
         {
-            IfCustomerHaveBookedTheRoom(index_of_customer_to_remove);
+            IfCustomerHaveBookedTheRoom(index_of_customer_to_change);
 
             switch (what_field_to_edit)
             {
@@ -96,14 +94,14 @@ namespace BLL.Logic
                             last_name = data_to_edit.Substring(i, (data_to_edit.Length - i));
                             data_to_edit = data_to_edit.Substring(0, i);
 
-                            if (CustomerList[index_of_customer_to_remove].First_name.ToUpper() == data_to_edit.ToUpper() &&
-                                        CustomerList[index_of_customer_to_remove].Last_name.ToUpper() == last_name.ToUpper())
+                            if (CustomerList[index_of_customer_to_change].First_name.ToUpper() == data_to_edit.ToUpper() &&
+                                        CustomerList[index_of_customer_to_change].Last_name.ToUpper() == last_name.ToUpper())
                             {
                                 throw new CustomerNewDataIsEqualToOld("first and last names are");
                             }
 
-                            CustomerList[index_of_customer_to_remove].First_name = data_to_edit;
-                            CustomerList[index_of_customer_to_remove].Last_name = last_name;
+                            CustomerList[index_of_customer_to_change].First_name = data_to_edit;
+                            CustomerList[index_of_customer_to_change].Last_name = last_name;
 
                             break;
                         }
@@ -111,28 +109,28 @@ namespace BLL.Logic
                     break;
 
                 case "F":
-                    if (CustomerList[index_of_customer_to_remove].First_name.ToUpper() == data_to_edit.ToUpper())
+                    if (CustomerList[index_of_customer_to_change].First_name.ToUpper() == data_to_edit.ToUpper())
                     {
                         throw new CustomerNewDataIsEqualToOld("first name is");
                     }
-                    CustomerList[index_of_customer_to_remove].First_name = data_to_edit;
+                    CustomerList[index_of_customer_to_change].First_name = data_to_edit;
                     break;
 
                 case "L":
-                    if (CustomerList[index_of_customer_to_remove].Last_name.ToUpper() == data_to_edit.ToUpper())
+                    if (CustomerList[index_of_customer_to_change].Last_name.ToUpper() == data_to_edit.ToUpper())
                     {
                         throw new CustomerNewDataIsEqualToOld("last name is");
                     }
-                    CustomerList[index_of_customer_to_remove].Last_name = data_to_edit;
+                    CustomerList[index_of_customer_to_change].Last_name = data_to_edit;
                     break;
 
                 case "A":
-                    if (CustomerList[index_of_customer_to_remove].Age == int.Parse(data_to_edit))
+                    if (CustomerList[index_of_customer_to_change].Age == int.Parse(data_to_edit))
                     {
                         throw new CustomerNewDataIsEqualToOld("age is");
                     }
 
-                    CustomerList[index_of_customer_to_remove].Age = int.Parse(data_to_edit);
+                    CustomerList[index_of_customer_to_change].Age = int.Parse(data_to_edit);
                     break;
             }
 
@@ -287,7 +285,6 @@ namespace BLL.Logic
         }
 
 
-
         public static bool CustomerAlreadyCreated(string first_name_to_check, string last_name_to_check)
         {
             for (int i = 0; i < CustomerList.Count; i++)
@@ -315,6 +312,21 @@ namespace BLL.Logic
             }
 
             return -1;
+        }
+
+
+        public static void FileDelete() 
+        {
+            if (File.Exists(Name_of_file + ".xml") )
+            {
+                File.Delete(Name_of_file + ".xml");
+            }
+
+            if (File.Exists(Name_of_file + "json")) 
+            {
+                File.Delete(Name_of_file + "json");
+                return;
+            }
         }
 
         public static int CustomerListLenght() => CustomerList.Count;

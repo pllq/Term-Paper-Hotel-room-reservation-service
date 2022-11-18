@@ -6,7 +6,6 @@ namespace DAL
     [Serializable]
     public class Hotel : ISerializable
     {
-
         public string Name_of_Hotel { get; set; }
         public string Description_of_Hotel { get; set; }
         public int Hotel_Stars_Rate { get; set; }
@@ -52,8 +51,6 @@ namespace DAL
             //Tofix: has to be Rooms = info.GetRoom("Rooms");
             //Rooms = info.GetString("Rooms");
         }
-
-
 
         public override bool Equals(object obj) => this.Equals(obj as Hotel);
 

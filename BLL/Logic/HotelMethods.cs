@@ -6,11 +6,11 @@ namespace BLL.Logic
 {
     public class HotelMethods
     {
-        internal static List<Hotel> HotelList = new List<Hotel>();
+        public static List<Hotel> HotelList = new List<Hotel>();
         internal static XMLSerialization<List<Hotel>> xml_serialize_list_of_hotels = new XMLSerialization<List<Hotel>>();
         internal static JSONSerialization<List<Hotel>> json_serialize_list_of_hotels = new JSONSerialization<List<Hotel>>();
-        internal const string Name_of_file = "hotel_list";
-
+        public static string Name_of_file = @"G:\Studying\2) NAU (01.09.2021 - XX.06.2025)\NAU\Homeworks\Second grade\1st Semester\1) OOP\6) Term Paper\TP\DAL\BD\hotel_list";
+        //internal const string Name_of_file = "hotel_list";
 
         public static bool HotelDataFileExists()
         {
@@ -47,24 +47,39 @@ namespace BLL.Logic
             Hotel Hotel = new Hotel(Name_of_Hotel, Decsription_of_Hotel, Hotel_Stars_Rate,
                                     Number_of_Rooms, list_of_rooms);
 
-
-            /*            Hotel Hotel = new Hotel(Name_of_Hotel, Decsription_of_Hotel, Hotel_Stars_Rate,
-                                                Number_of_Rooms, Number_of_Free_Rooms, list_of_rooms);
-
-            */
             HotelList.Add(Hotel);
 
-            //
             xml_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
-
             json_serialize_list_of_hotels.Serialize(HotelList, Name_of_file);
-
         }
 
 
         public static void RemoveHotel(int index_of_hotel_to_remove)
         {
             //Think about people, who ordered in that hotel room
+
+            List<Customer> temp_to_delete = new List<Customer>();
+            for (int i = 0; i < HotelList[index_of_hotel_to_remove].Rooms.Count; i++) 
+            {
+                if (HotelList[index_of_hotel_to_remove].Rooms[i].Is_Booked)
+                {
+                    temp_to_delete.Add(HotelList[index_of_hotel_to_remove].Rooms[i].Customer_of_Room);
+                }
+            }
+
+            if(temp_to_delete.Count != 0) 
+            {
+                for (int i = 0; i < temp_to_delete.Count; i++)
+                {
+                    if(CustomerMethods.CustomerList[i] == temp_to_delete[i]) 
+                    {
+                        CustomerMethods.CustomerList[i].Have_Booked_the_Room = false;
+                    }
+                }
+
+                CustomerMethods.xml_serialize_list_of_customers.Serialize(CustomerMethods.CustomerList, CustomerMethods.Name_of_file);
+                CustomerMethods.json_serialize_list_of_customers.Serialize(CustomerMethods.CustomerList, CustomerMethods.Name_of_file);
+            }
 
             HotelList.RemoveAt(index_of_hotel_to_remove);
 

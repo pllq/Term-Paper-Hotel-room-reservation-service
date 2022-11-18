@@ -25,15 +25,6 @@ namespace DAL
             this.Room_Price_For_1_Day = Room_Price_For_1_Day;
         }
 
-/*
-        public Room(int Room_Number, int Room_Price_For_1_Day, bool Is_Reserved)
-        {
-            this.Room_Number = Room_Number;
-            this.Room_Price_For_1_Day = Room_Price_For_1_Day;
-            this.Is_Booked = Is_Reserved;
-        }
-*/
-
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Room_Number", Room_Number);
