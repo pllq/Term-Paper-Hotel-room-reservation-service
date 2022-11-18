@@ -1,5 +1,4 @@
-﻿using BLL.Logic;
-using PLInput;
+﻿using PLInput;
 using System.Reflection;
 using System.Security.Cryptography;
 
@@ -9,27 +8,7 @@ namespace PL
     {
         public static void MainMenu()
         {
-            switch ((BLL.Logic.HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
-            {
-                case (true, true):
-                    Console.WriteLine("Data of created hotels with appropriate name was found and loaded.");
-                    Console.WriteLine("Data of created customers with appropriate name was found and loaded. To continue press any key.");
-                    Console.ReadKey();
-                    break;
-
-                case (true, false):
-                    Console.WriteLine("Data of created hotels with appropriate name was found and loaded. To continue press any key.");
-                    Console.ReadKey();
-                    break;
-
-                case (false, true):
-                    Console.WriteLine("Data of created customers with appropriate name was found and loaded. To continue press any key.");
-                    Console.ReadKey();
-                    break;
-
-                case (false, false):
-                    break;
-            }
+            CommonMethods.CheckIfFilesExistAndCanBeLoaded();
 
 
             ConsoleKey keyInfo;

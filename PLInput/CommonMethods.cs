@@ -10,6 +10,31 @@ namespace PLInput
 {
     public class CommonMethods
     {
+        public static void CheckIfFilesExistAndCanBeLoaded() 
+        { 
+            switch ((HotelMethods.HotelDataFileExists(), CustomerMethods.CustomerDataFileExists()))
+            {
+                case (true, true):
+                    Console.WriteLine("Data of created hotels with appropriate name was found and loaded.");
+                    Console.WriteLine("Data of created customers with appropriate name was found and loaded. To continue press any key.");
+                    Console.ReadKey();
+                    break;
+
+                case (true, false):
+                    Console.WriteLine("Data of created hotels with appropriate name was found and loaded. To continue press any key.");
+                    Console.ReadKey();
+                    break;
+
+                case (false, true):
+                    Console.WriteLine("Data of created customers with appropriate name was found and loaded. To continue press any key.");
+                    Console.ReadKey();
+                    break;
+
+                case (false, false):
+                    break;
+            }
+        }
+
         public static ConsoleKey keyIninze()
         {
             Console.Write("Press key: ");
