@@ -1,5 +1,6 @@
 # Screenthots
-## Program consists of:
+## Main Menu
+### Consists of:
 ### 1. Hotels management
 ### 2. Customers management
 ### 3. Room management
@@ -83,9 +84,6 @@
 
 #### R. Return to the Main menu
 
-
-
-
 ## 3. Room management
 #### Consists of:
 #### 1. Book a room at a particular hotel.
@@ -117,8 +115,19 @@
 ##### R. Return to the Main Menu
 
 
+## 4. Search
+#### 1. Search by a keyword among the hotels.
+#### 2. Search by a keyword among the customer.
+#### R. Return to the Main Menu.
+![image](https://user-images.githubusercontent.com/94574845/202861468-340928f1-ce42-4783-bdd1-5574e19c59f9.png)
 
+##### 1. Search by a keyword among the hotels.
+![image](https://user-images.githubusercontent.com/94574845/202861516-3201eac8-9b55-4105-861b-19a6d338a2ad.png)
+![image](https://user-images.githubusercontent.com/94574845/202861524-7cd5533c-835b-4035-8e39-770c37d0eef6.png)
 
+##### 2. Search by a keyword among the customer.
+![image](https://user-images.githubusercontent.com/94574845/202861575-5d7ac075-a82b-4a0e-a48b-e036e05d38e4.png)
+![image](https://user-images.githubusercontent.com/94574845/202861579-b67366d9-c8ac-4771-9632-1803844316d7.png)
 
 
 
