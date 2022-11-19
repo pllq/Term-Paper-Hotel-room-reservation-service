@@ -9,8 +9,10 @@ namespace BLL.Logic
         public static List<Hotel> HotelList = new List<Hotel>();
         internal static XMLSerialization<List<Hotel>> xml_serialize_list_of_hotels = new XMLSerialization<List<Hotel>>();
         internal static JSONSerialization<List<Hotel>> json_serialize_list_of_hotels = new JSONSerialization<List<Hotel>>();
-        public static string Name_of_file = @"G:\Studying\2) NAU (01.09.2021 - XX.06.2025)\NAU\Homeworks\Second grade\1st Semester\1) OOP\6) Term Paper\TP\DAL\BD\hotel_list";
-        //internal const string Name_of_file = "hotel_list";
+        public const string Name_of_file = @"..\..\..\..\DAL\BD\hotel_list";
+
+        //public static string Name_of_file = @"G:\Studying\2) NAU (01.09.2021 - XX.06.2025)\NAU\Homeworks\Second grade\1st Semester\1) OOP\6) Term Paper\TP\DAL\BD\hotel_list";
+        ////internal const string Name_of_file = "hotel_list";
 
         public static bool HotelDataFileExists()
         {
