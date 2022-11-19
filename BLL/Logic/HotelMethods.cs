@@ -315,6 +315,20 @@ namespace BLL.Logic
             return -1;
         }
 
+        public static void FileDelete()
+        {
+            if (File.Exists(Name_of_file + ".xml"))
+            {
+                File.Delete(Name_of_file + ".xml");
+            }
+
+            if (File.Exists(Name_of_file + ".json"))
+            {
+                File.Delete(Name_of_file + ".json");
+                return;
+            }
+        }
+
 
         public static int HotelListLenght() =>  HotelList.Count;
         public static int NumberOfRoomsInSpecificHotel(int index) => HotelList[index].Rooms.Count;

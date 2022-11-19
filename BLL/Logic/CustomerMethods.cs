@@ -322,9 +322,9 @@ namespace BLL.Logic
                 File.Delete(Name_of_file + ".xml");
             }
 
-            if (File.Exists(Name_of_file + "json")) 
+            if (File.Exists(Name_of_file + ".json")) 
             {
-                File.Delete(Name_of_file + "json");
+                File.Delete(Name_of_file + ".json");
                 return;
             }
         }

@@ -23,7 +23,7 @@ namespace DAL
                 File.Delete(filePath);
             }
 
-            using(StreamWriter writer = new StreamWriter(filePath)) 
+            using (StreamWriter writer = new StreamWriter(filePath)) 
             {
                 xMLSerialization.Serialize(writer, data);
             }

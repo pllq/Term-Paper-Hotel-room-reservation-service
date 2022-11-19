@@ -11,6 +11,12 @@ namespace BLL.Logic
     {
         public static void BookRoom(int index_of_customer_that_books_room, int index_of_hotel, int index_of_room, int days_to_book_room)
         {
+
+            if (CustomerMethods.CustomerList[index_of_customer_that_books_room].Have_Booked_the_Room)
+            {
+                throw new Custom_exceptions.CustomerAlreadyReserveRoomExeption();
+            }
+
             //If in chosen hotel, chosen room is booked, throw exception
             if (HotelMethods.HotelList[index_of_hotel].Rooms[index_of_room].Is_Booked) 
             {
