@@ -6,14 +6,14 @@ namespace BLLTest
 {
     public class CustomerMethodTests
     {
-        readonly string path = @"test_customer";
+        internal const string customer_path = @"test_customer";
 
-        private static void NewListAndDeleteFile()
+        internal static void CustomerNewListAndDeleteFile()
         {
+            CustomerMethods.FileDelete();
             if (CustomerMethods.CustomerList.Count != 0)
             {
                 CustomerMethods.CustomerList = new List<Customer>();
-                CustomerMethods.FileDelete();
             }
         }
 
@@ -30,8 +30,8 @@ namespace BLLTest
             int Age = 2;
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             int actual = CustomerMethods.CustomerListLenght();
@@ -54,8 +54,8 @@ namespace BLLTest
             int indexe_of_customer = 0;
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             CustomerMethods.RemoveCustomer(indexe_of_customer);
@@ -78,8 +78,8 @@ namespace BLLTest
             int Age = 19;
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             Customer customerbefore = new Customer();
@@ -105,8 +105,8 @@ namespace BLLTest
             int Age = 19;
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             Customer customerbefore = new Customer();
@@ -130,8 +130,8 @@ namespace BLLTest
             int Age = 19;
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             Customer customerbefore = new Customer();
@@ -156,8 +156,8 @@ namespace BLLTest
             int Age = 17;
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             Customer exptected = new Customer();
@@ -190,8 +190,8 @@ namespace BLLTest
 
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
@@ -222,8 +222,8 @@ namespace BLLTest
 
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer2, Last_Name_of_the_Customer2, Age2);
@@ -256,8 +256,8 @@ namespace BLLTest
 
 
             //Act
-            CustomerMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer2, Last_Name_of_the_Customer2, Age2);
@@ -287,7 +287,7 @@ namespace BLLTest
 
 
             //Act
-            NewListAndDeleteFile();
+            CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer2, Last_Name_of_the_Customer2, Age2);

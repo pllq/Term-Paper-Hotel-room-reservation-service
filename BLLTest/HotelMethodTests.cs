@@ -8,14 +8,14 @@ namespace BLLTest
     public class HotelMethodTests
     {
 
-        readonly string path = @"test_hotel";
+        internal const string hotel_path = @"test_hotel";
 
-        private static void NewListAndDeleteFile()
+        internal static void HotelNewListAndDeleteFile()
         {
+            HotelMethods.FileDelete();
             if (HotelMethods.HotelList.Count != 0)
             {
                 HotelMethods.HotelList = new List<Hotel>();
-                HotelMethods.FileDelete();
             }
         }
 
@@ -35,8 +35,8 @@ namespace BLLTest
 
 
             //Act
-            HotelMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            HotelMethods.Name_of_file = hotel_path;
+            HotelNewListAndDeleteFile();
 
             for (int i = 0; i < array_of_Room_Number.Length; i++)
             {
@@ -71,8 +71,8 @@ namespace BLLTest
 
 
             //Act
-            HotelMethods.Name_of_file = path;
-            NewListAndDeleteFile();
+            HotelMethods.Name_of_file = hotel_path;
+            HotelNewListAndDeleteFile();
 
             for (int i = 0; i < array_of_Room_Number.Length; i++)
             {
@@ -93,6 +93,10 @@ namespace BLLTest
             Assert.Equal(expected, actual);
             HotelMethods.FileDelete();
         }
+
+
+
+
 
 
 
