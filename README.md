@@ -86,6 +86,37 @@
 
 
 
+## 3. Room management
+#### Consists of:
+#### 1. Book a room at a particular hotel.
+#### 2. Cancel a customer's room reservation.
+#### 3. Show list of all created rooms in the specific hotel.
+#### 4. Show free and reserved rooms with information about thier price, who booked and for how many days.
+#### R. Return to the Main Menu
+![image](https://user-images.githubusercontent.com/94574845/202861149-7a9d241c-1b9f-4f08-ae09-aedaccc8165e.png)
+
+##### 1. Book a room at a particular hotel.
+![image](https://user-images.githubusercontent.com/94574845/202861214-945469f6-e9d6-436a-bc93-25f230802449.png)
+![image](https://user-images.githubusercontent.com/94574845/202861219-a2007edf-42c2-4bef-8732-3b8cc96d3875.png)
+![image](https://user-images.githubusercontent.com/94574845/202861226-b325e533-322d-47dc-a902-391a6d2c5b54.png)
+![image](https://user-images.githubusercontent.com/94574845/202861238-ecdd8f01-8dee-4977-9d30-b63e75378357.png)
+![image](https://user-images.githubusercontent.com/94574845/202861247-78c5edbd-20ce-4bdc-b079-7f34be5629b2.png)
+
+##### 2. Cancel a customer's room reservation.
+![image](https://user-images.githubusercontent.com/94574845/202861324-a69c0812-5c6d-435b-a61c-a4d38e1f100e.png)
+![image](https://user-images.githubusercontent.com/94574845/202861335-5b924235-ffb3-4d28-8cdd-8456b272d9cf.png)
+
+##### 3. Show list of all created rooms in the specific hotel.
+![image](https://user-images.githubusercontent.com/94574845/202861367-a0b7c490-8c61-4012-bb09-530235503ca8.png)
+![image](https://user-images.githubusercontent.com/94574845/202861373-0a990843-5b9a-418c-80b6-51a21ec991fd.png)
+
+##### 4. Show free and reserved rooms with information about thier price, who booked and for how many days.
+![image](https://user-images.githubusercontent.com/94574845/202861387-28c2dc77-2dea-452f-9cb4-1bbbe6e8159d.png)
+![image](https://user-images.githubusercontent.com/94574845/202861393-5a371e22-d6f7-4db3-be89-b267a32d6a8a.png)
+
+##### R. Return to the Main Menu
+
+
 
 
 
