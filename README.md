@@ -36,3 +36,71 @@
 
 #### R. Return to the Main menu
 
+
+## 2. Customers management
+#### Consists of:
+![image](https://user-images.githubusercontent.com/94574845/202860442-ba9e6edd-95a0-4682-99b2-70b712e8f8d0.png)
+
+#### 1. Add customer.
+![image](https://user-images.githubusercontent.com/94574845/202860507-d342b094-a55a-4f15-ac1a-f18bcec5920f.png)
+![image](https://user-images.githubusercontent.com/94574845/202860526-ff8390e0-6d2e-4576-8d40-ff7229bbb9b4.png)
+
+#### 2. Remove customer.
+![image](https://user-images.githubusercontent.com/94574845/202860537-610d4c1b-085d-42cf-9ee2-14befdb6daaa.png)
+![image](https://user-images.githubusercontent.com/94574845/202860575-14c17a97-30fa-47e7-bb97-e2f6c3beae63.png)
+![image](https://user-images.githubusercontent.com/94574845/202860584-1ae3d05e-894a-44d2-86ba-2d3a84ca8db6.png)
+
+
+
+
+
+#### 3. Change the customer's information.
+
+
+
+
+
+#### 4. Show list of all created customers.
+
+
+
+
+
+#### 5. Show information about specific customer.
+
+
+
+
+
+#### 6. Show the information about all customers.
+
+
+
+
+
+#### 7. Sort the list by first name (ascending or descending order).
+
+
+
+
+
+#### 8. Sort the list by last name (ascending or descending order).
+
+
+
+
+
+
+#### R. Return to the Main menu
+
+
+
+
+
+
+
+
+
+
+
+
