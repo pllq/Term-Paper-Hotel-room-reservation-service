@@ -127,6 +127,7 @@
 
 ##### 2. Search by a keyword among the customer.
 ![image](https://user-images.githubusercontent.com/94574845/202861575-5d7ac075-a82b-4a0e-a48b-e036e05d38e4.png)
+
 ![image](https://user-images.githubusercontent.com/94574845/202861579-b67366d9-c8ac-4771-9632-1803844316d7.png)
 
 
