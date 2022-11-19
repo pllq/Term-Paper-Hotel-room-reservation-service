@@ -22,6 +22,8 @@ namespace BLLTest
         [Fact]
         public void CreateHotel_should_return_length_of_list_1()
         {
+            HotelNewListAndDeleteFile();
+
             //Arrange
 
             int expected = 1;
@@ -36,7 +38,6 @@ namespace BLLTest
 
             //Act
             HotelMethods.Name_of_file = hotel_path;
-            HotelNewListAndDeleteFile();
 
             for (int i = 0; i < array_of_Room_Number.Length; i++)
             {
@@ -52,12 +53,13 @@ namespace BLLTest
 
             //Assert
             Assert.Equal(expected, actual);
-            HotelMethods.FileDelete();
         }
 
         [Fact]
         public void RemoveHotel_should_return_length_of_list_0()
         {
+            HotelNewListAndDeleteFile();
+
             //Arrange
 
             int expected = 0;
@@ -72,7 +74,6 @@ namespace BLLTest
 
             //Act
             HotelMethods.Name_of_file = hotel_path;
-            HotelNewListAndDeleteFile();
 
             for (int i = 0; i < array_of_Room_Number.Length; i++)
             {
@@ -91,7 +92,6 @@ namespace BLLTest
 
             //Assert
             Assert.Equal(expected, actual);
-            HotelMethods.FileDelete();
         }
 
 

@@ -22,6 +22,8 @@ namespace BLLTest
         [Fact]
         public void CreateCustomer_should_return_length_of_list_1()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
 
             int expected = 1;
@@ -38,13 +40,15 @@ namespace BLLTest
 
             //Assert
             Assert.Equal(expected, actual);
-            CustomerMethods.FileDelete();
         }
 
         //Remove
         [Fact]
         public void RemoveCustomer_should_return_length_of_list_0()
         {
+            CustomerMethods.FileDelete();
+
+
             //Arrange
 
             int expected = 0;
@@ -63,7 +67,6 @@ namespace BLLTest
 
             //Assert
             Assert.Equal(expected, actual);
-            CustomerMethods.FileDelete();
         }
 
         //Change
@@ -72,6 +75,8 @@ namespace BLLTest
         [Fact]
         public void ChangeCustomerNAME_should_return_length_of_list_0()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
 
             string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
@@ -93,12 +98,13 @@ namespace BLLTest
             //Assert
             Assert.NotEqual(customerbefore.First_name.ToUpper()+customerbefore.Last_name.ToUpper(), 
                             customerafter.First_name.ToUpper() + customerafter.Last_name.ToUpper());
-            CustomerMethods.FileDelete();
         }
 
         [Fact]
         public void ChangeCustomerFIRSTNAME_should_return_length_of_list_0()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
 
             string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
@@ -118,13 +124,14 @@ namespace BLLTest
 
             //Assert
             Assert.NotEqual(customerbefore.First_name, customerafter.First_name);
-            CustomerMethods.FileDelete();
         }
 
 
         [Fact]
         public void ChangeCustomerLASTNAME_should_return_length_of_list_0()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
             string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
             int Age = 19;
@@ -143,13 +150,14 @@ namespace BLLTest
 
             //Assert
             Assert.NotEqual(customerbefore.Last_name, customerafter.Last_name);
-            CustomerMethods.FileDelete();
         }
 
 
         [Fact]
         public void ChangeCustomerAGE_should_return_length_of_list_0()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
 
             string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
@@ -171,7 +179,6 @@ namespace BLLTest
 
             //Assert
             Assert.NotEqual(exptected.Age, actual.Age);
-            CustomerMethods.FileDelete();
         }
 
 
@@ -181,6 +188,8 @@ namespace BLLTest
         [Fact]
         public void SortByFirstName_inAscending_should_be_equal()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
             string First_Name_of_the_Customer = "BName", Last_Name_of_the_Customer = "ALastname";
             int Age = 19;
@@ -207,11 +216,12 @@ namespace BLLTest
             //Assert
             Assert.Equal(first, secondafter);
             Assert.Equal(second, firstafter);
-            CustomerMethods.FileDelete();
         }
         [Fact]
         public void SortByFirstName_inDescending_should_be_equal()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
 
             string First_Name_of_the_Customer = "BName", Last_Name_of_the_Customer = "Lastname";
@@ -238,7 +248,6 @@ namespace BLLTest
             //Assert
             Assert.Equal(first, secondafter);
             Assert.Equal(second, firstafter);
-            CustomerMethods.FileDelete();
         }
 
 
@@ -246,6 +255,7 @@ namespace BLLTest
         [Fact]
         public void SortByLastName_inAscending_should_be_equal()
         {
+            CustomerMethods.FileDelete();
             //Arrange
 
             string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "BLastname";
@@ -272,11 +282,12 @@ namespace BLLTest
             //Assert
             Assert.Equal(first, firstafter);
             Assert.Equal(second, secondafter);
-            CustomerMethods.FileDelete();
         }
         [Fact]
         public void SortByLastName_inDescending_should_be_equal()
         {
+            CustomerMethods.FileDelete();
+
             //Arrange
 
             string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "BLastname";
@@ -287,6 +298,7 @@ namespace BLLTest
 
 
             //Act
+            CustomerMethods.Name_of_file = customer_path;
             CustomerNewListAndDeleteFile();
 
             CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
@@ -302,7 +314,6 @@ namespace BLLTest
             //Assert
             Assert.Equal(first, firstafter);
             Assert.Equal(second, secondafter);
-            CustomerMethods.FileDelete();
         }
 
 
