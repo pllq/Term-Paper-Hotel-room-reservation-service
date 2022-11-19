@@ -8,7 +8,6 @@ namespace BLLTest
     [Collection("Sequence")]
     public class HotelMethodTests
     {
-
         internal const string hotel_path = @"test_hotel";
 
         internal static void HotelNewListAndDeleteFile()
