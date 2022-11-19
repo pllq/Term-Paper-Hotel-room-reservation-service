@@ -50,15 +50,12 @@
 ![image](https://user-images.githubusercontent.com/94574845/202860575-14c17a97-30fa-47e7-bb97-e2f6c3beae63.png)
 ![image](https://user-images.githubusercontent.com/94574845/202860584-1ae3d05e-894a-44d2-86ba-2d3a84ca8db6.png)
 
-
-
-
-
 #### 3. Change the customer's information.
-
-
-
-
+![image](https://user-images.githubusercontent.com/94574845/202860630-77564be9-ece1-497b-8eaf-c64297df3a04.png)
+![image](https://user-images.githubusercontent.com/94574845/202860680-de270208-e347-49c2-9c24-e0cecf6185c7.png)
+![image](https://user-images.githubusercontent.com/94574845/202860857-0f6caa68-d5c6-4577-bfce-5238067a3089.png)
+![image](https://user-images.githubusercontent.com/94574845/202860923-4df23e31-68bc-482a-abe7-3ed953f236ac.png)
+![image](https://user-images.githubusercontent.com/94574845/202860932-efeaa0b9-12ad-4b9f-99c8-cf135a950c56.png)
 
 #### 4. Show list of all created customers.
 
