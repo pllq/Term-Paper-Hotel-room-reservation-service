@@ -12,7 +12,6 @@ namespace BLLTest
     [Collection("Sequence")]
     public class RoomMethodTests
     {
-
         [Fact]
         public void BookRoom_should_return_length_of_list_1()
         {

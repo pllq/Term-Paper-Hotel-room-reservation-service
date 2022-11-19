@@ -314,5 +314,169 @@ namespace BLLTest
             Assert.Equal(first, firstafter);
             Assert.Equal(second, secondafter);
         }
+
+        //Show
+        [Fact]
+        public void CustomersLists_shoud_not_be_eqaul() 
+        {
+            CustomerMethods.FileDelete();
+            
+            //Arrange
+            string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
+            int Age = 2;
+
+            string First_Name_of_the_Customer2 = "Name2", Last_Name_of_the_Customer2 = "Lastname2";
+            int Age2 = 10;
+
+            string First_Name_of_the_Customer3 = "Name3", Last_Name_of_the_Customer3 = "Lastname3";
+            int Age3 = 19;
+
+            //Act
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer2, Last_Name_of_the_Customer2, Age2);
+
+            string[] for_expected_array = CustomerMethods.CustomersList();
+            string expected = "";
+
+            for (int i = 0; i < for_expected_array.Length; i++) 
+            {
+                expected += for_expected_array[i];
+            }
+            
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer3, Last_Name_of_the_Customer3, Age3);
+
+            string[] for_actual_array = CustomerMethods.CustomersList();
+            string actual = "";
+
+            for (int i = 0; i < for_actual_array.Length; i++)
+            {
+                actual += for_actual_array[i];
+            }
+
+            //Assert
+            Assert.NotEqual(expected, actual);
+            CustomerMethods.FileDelete();
+        }
+
+        [Fact]
+        public void SpecificCustomer_shoud_be_eqaul()
+        {
+            CustomerMethods.FileDelete();
+
+            //Arrange
+            string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
+            int Age = 2;
+
+            //Act
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
+
+            string expected = CustomerMethods.SpecificCustomer(0);
+            string actual = CustomerMethods.SpecificCustomer(0);
+
+            //Assert
+            Assert.Equal(expected, actual);
+            CustomerMethods.FileDelete();
+        }
+
+        [Fact]
+        public void ViewWholeInfoOfCustomers_shoud_be_eqaul()
+        {
+            //Arrange
+            string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
+            int Age = 2;
+
+            string First_Name_of_the_Customer2 = "Name2", Last_Name_of_the_Customer2 = "Lastname2";
+            int Age2 = 10;
+
+            string First_Name_of_the_Customer3 = "Name3", Last_Name_of_the_Customer3 = "Lastname3";
+            int Age3 = 19;
+
+            //Act
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer2, Last_Name_of_the_Customer2, Age2);
+
+            string[] for_expected_array = CustomerMethods.ViewWholeInfoOfCustomers();
+            string expected = "";
+
+            for (int i = 0; i < for_expected_array.Length; i++)
+            {
+                expected += for_expected_array[i];
+            }
+
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer3, Last_Name_of_the_Customer3, Age3);
+
+            string[] for_actual_array = CustomerMethods.ViewWholeInfoOfCustomers();
+            string actual = "";
+
+            for (int i = 0; i < for_actual_array.Length; i++)
+            {
+                actual += for_actual_array[i];
+            }
+
+            //Assert
+            Assert.NotEqual(expected, actual);
+            CustomerMethods.FileDelete();
+        }
+
+        [Fact]
+        public void CustomerAlreadyCreated_should_return_true()
+        {
+            //Arrange
+            bool expected = true;
+
+            string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
+            int Age = 2;
+
+            string First_Name_of_the_Customer2 = "Name", Last_Name_of_the_Customer2 = "Lastname";
+
+
+            //Act
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
+
+            var actual = CustomerMethods.CustomerAlreadyCreated(First_Name_of_the_Customer2, Last_Name_of_the_Customer2);
+
+            //Assert
+            Assert.Equal(expected, actual);
+            CustomerMethods.FileDelete();
+        }
+
+        [Fact]
+        public void CustomerIndexByFirstAndLastName_shoud_return_1_when_expected_1()
+        {
+            //Arrange
+            int expected = 0;
+
+            string First_Name_of_the_Customer = "Name", Last_Name_of_the_Customer = "Lastname";
+            int Age = 2;
+
+            string First_Name_of_the_Customer2 = "Name", Last_Name_of_the_Customer2 = "Lastname";
+
+
+            //Act
+            CustomerMethods.Name_of_file = customer_path;
+            CustomerNewListAndDeleteFile();
+
+            CustomerMethods.CreateCustomer(First_Name_of_the_Customer, Last_Name_of_the_Customer, Age);
+
+            int actual = CustomerMethods.CustomerIndexByFirstAndLastName(First_Name_of_the_Customer2, Last_Name_of_the_Customer2);
+
+            //Assert
+            Assert.Equal(expected, actual);
+            CustomerMethods.FileDelete();
+        }
     }
 }
