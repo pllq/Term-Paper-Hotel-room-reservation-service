@@ -233,7 +233,7 @@ namespace PLInput
             switch (consoleKey)
             {
                 case ConsoleKey.N:
-                    string first_name = CommonMethods.ForIndexIniz("new first name", @"^[a-zA-Z]+$");
+                    string first_name = CommonMethods.Initialize("new first name", @"^[a-zA-Z]+$").ToLower();
                     first_name = char.ToUpper(first_name[0]) + first_name.Substring(1);
 
                     user_change = CommonMethods.Initialize($"new last name", @"^[a-zA-Z]+$").ToLower();

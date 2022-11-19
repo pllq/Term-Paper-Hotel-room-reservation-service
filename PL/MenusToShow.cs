@@ -46,7 +46,7 @@ namespace PL
                       "6. Show the information about all customers.\n" +
                       "7. Sort the list by first name (ascending or descending order).\n" +
                       "8. Sort the list by last name (ascending or descending order).\n" +
-                      "R. Return to the Customers Management Menu";
+                      "R. Return to the Main Menu";
         }
         internal static string RoomManagement()
         {
@@ -56,7 +56,7 @@ namespace PL
                        "2. Cancel a customer’s room reservation.\n" +
                        "3. Show list of all created rooms in the specific hotel.\n" +
                        "4. Show free and reserved rooms with information about thier price, who booked and for how many days.\n" +
-                       "R. Return to the Customers Management Menu";
+                       "R. Return to the Main Menu";
         }
         internal static string SearchMenu()
         {

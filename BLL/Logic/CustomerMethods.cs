@@ -9,7 +9,7 @@ namespace BLL.Logic
         public static List<Customer> CustomerList = new List<Customer>();
         internal static XMLSerialization<List<Customer>> xml_serialize_list_of_customers = new XMLSerialization<List<Customer>>();
         internal static JSONSerialization<List<Customer>> json_serialize_list_of_customers = new JSONSerialization<List<Customer>>();
-        public const string Name_of_file = @"..\..\..\..\DAL\BD\customer_list";
+        public static string Name_of_file = @"..\..\..\..\DAL\BD\customer_list";
         //public static string Name_of_file = @"G:\Studying\2) NAU (01.09.2021 - XX.06.2025)\NAU\Homeworks\Second grade\1st Semester\1) OOP\6) Term Paper\TP\DAL\BD\customer_list";
         //internal const string Name_of_file = "customer_list";
 

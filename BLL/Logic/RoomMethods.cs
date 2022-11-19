@@ -56,6 +56,8 @@ namespace BLL.Logic
 
                         HotelMethods.RoomIsNotBooked(i, j);
 
+                        CustomerMethods.xml_serialize_list_of_customers.Serialize(CustomerMethods.CustomerList, CustomerMethods.Name_of_file);
+                        CustomerMethods.json_serialize_list_of_customers.Serialize(CustomerMethods.CustomerList, CustomerMethods.Name_of_file);
                         HotelMethods.xml_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
                         HotelMethods.json_serialize_list_of_hotels.Serialize(HotelMethods.HotelList, HotelMethods.Name_of_file);
 
