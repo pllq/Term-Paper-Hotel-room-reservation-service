@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLLTest
 {
+    [Collection("Sequence")]
     public class RoomMethodTests
     {
 

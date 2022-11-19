@@ -317,7 +317,7 @@ namespace BLL.Logic
 
         public static void FileDelete() 
         {
-            if (File.Exists(Name_of_file + ".xml") )
+            if (File.Exists(Name_of_file + ".xml"))
             {
                 File.Delete(Name_of_file + ".xml");
             }

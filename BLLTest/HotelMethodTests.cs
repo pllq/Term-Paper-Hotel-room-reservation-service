@@ -5,6 +5,7 @@ using System.Collections;
 
 namespace BLLTest
 {
+    [Collection("Sequence")]
     public class HotelMethodTests
     {
 
