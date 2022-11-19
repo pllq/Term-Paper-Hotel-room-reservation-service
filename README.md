@@ -58,35 +58,28 @@
 ![image](https://user-images.githubusercontent.com/94574845/202860932-efeaa0b9-12ad-4b9f-99c8-cf135a950c56.png)
 
 #### 4. Show list of all created customers.
-
-
-
-
+![image](https://user-images.githubusercontent.com/94574845/202860966-02fe586d-2384-4ff7-8ae9-715343fa720a.png)
 
 #### 5. Show information about specific customer.
-
-
-
-
+![image](https://user-images.githubusercontent.com/94574845/202860986-f9be1c0e-f848-4011-8b97-9c1218bf09ad.png)
+![image](https://user-images.githubusercontent.com/94574845/202860991-deb6addb-8035-41c3-ad75-57fd474ca8c0.png)
 
 #### 6. Show the information about all customers.
-
-
-
-
+![image](https://user-images.githubusercontent.com/94574845/202861012-74b5c29a-c8dc-432c-9e12-89c90606004a.png)
 
 #### 7. Sort the list by first name (ascending or descending order).
-
-
-
-
+![image](https://user-images.githubusercontent.com/94574845/202861025-7b4e3920-14dc-4e92-9fcc-400b9f851958.png)
+![image](https://user-images.githubusercontent.com/94574845/202861030-5af15d8e-fbf7-4445-8198-a34713c9652c.png)
+##### and:
+![image](https://user-images.githubusercontent.com/94574845/202861038-6c3571de-6ac9-4e73-b763-e84d763f6b24.png)
 
 #### 8. Sort the list by last name (ascending or descending order).
 
 
-
-
-
+![image](https://user-images.githubusercontent.com/94574845/202861056-f61f3ca5-dfa1-4548-b1fa-261ae151ba17.png)
+![image](https://user-images.githubusercontent.com/94574845/202861057-eebd9a16-07cf-4534-89e6-264b1783794c.png)
+##### and:
+![image](https://user-images.githubusercontent.com/94574845/202861062-37684a87-3ffd-4153-91d6-67f62d18b71a.png)
 
 #### R. Return to the Main menu
 
